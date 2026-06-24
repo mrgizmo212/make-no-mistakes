@@ -32,6 +32,25 @@ A **GitHub-native ebook**: markdown chapters, citation traceability, and a full 
 
 ---
 
+## Composite architecture — not a codebase merge
+
+**You are not forking Hermes, Codex, Pi, LangGraph, OpenClaw, LibreChat, and the rest into one mega-repo.**
+
+This research recommends building **one new harness** using a **composite approach**: each reference project is a **pattern donor** for a specific layer, connected by standard protocols (OpenAI-compatible APIs, MCP, SSE, `SKILL.md`, etc.).
+
+| What the spec means | What it does **not** mean |
+|:---|:---|
+| Tier 2 behaves *like* Hermes/Codex/Pi (ReAct loop, tools, safety) | Copy all three engines into one tree |
+| Tier 5 *routes through* LiteLLM or Open Responses | Ship their full codebases inside yours |
+| Tier 4 *looks like* OpenClaw / assistant-ui patterns | Replace your backend by forking OpenClaw wholesale |
+| Study LibreChat, LangGraph, LangChain for routing & state | Run every framework as a hard dependency stack |
+
+**Design principle:** *narrow waist, rich edges* — a thin shared core (model API + agent runtime), with capabilities plugged in at the edges.
+
+→ Full rationale: [Architecture Recommendations — Composite Approach](18_architecture_recommendations/README.md#recommended-architecture-the-composite-approach)
+
+---
+
 ## Start here
 
 | | |
@@ -45,6 +64,8 @@ A **GitHub-native ebook**: markdown chapters, citation traceability, and a full 
 ---
 
 ## 5-tier harness stack
+
+A **layer diagram**, not a shopping list to merge. Names like “Hermes” or “LiteLLM” mark **which project inspired that tier** — not repos you vendor together.
 
 ```mermaid
 flowchart TB

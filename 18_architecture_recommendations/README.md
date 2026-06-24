@@ -10,6 +10,8 @@ All previous research directories (01–15, 17) and all 10 local codebases.
 
 ## Recommended Architecture: The Composite Approach
 
+> **This is not a merge of reference codebases.** Hermes, Codex, Pi, LangGraph, OpenClaw, LiteLLM, assistant-ui, LibreChat, and others were **studied** to extract patterns. The recommendation is to **build one new harness** — pick the best idea per layer and connect them via standard interfaces (OpenAI-compat API, MCP, SSE, `SKILL.md`). Do not fork and glue every project into a single repo.
+
 ### Core Principle: Narrow Waist, Rich Edges
 
 Adopt Hermes's "narrow core, capability at edges" principle as the foundational design constraint.

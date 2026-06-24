@@ -6,6 +6,24 @@ June 2026 · 217 verified claims · 30 sources · 12 codebases studied
 
 ---
 
+## Composite architecture — not a codebase merge
+
+**You are not forking every reference repo into one project.**
+
+This ebook describes **one new harness** built from **best patterns per layer** — connected via OpenAI-compatible APIs, MCP, SSE, and standard file conventions (`AGENTS.md`, `SKILL.md`). Reference codebases are **studied and cited**, not combined as submodules or monorepo dependencies.
+
+| Layer | Learn from | Build yourself |
+|:---|:---|:---|
+| Agent loop & tools | Hermes, Codex, Pi | Your Python/TS runtime |
+| State & handoffs | LangGraph patterns | Your orchestration layer |
+| Chat UI | assistant-ui | Your React + Vite app |
+| Gateway & channels | OpenClaw patterns | Your Node gateway |
+| Model routing | LiteLLM, Open Responses | Proxy integration, not a fork |
+
+→ [Architecture Recommendations](18_architecture_recommendations/README.md)
+
+---
+
 ## Start reading
 
 | | |
@@ -18,6 +36,8 @@ June 2026 · 217 verified claims · 30 sources · 12 codebases studied
 ---
 
 ## 5-tier harness stack
+
+Each tier names **reference projects for inspiration**. The goal is a clean separation of concerns in *your* harness — not gluing those repos together.
 
 ```mermaid
 flowchart TB
@@ -44,9 +64,9 @@ flowchart TB
 
 ## Reference codebases
 
-This ebook cites upstream repos — it does **not** vendor them as submodules.
+These repos are **upstream references for research** — linked, not vendored. The “Role” column is what to **learn from** each project when designing your own harness.
 
-| Project | Role |
+| Project | Inspiration for (not “merge into”) |
 |:---|:---|
 | [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Autonomous loop, learning |
 | [Codex](https://github.com/openai/codex) | Rust coding CLI, AGENTS.md |

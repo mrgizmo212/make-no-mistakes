@@ -7,6 +7,8 @@ This document synthesizes findings across all 19 topic areas and 10 local refere
 
 ## 1. The 5-Tier Interface Taxonomy & Interoperability
 
+> **Important:** The tier labels (Hermes, Codex, LiteLLM, OpenClaw, etc.) name **reference projects that informed each layer** — not repositories to fork and combine into one codebase. The recommended approach is a **composite architecture**: build one harness, adopt patterns per tier, and integrate via standard protocols (OpenAI-compatible APIs, MCP, SSE). See [18 — Architecture Recommendations](../18_architecture_recommendations/README.md#recommended-architecture-the-composite-approach).
+
 To separate graphical rendering, command execution, and network routing, the harness is designed as a **5-Tier system**:
 
 ```
