@@ -11,7 +11,7 @@
   },
   "plugins": [
     "-sharing",
-    "search",
+    "-search",
     "fontsettings",
     "theme-default"
   ],
