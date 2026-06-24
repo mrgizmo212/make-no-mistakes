@@ -1,3 +1,9 @@
+---
+title: Complete Frontend Architecture
+render_with_liquid: false
+---
+
+{% raw %}
 # Complete Frontend Architecture for AI Agent Apps — React + Vite — June 2026
 
 ## What Was Researched
@@ -1696,3 +1702,5 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 | Dot matrix status | **P2** | 20-state CSS animation system |
 | Number roll animation | **P3** | CSS Houdini `@property` with feature detection |
 | Voice orb WebGL | **P3** | Fragment shader with GPU cleanup |
+
+{% endraw %}
