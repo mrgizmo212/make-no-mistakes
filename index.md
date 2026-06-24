@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Make No Mistakes" width="280"/>
+</p>
+
 # Make No Mistakes
 
 **An open research ebook for building a model-agnostic agent harness.**

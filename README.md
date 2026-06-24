@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Make No Mistakes — Agent Harness Research Ebook" width="100%"/>
+  <img src="assets/logo.png" alt="Make No Mistakes — Agent Harness Research Ebook" width="320"/>
 </p>
 
 <h1 align="center">Make No Mistakes</h1>

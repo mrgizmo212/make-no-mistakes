@@ -25,3 +25,8 @@
   border-left: 4px solid #a371f7;
   background: rgba(163, 113, 247, 0.08);
 }
+
+.markdown-section img[alt="Make No Mistakes"] {
+  display: block;
+  margin: 0 auto 1.5rem;
+}
