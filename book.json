@@ -1,0 +1,26 @@
+{
+  "title": "Make No Mistakes",
+  "description": "Open research ebook — model-agnostic agent harness architecture (June 2026)",
+  "author": "mrgizmo212",
+  "language": "en",
+  "gitbook": "3.2.3",
+  "root": ".",
+  "structure": {
+    "readme": "index.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "-sharing",
+    "search",
+    "fontsettings",
+    "theme-default"
+  ],
+  "pluginsConfig": {
+    "theme-default": {
+      "showLevel": true,
+      "styles": {
+        "website": "styles/website.css"
+      }
+    }
+  }
+}

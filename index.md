@@ -1,16 +1,7 @@
----
-title: Make No Mistakes
-layout: default
-nav_order: 1
-description: Open research ebook for building a model-agnostic agent harness.
-permalink: /
----
-
 # Make No Mistakes
 
 **An open research ebook for building a model-agnostic agent harness.**
 
-{: .fs-6 .fw-300 }
 June 2026 · 217 verified claims · 30 sources · 12 codebases studied
 
 ---

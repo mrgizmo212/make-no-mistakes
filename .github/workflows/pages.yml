@@ -19,15 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/setup-node@v4
         with:
-          ruby-version: '3.3'
-          bundler-cache: true
-      - run: bundle install
-      - run: bundle exec jekyll build -d _site
+          node-version: "20"
+      - run: npm install -g honkit@6.0.0
+      - run: honkit build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: _book
 
   deploy:
     needs: build

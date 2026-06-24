@@ -1,10 +1,3 @@
----
-title: Table of Contents
-layout: default
-nav_order: 2
-permalink: /SUMMARY.html
----
-
 # Table of Contents
 
 ## Front matter
