@@ -1,47 +1,86 @@
-# Building a Model-Agnostic Agent Harness
+<p align="center">
+  <img src="assets/banner.svg" alt="Make No Mistakes — Agent Harness Research Ebook" width="100%"/>
+</p>
 
-**Research corpus & technical architecture specification — June 2026**
+<h1 align="center">Make No Mistakes</h1>
 
-This repository is a GitHub-native ebook: markdown chapters, full citation traceability, and a synthesized architecture spec drawn from 12 open-source reference codebases.
+<p align="center">
+  <strong>Open research ebook for building a model-agnostic agent harness</strong><br/>
+  <sub>June 2026 · synthesized from 12 reference codebases</sub>
+</p>
+
+<p align="center">
+  <a href="https://mrgizmo212.github.io/make-no-mistakes/"><img src="https://img.shields.io/badge/📖_Read_online-GitHub_Pages-58a6ff?style=for-the-badge" alt="Read online"/></a>
+  <a href="19_final_reports/harness_architecture_specification_report.md"><img src="https://img.shields.io/badge/⚡_Jump_to-Spec-a371f7?style=for-the-badge" alt="Jump to spec"/></a>
+  <a href="SUMMARY.md"><img src="https://img.shields.io/badge/🗂️_Full-TOC-238636?style=for-the-badge" alt="Table of contents"/></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/chapters-55-blue?style=flat-square" alt="55 chapters"/>
+  <img src="https://img.shields.io/badge/claims-217-blueviolet?style=flat-square" alt="217 claims"/>
+  <img src="https://img.shields.io/badge/sources-30-informational?style=flat-square" alt="30 sources"/>
+  <img src="https://img.shields.io/badge/codebases-12-orange?style=flat-square" alt="12 codebases"/>
+</p>
+
+---
+
+## What is this?
+
+A **GitHub-native ebook**: markdown chapters, citation traceability, and a full technical architecture spec for a modern agent harness — loops, memory, subagents, tools, MCPs, skills, voice, and a 5-tier stack.
+
+> **No submodules.** Reference repos are linked upstream. This repo is the book.
 
 ---
 
 ## Start here
 
 | | |
-|---|---|
-| **Read the spec** | [Technical Architecture Specification](19_final_reports/harness_architecture_specification_report.md) |
-| **Full table of contents** | [SUMMARY.md](SUMMARY.md) |
-| **Research index** | [00_index](00_index/README.md) |
-| **Sources & citations** | [source_registry](00_index/source_registry.md) · [citation_map](00_index/citation_map.md) |
+|:---|:---|
+| **Read the site** | [**mrgizmo212.github.io/make-no-mistakes**](https://mrgizmo212.github.io/make-no-mistakes/) |
+| **The spec** | [Technical Architecture Specification](19_final_reports/harness_architecture_specification_report.md) |
+| **Recommendations** | [Architecture Recommendations](18_architecture_recommendations/README.md) |
+| **Table of contents** | [SUMMARY.md](SUMMARY.md) |
+| **Provenance** | [Sources](00_index/source_registry.md) · [Citations](00_index/citation_map.md) |
 
 ---
 
-## What this covers
+## 5-tier harness stack
 
-- Open-source agent SDKs, frameworks, and coding agents
-- Execution loops, memory, subagents, tools, MCPs, skills, instructions
-- Heartbeat automation, voice integration, model-agnostic architecture
-- Backend and frontend agent stack engineering
-- Local codebase studies (Hermes, Codex, Pi, LangGraph, LangChain, OpenClaw, LiteLLM, Open Responses, assistant-ui, LibreChat, LibreChat Agents)
-- Comparisons, architecture recommendations, and final reports
+```mermaid
+flowchart TB
+  T5["Tier 5 · Gateway<br/>LiteLLM / Open Responses"]
+  T4["Tier 4 · Canvas GUI<br/>OpenClaw"]
+  T3["Tier 3 · IDE Extension<br/>Cursor / VS Code"]
+  T2["Tier 2 · Cognitive Engine<br/>Hermes / Codex / Pi"]
+  T1["Tier 1 · SDK / Hooks<br/>LangGraph / assistant-ui"]
 
-**217 verified claims** · **30 registered sources** · **55 markdown chapters**
-
----
-
-## How to read
-
-Browse chapters on GitHub using [SUMMARY.md](SUMMARY.md), or clone and read locally:
-
-```bash
-git clone <your-repo-url>
+  T5 --> T4 --> T3 --> T2 --> T1
 ```
 
-Reference codebases cited in this research live in their upstream GitHub repos — they are **not** included as submodules in this repository.
+---
+
+## What's inside
+
+| Part | Topics |
+|:---|:---|
+| **I · Landscape** | SDKs, frameworks, coding agents |
+| **II · Core systems** | Loops, memory, subagents, tools, MCPs, skills, voice |
+| **III · Architecture** | Model-agnostic harness, backend & frontend stacks |
+| **IV · Studies** | Hermes, Codex, Pi, LangGraph, LangChain, OpenClaw, LiteLLM, … |
+| **V · Synthesis** | Comparisons, recommendations, final spec |
 
 ---
 
-## License
+## Clone & read offline
 
-Research and synthesis © 2026. Upstream projects retain their own licenses.
+```bash
+git clone https://github.com/mrgizmo212/make-no-mistakes.git
+cd make-no-mistakes
+# open SUMMARY.md or start at 19_final_reports/harness_architecture_specification_report.md
+```
+
+---
+
+<p align="center">
+  <sub>Research & synthesis © 2026 · Upstream projects retain their own licenses</sub>
+</p>

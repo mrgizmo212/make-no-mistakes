@@ -1,0 +1,103 @@
+title: Make No Mistakes
+description: >-
+  Open research ebook — model-agnostic agent harness architecture,
+  synthesized from 12 reference codebases. June 2026.
+tagline: Build the harness. Make no mistakes.
+url: https://mrgizmo212.github.io
+baseurl: /make-no-mistakes
+repository: mrgizmo212/make-no-mistakes
+
+remote_theme: just-the-docs/just-the-docs
+
+search_enabled: true
+heading_anchors: true
+
+color_scheme: dark
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+
+mermaid:
+  version: "10.9.0"
+
+aux_links:
+  GitHub Repo:
+    - https://github.com/mrgizmo212/make-no-mistakes
+  Read the Spec:
+    - /make-no-mistakes/19_final_reports/harness_architecture_specification_report.html
+
+nav:
+  - title: Home
+    url: /
+  - title: Table of Contents
+    url: /SUMMARY.html
+  - title: Final Spec
+    url: /19_final_reports/harness_architecture_specification_report.html
+  - title: Part I · Landscape
+    children:
+      - title: "01 · Agentic SDKs"
+        url: /01_open_source_agentic_sdks/README.html
+      - title: "02 · Frameworks"
+        url: /02_open_source_agent_frameworks/README.html
+      - title: "03 · Coding Agents"
+        url: /03_open_source_coding_agents/README.html
+  - title: Part II · Core Systems
+    children:
+      - title: "04 · Agent Loops"
+        url: /04_agent_loops/README.html
+      - title: Execution Loops
+        url: /04_agent_loops/execution_loops.html
+      - title: Human-in-the-Loop
+        url: /04_agent_loops/human_in_the_loop_steering.html
+      - title: "05 · Memory"
+        url: /05_agent_memory/README.html
+      - title: "06 · Subagents"
+        url: /06_subagents/README.html
+      - title: "07 · Tools"
+        url: /07_tools/README.html
+      - title: "08 · MCPs"
+        url: /08_mcps/README.html
+      - title: "09 · Skills"
+        url: /09_skills_md/README.html
+      - title: "10 · Instructions"
+        url: /10_instructions/README.html
+      - title: "11 · Automation"
+        url: /11_heartbeat_automation_workflows/README.html
+      - title: "12 · Voice"
+        url: /12_open_source_voice_integration/README.html
+  - title: Part III · Architecture
+    children:
+      - title: "13 · Harness Architecture"
+        url: /13_model_agnostic_harness_architecture/README.html
+      - title: "14 · Backend Stack"
+        url: /14_backend_agent_stack_engineering/README.html
+      - title: "15 · Frontend Stack"
+        url: /15_frontend_react_vite_agent_stack/README.html
+  - title: Part IV · Studies
+    children:
+      - title: Codebase Studies
+        url: /16_local_codebase_studies/README.html
+  - title: Part V · Synthesis
+    children:
+      - title: "17 · Comparisons"
+        url: /17_comparisons/README.html
+      - title: "18 · Recommendations"
+        url: /18_architecture_recommendations/README.html
+      - title: "19 · Final Reports"
+        url: /19_final_reports/README.html
+  - title: Index
+    children:
+      - title: Source Registry
+        url: /00_index/source_registry.html
+      - title: Citation Map
+        url: /00_index/citation_map.html
+      - title: Research Log
+        url: /00_index/research_log.html
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - extract_prices.ps1
+  - .github
+  - README.md

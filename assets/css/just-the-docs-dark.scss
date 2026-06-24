@@ -1,0 +1,22 @@
+---
+# Dark theme accent overrides for the ebook site.
+---
+
+@import "just-the-docs/dark";
+
+blockquote {
+  border-left: 4px solid #a371f7;
+  background: rgba(163, 113, 247, 0.08);
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+.main-content-wrap {
+  max-width: 960px;
+}
+
+a:not([class]) {
+  text-decoration-color: rgba(88, 166, 255, 0.45);
+}
