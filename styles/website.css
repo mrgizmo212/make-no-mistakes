@@ -184,16 +184,37 @@ body,
   margin: 2rem 0;
 }
 
-/* ── Tables ────────────────────────────────────────────────── */
+/* ── Tables (override gitbook tr { background:#fff }) ─────── */
 
 .markdown-section table,
 .book .book-body .page-wrapper .page-inner section.normal table {
-  border-collapse: collapse;
-  width: 100%;
+  display: table !important;
+  width: 100% !important;
+  border-collapse: collapse !important;
   border: 1px solid var(--border) !important;
   border-radius: 8px;
   overflow: hidden;
   background: var(--bg) !important;
+  margin: 1.25em 0 1.75em;
+}
+
+.markdown-section table tr,
+.book .book-body .page-wrapper .page-inner section.normal table tr {
+  background: var(--bg) !important;
+  background-color: var(--bg) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.markdown-section table thead tr,
+.book .book-body .page-wrapper .page-inner section.normal table thead tr {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+}
+
+.markdown-section table tr:nth-child(2n),
+.book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(2n) {
+  background: #080808 !important;
+  background-color: #080808 !important;
 }
 
 .markdown-section table th,
@@ -201,9 +222,10 @@ body,
 .book .book-body .page-wrapper .page-inner section.normal table th,
 .book .book-body .page-wrapper .page-inner section.normal table td {
   border: 1px solid var(--border) !important;
-  padding: 0.6em 0.9em;
+  padding: 0.65em 0.95em !important;
   color: var(--text) !important;
-  background: var(--bg) !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 .markdown-section table thead th,
@@ -211,12 +233,20 @@ body,
   color: var(--heading) !important;
   font-weight: 600;
   background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
   border-bottom: 1px solid var(--border-accent) !important;
 }
 
-.markdown-section table tr:nth-child(2n) td,
-.book .book-body .page-wrapper .page-inner section.normal table tr:nth-child(2n) td {
+.markdown-section table tbody tr:nth-child(2n) td,
+.book .book-body .page-wrapper .page-inner section.normal table tbody tr:nth-child(2n) td {
   background: #080808 !important;
+  background-color: #080808 !important;
+}
+
+.markdown-section table a,
+.book .book-body .page-wrapper .page-inner section.normal table a {
+  color: var(--link) !important;
+  border-bottom-color: rgba(110, 181, 255, 0.35) !important;
 }
 
 /* ── Code ──────────────────────────────────────────────────── */
