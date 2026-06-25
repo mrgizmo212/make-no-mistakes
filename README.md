@@ -94,5 +94,5 @@ cd make-no-mistakes
 ---
 
 <p align="center">
-  <sub>© 2026 · Upstream projects keep their own licenses</sub>
+  <sub>© 2026 Adam Heimann · Licensed <a href="LICENSE">CC BY 4.0</a> — use it freely, just credit me · Upstream projects keep their own licenses</sub>
 </p>
