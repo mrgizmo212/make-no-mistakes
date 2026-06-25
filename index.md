@@ -4,44 +4,50 @@
 
 # Make No Mistakes
 
-**An open research ebook for building a model-agnostic agent harness.**
+**Notes toward a model-agnostic agent harness.**
 
-June 2026 · 217 verified claims · 30 sources · 12 codebases studied
-
----
-
-## Composite architecture — not a codebase merge
-
-**You are not forking every reference repo into one project.**
-
-This ebook describes **one new harness** built from **best patterns per layer** — connected via OpenAI-compatible APIs, MCP, SSE, and standard file conventions (`AGENTS.md`, `SKILL.md`). Reference codebases are **studied and cited**, not combined as submodules or monorepo dependencies.
-
-| Layer | Learn from | Build yourself |
-|:---|:---|:---|
-| Agent loop & tools | Hermes, Codex, Pi | Your Python/TS runtime |
-| State & handoffs | LangGraph patterns | Your orchestration layer |
-| Chat UI | assistant-ui | Your React + Vite app |
-| Gateway & channels | OpenClaw patterns | Your Node gateway |
-| Model routing | OpenAI-compat APIs | Point at **Ollama** (local), **OpenRouter** (hosted multi-model), **LiteLLM** (self-hosted proxy), or direct provider APIs — pick one, not all |
-
-→ [Architecture Recommendations](18_architecture_recommendations/README.md)
+*Started June 2026 · still being edited*
 
 ---
 
-## Start reading
+## What this is
+
+Working notes on how to build a clean, model-agnostic **agent harness** — loops, memory, subagents, tools, MCPs, skills, voice — organized around a 5-tier architecture.
+
+It pulls patterns from a dozen existing projects (Hermes, Codex, Pi, LangGraph, OpenClaw, LiteLLM, and others) and tries to say which layer each one is actually good at.
+
+---
+
+## It's a composite, not a merge
+
+You are not supposed to fork Hermes, Codex, Pi, LangGraph, and OpenClaw into one giant monorepo. That's the mistake this whole thing is named after.
+
+Instead, treat each project as a **pattern donor** for a specific layer, and wire them together through interfaces that already exist: OpenAI-compatible APIs, MCP, SSE, `SKILL.md`.
+
+| The spec means | It does **not** mean |
+|:---|:---|
+| Tier 2 behaves *like* Hermes/Codex/Pi | Copy their codebases |
+| Tier 5 talks to your model backend (Ollama, OpenRouter, …) | Vendor a proxy repo or require LiteLLM |
+| Tier 4 borrows OpenClaw patterns | Fork OpenClaw as your base |
+
+Narrow interfaces, opinionated layers.
+
+→ [Full architecture recommendations](18_architecture_recommendations/README.md)
+
+---
+
+## Start here
 
 | | |
 |:---|:---|
-| **The spec** | [Technical Architecture Specification](19_final_reports/harness_architecture_specification_report.md) |
+| **The spec** | [Harness Architecture Specification](19_final_reports/harness_architecture_specification_report.md) |
 | **Full TOC** | [Table of Contents](SUMMARY.md) |
 | **Recommendations** | [Architecture Recommendations](18_architecture_recommendations/README.md) |
 | **Citations** | [Source Registry](00_index/source_registry.md) · [Citation Map](00_index/citation_map.md) |
 
 ---
 
-## 5-tier harness stack
-
-Each tier names **reference projects for inspiration**. The goal is a clean separation of concerns in *your* harness — not gluing those repos together.
+## The 5-tier stack
 
 ```mermaid
 flowchart TB
@@ -50,29 +56,30 @@ flowchart TB
   T3["Tier 3 · IDE Extension<br/>Cursor · VS Code"]
   T2["Tier 2 · Cognitive Engine<br/>Hermes / Codex / Pi"]
   T1["Tier 1 · SDK / Hooks<br/>LangGraph / assistant-ui"]
-
   T5 --> T4 --> T3 --> T2 --> T1
 ```
 
-Tier 3 case study: [Cursor Agent docs](https://cursor.com/docs/agent/overview)
+Tier 3 leans on Cursor's agent model — see the [Cursor Agent docs](https://cursor.com/docs/agent/overview) and [SRC-021](00_index/source_registry.md).
 
 ---
 
-## What you get
+## What's inside
 
-- **Landscape survey** — SDKs, frameworks, coding agents
-- **Core systems** — loops, memory, subagents, tools, MCPs, skills
-- **Architecture** — model-agnostic harness, backend & frontend stacks
-- **Codebase studies** — Hermes, Codex, Pi, LangGraph, LangChain, OpenClaw, LiteLLM, Open Responses, assistant-ui, LibreChat
-- **Synthesis** — comparisons, recommendations, final specification
+| Part | Topics |
+|:---|:---|
+| I · Landscape | SDKs, frameworks, coding agents |
+| II · Core systems | Loops, memory, subagents, tools, MCPs, skills, voice |
+| III · Architecture | Model-agnostic harness, backend & frontend stacks |
+| IV · Studies | Hermes, Codex, Pi, LangGraph, LangChain, OpenClaw, LiteLLM, … |
+| V · Synthesis | Comparisons, recommendations, final spec |
 
 ---
 
 ## Reference codebases
 
-These repos are **upstream references for research** — linked, not vendored. The “Role” column is what to **learn from** each project when designing your own harness.
+Upstream repos — linked, not vendored. Learn from each; don't merge them.
 
-| Project | Inspiration for (not “merge into”) |
+| Project | Good for |
 |:---|:---|
 | [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Autonomous loop, learning |
 | [Codex](https://github.com/openai/codex) | Rust coding CLI, AGENTS.md |
@@ -80,8 +87,8 @@ These repos are **upstream references for research** — linked, not vendored. T
 | [LangGraph](https://github.com/langchain-ai/langgraph) | Graph orchestration |
 | [LangChain](https://github.com/langchain-ai/langchain) | Model abstraction |
 | [OpenClaw](https://github.com/openclaw/openclaw) | Multi-platform assistant |
-| [OpenRouter SDK](https://github.com/OpenRouterTeam/typescript-sdk) | Hosted multi-model routing (one API key) |
-| [LiteLLM](https://github.com/BerriAI/litellm) | Self-hosted 100+ model proxy (optional) |
+| [OpenRouter SDK](https://github.com/OpenRouterTeam/typescript-sdk) | Hosted multi-model routing |
+| [LiteLLM](https://github.com/BerriAI/litellm) | Self-hosted proxy (optional) |
 | [Ollama](https://ollama.com) | Local models via OpenAI-compat `/v1` |
 | [Open Responses](https://github.com/open-responses/open-responses) | Responses API server |
 | [assistant-ui](https://github.com/assistant-ui/assistant-ui) | React chat components |
