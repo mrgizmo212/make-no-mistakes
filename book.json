@@ -12,15 +12,10 @@
   "plugins": [
     "-sharing",
     "-search",
-    "fontsettings",
+    "-fontsettings",
     "theme-default"
   ],
   "pluginsConfig": {
-    "fontsettings": {
-      "theme": "night",
-      "family": "sans",
-      "size": 2
-    },
     "theme-default": {
       "showLevel": true,
       "styles": {
