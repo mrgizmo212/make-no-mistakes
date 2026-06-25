@@ -81,8 +81,8 @@ Three distinct frontends:
 | Separate Agent Surface | VS Code Copilot Agents Window | Orchestrates cross-repo/multi-project tasks [CLAIM-161](../00_index/citation_map.md#claim-161) |
 | Multi-file Edit Composer | Cursor Composer | High-context side-by-side editing in editor [CLAIM-164](../00_index/citation_map.md#claim-164) |
 | Planning & Artifact Tracking | Google Antigravity | Transparent visual plan-to-walkthrough pipeline [CLAIM-167](../00_index/citation_map.md#claim-167) |
-| Declarative Generative UI | CopilotKit / Vercel AI SDK | Dynamic schema-based React component rendering [CLAIM-172, CLAIM-173] |
-| Sandboxed Widget Host | MCP Apps (SEP-1865) | Secure HTML/JS widget rendering in iframes [CLAIM-174, CLAIM-175] |
+| Declarative Generative UI | CopilotKit / Vercel AI SDK | Dynamic schema-based React component rendering [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-173](../00_index/citation_map.md#claim-173) |
+| Sandboxed Widget Host | MCP Apps (SEP-1865) | Secure HTML/JS widget rendering in iframes [CLAIM-174](../00_index/citation_map.md#claim-174), [CLAIM-175](../00_index/citation_map.md#claim-175) |
 | Open Responses Stream Adapter | LibreChat Client / Server | Translates SSE completions to semantic event structures (`response.output_text.delta`) [CLAIM-180](../00_index/citation_map.md#claim-180) |
 
 ### Key Design Principle (Hermes)
@@ -99,8 +99,8 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 4. **PTY bridge** allows embedding terminal UIs in web dashboards
 5. **Nanostore** is preferred over Redux/Zustand for lightweight state in agent UIs
 6. **JSON-RPC** is the standard transport between frontend and agent backend
-7. **Workspace Orchestration requires dual surfaces**: a chat interface for inline changes and a dedicated window/pane for multi-project planning and background agents [CLAIM-158, CLAIM-161, CLAIM-166].
-8. **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170, CLAIM-171, CLAIM-175].
+7. **Workspace Orchestration requires dual surfaces**: a chat interface for inline changes and a dedicated window/pane for multi-project planning and background agents [CLAIM-158](../00_index/citation_map.md#claim-158), [CLAIM-161](../00_index/citation_map.md#claim-161), [CLAIM-166](../00_index/citation_map.md#claim-166).
+8. **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175).
 9. **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174](../00_index/citation_map.md#claim-174).
 10. **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178](../00_index/citation_map.md#claim-178).
 
@@ -109,7 +109,7 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 - Whether to build a web-first or terminal-first UI
 - Whether Electron is the right choice for desktop (vs. Tauri)
 - How to handle real-time streaming efficiently in React
-- Best default auto-run permission thresholds for CLI commands (Ask vs Sandbox vs YOLO) [CLAIM-165, CLAIM-169].
+- Best default auto-run permission thresholds for CLI commands (Ask vs Sandbox vs YOLO) [CLAIM-165](../00_index/citation_map.md#claim-165), [CLAIM-169](../00_index/citation_map.md#claim-169).
 
 ## How This Applies to Building a Modern Model-Agnostic Agent Harness
 
@@ -119,6 +119,6 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 4. **Consider PTY bridge** for embedding terminal UIs in web dashboards
 5. **Use Nanostore** for lightweight state management
 6. **Build UI once, embed everywhere** — Hermes's approach is the reference pattern
-7. **Provide a dedicated 3-column workspace with a planning artifact panel** — modeled after Google Antigravity's lifecycle and Cursor's Composer [CLAIM-164, CLAIM-167].
-8. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172, CLAIM-175].
+7. **Provide a dedicated 3-column workspace with a planning artifact panel** — modeled after Google Antigravity's lifecycle and Cursor's Composer [CLAIM-164](../00_index/citation_map.md#claim-164), [CLAIM-167](../00_index/citation_map.md#claim-167).
+8. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-175](../00_index/citation_map.md#claim-175).
 9. **Support the MCP Tasks extension** for client-driven asynchronous agent execution [CLAIM-178](../00_index/citation_map.md#claim-178).

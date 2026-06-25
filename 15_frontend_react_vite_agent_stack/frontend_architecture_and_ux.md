@@ -613,7 +613,7 @@ To inform our model-agnostic harness UI design, we analyze four leading AI devel
 | **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159](../00_index/citation_map.md#claim-159) | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164](../00_index/citation_map.md#claim-164) | Planning-stage file checklist + diff review [CLAIM-167](../00_index/citation_map.md#claim-167) |
 | **Terminal Integration** | Stdio/WebSocket jsonrpc via codex app-server [CLAIM-160](../00_index/citation_map.md#claim-160) | Integrated terminal with Rich Shell Integration [CLAIM-163](../00_index/citation_map.md#claim-163) | Integrated terminal with settings auto-run toggles [CLAIM-165](../00_index/citation_map.md#claim-165) | Proposed execution logs + bg task tracking [CLAIM-169](../00_index/citation_map.md#claim-169) |
 | **Approval Mechanism** | Local sandboxing + manual approval prompts [CLAIM-159](../00_index/citation_map.md#claim-159) | Security-gated execution prompts in chat [CLAIM-162](../00_index/citation_map.md#claim-162) | Auto-run levels (Ask Every Time, Sandbox, YOLO) [CLAIM-165](../00_index/citation_map.md#claim-165) | Strict programmatic tool approval gates [CLAIM-169](../00_index/citation_map.md#claim-169) |
-| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158](../00_index/citation_map.md#claim-158) | Task/Agent manager window + Copilot CLI [CLAIM-161](../00_index/citation_map.md#claim-161) | In-pane task lists + .cursorrules formatting [CLAIM-164](../00_index/citation_map.md#claim-164) | Dedicated Manager Surface + artifact pipeline [CLAIM-166, CLAIM-167] |
+| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158](../00_index/citation_map.md#claim-158) | Task/Agent manager window + Copilot CLI [CLAIM-161](../00_index/citation_map.md#claim-161) | In-pane task lists + .cursorrules formatting [CLAIM-164](../00_index/citation_map.md#claim-164) | Dedicated Manager Surface + artifact pipeline [CLAIM-166](../00_index/citation_map.md#claim-166), [CLAIM-167](../00_index/citation_map.md#claim-167) |
 
 ### Key UI/UX Implementations & Takeaways
 
@@ -641,7 +641,7 @@ To inform our model-agnostic harness UI design, we analyze four leading AI devel
 
 ## 14. Generative UI in Responses, MCP Apps, & MCP UI
 
-In June 2026, the AI frontend ecosystem has shifted from static, passive text chats to **Intent-Based Generative User Interfaces (GenUI)** and **Model Context Protocol (MCP) Apps** [CLAIM-170, CLAIM-174].
+In June 2026, the AI frontend ecosystem has shifted from static, passive text chats to **Intent-Based Generative User Interfaces (GenUI)** and **Model Context Protocol (MCP) Apps** [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-174](../00_index/citation_map.md#claim-174).
 
 ### A. Open Source Ecosystem & Tools (June 2026)
 
@@ -652,7 +652,7 @@ Several frameworks form the standard stack for authoring and rendering agentic U
 
 ### B. Generative UI in the Responses API
 
-Rather than letting models output raw unstructured text, applications leverage stateful completions (like the OpenAI Responses API or the self-hosted Open Responses) to generate interactive layouts [CLAIM-170, CLAIM-118].
+Rather than letting models output raw unstructured text, applications leverage stateful completions (like the OpenAI Responses API or the self-hosted Open Responses) to generate interactive layouts [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-118](../00_index/citation_map.md#claim-118).
 1. **Structured Outputs Gating**: The host client sends the user prompt along with a strict JSON Schema inside the `response_format` payload:
    ```json
    {
@@ -699,8 +699,8 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 - Optimistic rendering for user actions, pessimistic for server state — no exceptions
 - `data-slot` naming enables stable CSS targeting across refactors
 - OKLAB color mixing is the 2026 standard for perceptually uniform color blending
-- **Two-tier workspace orchestration surfaces** (chat panel for immediate editing + multi-threaded planning surface/manager window for background tasks) is the UX benchmark [CLAIM-158, CLAIM-161, CLAIM-166].
-- **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170, CLAIM-171, CLAIM-175].
+- **Two-tier workspace orchestration surfaces** (chat panel for immediate editing + multi-threaded planning surface/manager window for background tasks) is the UX benchmark [CLAIM-158](../00_index/citation_map.md#claim-158), [CLAIM-161](../00_index/citation_map.md#claim-161), [CLAIM-166](../00_index/citation_map.md#claim-166).
+- **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175).
 - **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174](../00_index/citation_map.md#claim-174).
 - **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178](../00_index/citation_map.md#claim-178).
 
@@ -718,7 +718,7 @@ This research directly informs `15_frontend_react_vite_agent_stack/` and the har
 8. **Optimistic sends, pessimistic completions** — Decision rule for every state update
 9. **Dot matrix status indicator** — 20 states cover all agent UX scenarios
 10. **Number roll animation** — CSS Houdini for smooth metric displays
-11. **Provide side-by-side diff previews and interactive tool execution / background task managers** with custom auto-run settings (Ask / Sandbox / YOLO) [CLAIM-164, CLAIM-165, CLAIM-169].
+11. **Provide side-by-side diff previews and interactive tool execution / background task managers** with custom auto-run settings (Ask / Sandbox / YOLO) [CLAIM-164](../00_index/citation_map.md#claim-164), [CLAIM-165](../00_index/citation_map.md#claim-165), [CLAIM-169](../00_index/citation_map.md#claim-169).
 12. **Implement an artifact-based planning and verification check loop** — modeled after Google Antigravity's lifecycle [CLAIM-167](../00_index/citation_map.md#claim-167).
-13. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172, CLAIM-175].
+13. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-175](../00_index/citation_map.md#claim-175).
 14. **Support the MCP Tasks extension** for client-driven asynchronous agent execution [CLAIM-178](../00_index/citation_map.md#claim-178).

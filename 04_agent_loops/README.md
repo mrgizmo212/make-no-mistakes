@@ -109,9 +109,9 @@ The agent loop should support setting reasoning effort per-turn, potentially ada
 
 1. **Start with a while-loop pattern** — simpler, proven, and sufficient for most use cases
 2. **Implement budget tracking from day one** — token budget + iteration cap + grace call
-3. **Support interrupt signals** — both user-initiated and programmatic with request-local cancellation safety to avoid HTTP retries [CLAIM-190, CLAIM-191]
+3. **Support interrupt signals** — both user-initiated and programmatic with request-local cancellation safety to avoid HTTP retries [CLAIM-190](../00_index/citation_map.md#claim-190), [CLAIM-191](../00_index/citation_map.md#claim-191)
 4. **Enforce message role alternation** — critical for model compatibility
 5. **Expose reasoning effort** as a per-turn configuration option
 6. **Consider graph-based execution** for complex multi-step workflows (can be layered on later)
 7. **Implement OpenRouter-style stop conditions** for declarative loop control
-8. **Provide granular bypass policies** (e.g., Ask, Session Bypass, and Sensitive Path Gating) to balance developer velocity and security [CLAIM-194, CLAIM-195]
+8. **Provide granular bypass policies** (e.g., Ask, Session Bypass, and Sensitive Path Gating) to balance developer velocity and security [CLAIM-194](../00_index/citation_map.md#claim-194), [CLAIM-195](../00_index/citation_map.md#claim-195)

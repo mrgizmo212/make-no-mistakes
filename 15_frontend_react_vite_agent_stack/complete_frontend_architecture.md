@@ -1557,14 +1557,14 @@ In this section, we analyze four leading AI developer environments across five p
 | **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159](../00_index/citation_map.md#claim-159) | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164](../00_index/citation_map.md#claim-164) | Planning-stage file checklist + diff review [CLAIM-167](../00_index/citation_map.md#claim-167) |
 | **Terminal Integration** | Stdio/WebSocket jsonrpc via codex app-server [CLAIM-160](../00_index/citation_map.md#claim-160) | Integrated terminal with Rich Shell Integration [CLAIM-163](../00_index/citation_map.md#claim-163) | Integrated terminal with settings auto-run toggles [CLAIM-165](../00_index/citation_map.md#claim-165) | Proposed execution logs + bg task tracking [CLAIM-169](../00_index/citation_map.md#claim-169) |
 | **Approval Mechanism** | Local sandboxing + manual approval prompts [CLAIM-159](../00_index/citation_map.md#claim-159) | Security-gated execution prompts in chat [CLAIM-162](../00_index/citation_map.md#claim-162) | Auto-run levels (Ask Every Time, Sandbox, YOLO) [CLAIM-165](../00_index/citation_map.md#claim-165) | Strict programmatic tool approval gates [CLAIM-169](../00_index/citation_map.md#claim-169) |
-| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158](../00_index/citation_map.md#claim-158) | Task/Agent manager window + Copilot CLI [CLAIM-161](../00_index/citation_map.md#claim-161) | In-pane task lists + .cursorrules formatting [CLAIM-164](../00_index/citation_map.md#claim-164) | Dedicated Manager Surface + artifact pipeline [CLAIM-166, CLAIM-167] |
+| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158](../00_index/citation_map.md#claim-158) | Task/Agent manager window + Copilot CLI [CLAIM-161](../00_index/citation_map.md#claim-161) | In-pane task lists + .cursorrules formatting [CLAIM-164](../00_index/citation_map.md#claim-164) | Dedicated Manager Surface + artifact pipeline [CLAIM-166](../00_index/citation_map.md#claim-166), [CLAIM-167](../00_index/citation_map.md#claim-167) |
 
 ### Key UI/UX Implementations & Takeaways
 
 #### A. OpenAI Codex Desktop App (standalone) [SRC-019]
 - **Multi-Threaded Layout**: Relies on a card-based multi-threaded control center interface to allow parallel agent project sessions [CLAIM-158](../00_index/citation_map.md#claim-158).
 - **Computer Use & Visual Previews**: Uses a Visual Design Loop where the agent can run Chrome browser subagents or Playwright tests, capture screenshots, and allow the user to draw annotations/feedback directly in the UI for real-time UI/UX fixes [CLAIM-159](../00_index/citation_map.md#claim-159).
-- **Local Sandbox Execution**: Binds all commands and tool calls to local secure sandboxes (Bubblewrap/Landlock for Linux, Seatbelt for macOS, restricted tokens on Windows) and routes them through a local WebSocket/Unix socket using `codex app-server` [CLAIM-160, CLAIM-007].
+- **Local Sandbox Execution**: Binds all commands and tool calls to local secure sandboxes (Bubblewrap/Landlock for Linux, Seatbelt for macOS, restricted tokens on Windows) and routes them through a local WebSocket/Unix socket using `codex app-server` [CLAIM-160](../00_index/citation_map.md#claim-160), [CLAIM-007](../00_index/citation_map.md#claim-007).
 
 #### B. VS Code Copilot Chat (Agent Mode) [SRC-020]
 - **Chat vs Agents Surface**: Splitting the UX into a code-first Chat view for focused file editing and a dedicated *Agents Window* for executing broader, cross-project tasks [CLAIM-161](../00_index/citation_map.md#claim-161).
@@ -1586,7 +1586,7 @@ In this section, we analyze four leading AI developer environments across five p
 
 ## 12. Generative UI in Responses, MCP Apps, & MCP UI
 
-In June 2026, the AI frontend ecosystem has shifted from static, passive text chats to **Intent-Based Generative User Interfaces (GenUI)** and **Model Context Protocol (MCP) Apps** [CLAIM-170, CLAIM-174].
+In June 2026, the AI frontend ecosystem has shifted from static, passive text chats to **Intent-Based Generative User Interfaces (GenUI)** and **Model Context Protocol (MCP) Apps** [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-174](../00_index/citation_map.md#claim-174).
 
 ### A. Open Source Ecosystem & Tools (June 2026)
 
@@ -1597,7 +1597,7 @@ Several frameworks form the standard stack for authoring and rendering agentic U
 
 ### B. Generative UI in the Responses API
 
-Rather than letting models output raw unstructured text, applications leverage stateful completions (like the OpenAI Responses API or the self-hosted Open Responses) to generate interactive layouts [CLAIM-170, CLAIM-118].
+Rather than letting models output raw unstructured text, applications leverage stateful completions (like the OpenAI Responses API or the self-hosted Open Responses) to generate interactive layouts [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-118](../00_index/citation_map.md#claim-118).
 1. **Structured Outputs Gating**: The host client sends the user prompt along with a strict JSON Schema inside the `response_format` payload:
    ```json
    {
@@ -1662,8 +1662,8 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 - `100dvh` replaces `100vh` for mobile viewport height
 - Synchronous `localStorage` read in `useState` initializer prevents FOUC
 - React Compiler (2026) largely eliminates need for manual memoization
-- **Two-tier workspace orchestration surfaces** (chat panel for immediate editing + multi-threaded planning surface/manager window for background tasks) is the UX benchmark [CLAIM-158, CLAIM-161, CLAIM-166].
-- **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170, CLAIM-171, CLAIM-175].
+- **Two-tier workspace orchestration surfaces** (chat panel for immediate editing + multi-threaded planning surface/manager window for background tasks) is the UX benchmark [CLAIM-158](../00_index/citation_map.md#claim-158), [CLAIM-161](../00_index/citation_map.md#claim-161), [CLAIM-166](../00_index/citation_map.md#claim-166).
+- **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175).
 - **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174](../00_index/citation_map.md#claim-174).
 - **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178](../00_index/citation_map.md#claim-178).
 
@@ -1673,7 +1673,7 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 - Whether `react-resizable-panels` animation transitions are smooth enough without custom CSS (the library prioritizes performance over animation)
 - Best practice for syncing panel sizes across tabs/windows (currently per-tab via localStorage)
 - Whether React Native Web can replace the mobile-specific layout entirely
-- Best default auto-run permission thresholds for CLI commands (Ask vs Sandbox vs YOLO) [CLAIM-165, CLAIM-169].
+- Best default auto-run permission thresholds for CLI commands (Ask vs Sandbox vs YOLO) [CLAIM-165](../00_index/citation_map.md#claim-165), [CLAIM-169](../00_index/citation_map.md#claim-169).
 
 ## Applicability to Harness
 
@@ -1688,9 +1688,9 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 | Theme flash prevention | **P1** | `index.html` inline script |
 | Content-visibility messages | **P1** | `[content-visibility:auto]` on message containers |
 | Lazy-loaded admin views | **P1** | `React.lazy()` + Suspense for settings pages |
-| Side-by-side diff previews & task settings | **P1** | Multi-file diff viewer with Ask/Sandbox/YOLO auto-run toggles [CLAIM-164, CLAIM-165] |
+| Side-by-side diff previews & task settings | **P1** | Multi-file diff viewer with Ask/Sandbox/YOLO auto-run toggles [CLAIM-164](../00_index/citation_map.md#claim-164), [CLAIM-165](../00_index/citation_map.md#claim-165) |
 | Plan/Task/Walkthrough check loop | **P1** | Integrated artifact planning lifecycle and state tracker [CLAIM-167](../00_index/citation_map.md#claim-167) |
-| Structured outputs & Sandboxed UI Widgets | **P1** | Structured JSON schema mapping + sandboxed iframe components (MCP Apps style) [CLAIM-172, CLAIM-175] |
+| Structured outputs & Sandboxed UI Widgets | **P1** | Structured JSON schema mapping + sandboxed iframe components (MCP Apps style) [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-175](../00_index/citation_map.md#claim-175) |
 | MCP Tasks runtime support | **P1** | Long-running asynchronous execution state machines via MCP Tasks [CLAIM-178](../00_index/citation_map.md#claim-178) |
 | Skeleton loading states | **P2** | Randomized-width skeletons for natural look |
 | Dot matrix status | **P2** | 20-state CSS animation system |

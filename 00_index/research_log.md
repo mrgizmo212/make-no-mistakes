@@ -371,10 +371,10 @@
 ### 21:00 — Observability, Prompt Caching, Gotchas & Spec Finalization
 - **Activity**: Conducted a thorough audit of the research workspace to integrate gotchas, error handling, prompt caching, and observability configurations.
 - **Actions Taken**:
-  1. **Prompt & Context Engineering**: Added Section 10.4 and prompt caching guidelines to `prompt_context_instruction_engineering.md` and updated `context_management_and_evolution.md` with SQLite WAL write lock contention details [CLAIM-136, CLAIM-137, CLAIM-138].
-  2. **Sandbox & Tooling Gotchas**: Appended init reapers (`tini`), path validators, and sudo/background executions to `built_in_local_tools.md` [CLAIM-139, CLAIM-140, CLAIM-141].
+  1. **Prompt & Context Engineering**: Added Section 10.4 and prompt caching guidelines to `prompt_context_instruction_engineering.md` and updated `context_management_and_evolution.md` with SQLite WAL write lock contention details [CLAIM-136](citation_map.md#claim-136), [CLAIM-137](citation_map.md#claim-137), [CLAIM-138](citation_map.md#claim-138).
+  2. **Sandbox & Tooling Gotchas**: Appended init reapers (`tini`), path validators, and sudo/background executions to `built_in_local_tools.md` [CLAIM-139](citation_map.md#claim-139), [CLAIM-140](citation_map.md#claim-140), [CLAIM-141](citation_map.md#claim-141).
   3. **Execution Loops**: Appended self-healing error recovery loop patterns and bounds to `execution_loops.md` [CLAIM-142](citation_map.md#claim-142).
-  4. **Channel connectors**: Documented Twilio SSL proxy mismatches and WhatsApp credentials corruption gotchas in `channel_connectors_and_pairing.md` [CLAIM-143, CLAIM-144].
+  4. **Channel connectors**: Documented Twilio SSL proxy mismatches and WhatsApp credentials corruption gotchas in `channel_connectors_and_pairing.md` [CLAIM-143](citation_map.md#claim-143), [CLAIM-144](citation_map.md#claim-144).
   5. **Architecture Recommendations**: Added design constraints on prompt caching, regex avoidance, and standardized Tracing & Observability sections in `architecture_recommendations/README.md`.
   6. **Specification Report**: Updated `harness_architecture_specification_report.md` with sections detailing Caching, Tracing, Gotchas, and Regex constraints.
   7. **Citations & Indexes**: Registered `CLAIM-136` through `CLAIM-144` in `citation_map.md`.
@@ -405,7 +405,7 @@
   - Multi-agent consensus reduces hallucination by ~35.9% [CLAIM-151](citation_map.md#claim-151)
   - Open-source MoA beat GPT-4 on AlpacaEval 2.0 [CLAIM-147](citation_map.md#claim-147)
   - Self-synthesis (model with itself) improves quality [CLAIM-157](citation_map.md#claim-157)
-  - Panel isolation prevents anchoring bias; anonymity prevents lab-bias [CLAIM-145, CLAIM-150]
+  - Panel isolation prevents anchoring bias; anonymity prevents lab-bias [CLAIM-145](citation_map.md#claim-145), [CLAIM-150](citation_map.md#claim-150)
 - **Status**: Multi-model deliberation research COMPLETE.
 
 ### 21:22 — Citation URL Sweep

@@ -49,9 +49,9 @@ The Model Context Protocol (MCP) — an open standard for connecting AI agents t
 ### Generative UI, MCP Apps, and MCP UI (June 2026)
 
 - **Structured Output Gating**: Enforces component safety using rigid schemas in outbound Responses API calls (`response_format`) [CLAIM-171](../00_index/citation_map.md#claim-171).
-- **Isolated Iframe Widgets**: SEP-1865 standardizes rendering of interactive UI widgets served by remote MCP servers inside sandboxed iframes (`sandbox="allow-scripts"`) [CLAIM-174, CLAIM-175].
+- **Isolated Iframe Widgets**: SEP-1865 standardizes rendering of interactive UI widgets served by remote MCP servers inside sandboxed iframes (`sandbox="allow-scripts"`) [CLAIM-174](../00_index/citation_map.md#claim-174), [CLAIM-175](../00_index/citation_map.md#claim-175).
 - **Bi-directional JSON-RPC Sync**: Communication maps interactive iframe buttons and form events to host agent actions via postMessage JSON-RPC [CLAIM-174](../00_index/citation_map.md#claim-174).
-- **Stateless Core Tasks**: Transition to a stateless core utilizes the Tasks extension to run client-driven state machines, avoiding socket-connection memory bloat on servers [CLAIM-177, CLAIM-178].
+- **Stateless Core Tasks**: Transition to a stateless core utilizes the Tasks extension to run client-driven state machines, avoiding socket-connection memory bloat on servers [CLAIM-177](../00_index/citation_map.md#claim-177), [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 For detailed research, specifications, and TS component registry/iframe hooks, see the dedicated document: **[mcp_apps_and_ui.md](08_mcps/mcp_apps_and_ui.md)**.
 
@@ -90,9 +90,9 @@ For detailed research, specifications, and TS component registry/iframe hooks, s
 3. **Zero permanent footprint** — MCP tools only appear when servers are connected
 4. **Bidirectional support** matters — agents should be both MCP clients AND MCP servers (Hermes does both)
 5. **OAuth support** is required for production MCP deployments
-6. **Generative UI must be gated behind structured schemas and client registries** to prevent injection risks [CLAIM-171, CLAIM-175].
-7. **MCP Apps UI (SEP-1865) requires sandboxed iframe containers** communicating via JSON-RPC postMessage [CLAIM-174, CLAIM-175].
-8. **Asynchronous loops are modeled via the Tasks extension** rather than stateful connection sockets [CLAIM-177, CLAIM-178].
+6. **Generative UI must be gated behind structured schemas and client registries** to prevent injection risks [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175).
+7. **MCP Apps UI (SEP-1865) requires sandboxed iframe containers** communicating via JSON-RPC postMessage [CLAIM-174](../00_index/citation_map.md#claim-174), [CLAIM-175](../00_index/citation_map.md#claim-175).
+8. **Asynchronous loops are modeled via the Tasks extension** rather than stateful connection sockets [CLAIM-177](../00_index/citation_map.md#claim-177), [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 ## What Is Uncertain
 

@@ -41,7 +41,7 @@ To separate graphical rendering, command execution, and network routing, the har
 **Model routing (pick one, not all):** The harness calls models through a standard OpenAI-compatible client. Common backends: **Ollama** (`localhost:11434/v1`) for local models, **OpenRouter** for hosted multi-provider access with one API key, **LiteLLM** when you want a self-hosted proxy with auth and budgets, or **direct provider APIs** for a single vendor. LiteLLM was studied as a reference implementation — it is not a hard dependency.
 
 ### Interoperability Standards
-*   **Credential Shadowing**: Outbound model calls route through first-party plan limits by reading credentials from macOS Keychain (service `"Claude Code-credentials"`) or parsing `~/.claude/.credentials.json`, spoofing client signatures (`User-Agent: claude-cli/2.1.74`), and injecting header markers [CLAIM-116, CLAIM-117].
+*   **Credential Shadowing**: Outbound model calls route through first-party plan limits by reading credentials from macOS Keychain (service `"Claude Code-credentials"`) or parsing `~/.claude/.credentials.json`, spoofing client signatures (`User-Agent: claude-cli/2.1.74`), and injecting header markers [CLAIM-116](../00_index/citation_map.md#claim-116), [CLAIM-117](../00_index/citation_map.md#claim-117).
 *   **API Emulation**: The gateway emulates OpenAI's stateful Responses wire protocol (`POST /v1/responses`), managing server-side runs while translating payloads to any backend model (Claude, DeepSeek, Qwen) [CLAIM-118](../00_index/citation_map.md#claim-118).
 *   **Open Responses API Server**: Exposes standard Open Responses endpoints (`/v1/responses`), converting input lists to internal messages and streaming semantic events like `response.output_text.delta` via Server-Sent Events (SSE) [CLAIM-180](../00_index/citation_map.md#claim-180).
 *   **BFS Agent Discovery**: The controller utilizes a Breadth-First Search (BFS) discovery algorithm starting from the primary agent's edges, validating remote agent permissions for each hop and establishing isolated sub-agent run contexts [CLAIM-181](../00_index/citation_map.md#claim-181).
@@ -72,7 +72,7 @@ To support Anthropic Claude 3.7+ models, the adapter converts OpenAI-style input
 *   Extracts system prompt objects to top-level parameters [CLAIM-105](../00_index/citation_map.md#claim-105).
 *   Merges consecutive identical roles to enforce strict user-assistant alternation [CLAIM-106](../00_index/citation_map.md#claim-106).
 *   Converts tool messages into `tool_result` content arrays inside user messages [CLAIM-107](../00_index/citation_map.md#claim-107).
-*   Strips thinking blocks for third-party endpoints (Bedrock/Azure) while preserving signatures for direct Anthropic APIs [CLAIM-108, CLAIM-109].
+*   Strips thinking blocks for third-party endpoints (Bedrock/Azure) while preserving signatures for direct Anthropic APIs [CLAIM-108](../00_index/citation_map.md#claim-108), [CLAIM-109](../00_index/citation_map.md#claim-109).
 *   Applies a double-underscore prefix `mcp__` to tool names to bypass subscription billing filters [CLAIM-112](../00_index/citation_map.md#claim-112).
 
 ### D. Prompt Caching & Byte-Stability Specifications
@@ -139,7 +139,7 @@ The harness adopts a **3-Tier Database Stack**:
 *   **Containers**: Spawns isolated Docker/Podman workspace containers.
     *   **Zombie Process Gotcha**: Spawning subprocesses in headless Docker containers without an init system leads to PID 1 zombie process build-ups, consuming system resources and leaking file descriptors.
     *   **Mitigation**: Always run `tini` or `catatonit` as the container's PID 1 process to reap exited processes properly [CLAIM-139](../00_index/citation_map.md#claim-139).
-*   **MicroVMs**: Boots AWS Firecracker KVM microVMs (<5ms boot, 5MB RAM) with a minimal custom compiled `vmlinux` kernel and virtio devices [CLAIM-101, CLAIM-103].
+*   **MicroVMs**: Boots AWS Firecracker KVM microVMs (<5ms boot, 5MB RAM) with a minimal custom compiled `vmlinux` kernel and virtio devices [CLAIM-101](../00_index/citation_map.md#claim-101), [CLAIM-103](../00_index/citation_map.md#claim-103).
 *   **Linux Primitives**: Sandboxes built from scratch utilize `unshare` namespaces (MNT, PID, NET, USER, IPC, UTS), `cgroups v2` resource quotas (CPU limits, 256M memory max, PID ceilings to block fork bombs), `pivot_root` mount pivots, seccomp filters, and stripped Linux capabilities [CLAIM-102](../00_index/citation_map.md#claim-102).
 *   **Browser control**: Connects to the user's headed browser session via a Chrome Extension WebSocket CDP Bridge. This inherits active cookies and session states to bypass Cloudflare and bot-detection systems [CLAIM-104](../00_index/citation_map.md#claim-104).
 
@@ -148,7 +148,7 @@ The harness adopts a **3-Tier Database Stack**:
     *   **Path Escape Gotcha**: Letting the agent pass relative directory sentinels (`"."`, `"cwd"`, or `".."`) can trick path validators into exposing files outside the workspace root or in incorrect git worktrees.
     *   **Mitigation**: Rejects sentinel paths completely. Enforce resolving paths to absolute formats using realpath evaluation before validating them against the workspace boundary [CLAIM-140](../00_index/citation_map.md#claim-140).
 *   **Sensitive Blocklists**: Blocks modifications to configuration files (`config.yaml`, `.env`) and system paths (`/etc/`, `/boot/`, `~/.ssh/`) [CLAIM-069](../00_index/citation_map.md#claim-069).
-*   **Command Sanitization**: Normalizes terminal strings by stripping ANSI escapes and quotes, NFKC character mapping, and matching commands against a hardline blocklist (`rm -rf /`, `mkfs`, `dd` to raw disks) [CLAIM-071, CLAIM-072].
+*   **Command Sanitization**: Normalizes terminal strings by stripping ANSI escapes and quotes, NFKC character mapping, and matching commands against a hardline blocklist (`rm -rf /`, `mkfs`, `dd` to raw disks) [CLAIM-071](../00_index/citation_map.md#claim-071), [CLAIM-072](../00_index/citation_map.md#claim-072).
 *   **Sudo & Background Processes**:
     *   **Interactive Hang Gotcha**: In headless, TTY-less terminals, interactive prompts like `sudo` or background processes that do not close their stdout/stderr pipes cause the execution tool to hang indefinitely.
     *   **Mitigation**: Transform blocking `sudo` queries to `sudo -S -p ''` (piping credentials to stdin [CLAIM-141](../00_index/citation_map.md#claim-141)), and brace-group background compounds (`A && { B & }` [CLAIM-141](../00_index/citation_map.md#claim-141)) to detach background streams from the terminal session.
@@ -160,7 +160,7 @@ The harness adopts a **3-Tier Database Stack**:
 ### Monorepo Stack
 *   **Core Engine (Python 3.11+)**: Leverages the Python machine learning and LLM SDK ecosystem. Configured with the **uv** package manager.
 *   **API Gateway & Frontend UI (TypeScript / Node 24+)**: Uses **pnpm workspaces** for monorepo routing and type sharing. Binds UI streaming to Server-Sent Events (SSE) reconnecting loops.
-*   **Skills & Context conventions**: Adheres to the **SKILL.md** standard (agentskills.io) and **AGENTS.md** configuration walk [CLAIM-047, CLAIM-080].
+*   **Skills & Context conventions**: Adheres to the **SKILL.md** standard (agentskills.io) and **AGENTS.md** configuration walk [CLAIM-047](../00_index/citation_map.md#claim-047), [CLAIM-080](../00_index/citation_map.md#claim-080).
 
 ### Model Routing Specifications (June 2026 Costs)
 1.  **Intent Classifier (Nano Tier)**: `openai/gpt-5.4-nano` (~$0.0001/turn).
@@ -290,7 +290,7 @@ For detailed research including taxonomy, self-hosted implementation code, anti-
 
 ## 9. Generative UI, MCP Apps, & MCP UI Specifications
 
-To deliver interactive graphical tools without violating security principles or bloating backend resources, the harness supports **Intent-Based Generative UIs** and **SEP-1865 MCP Apps** [CLAIM-170, CLAIM-174].
+To deliver interactive graphical tools without violating security principles or bloating backend resources, the harness supports **Intent-Based Generative UIs** and **SEP-1865 MCP Apps** [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-174](../00_index/citation_map.md#claim-174).
 
 ### A. Generative UI Streaming Specification
 1.  **JSON-Schema Gating**: The frontend must never render unstructured agent-generated code. Outbound Response calls restrict output structures using a JSON Schema (passed in `response_format` payload) detailing permissible components and properties [CLAIM-171](../00_index/citation_map.md#claim-171).
@@ -306,7 +306,7 @@ To deliver interactive graphical tools without violating security principles or 
     *   *Host to Iframe (Updates)*: `mcp/appStateUpdate` broadcasts tool result states back to the sandboxed visual card [CLAIM-174](../00_index/citation_map.md#claim-174).
 
 ### C. Stateless Core & Asynchronous Tasks Extension
-1.  **Durable Session Checkpointing**: The core cognitive loops are stateless. Session state, conversation history, and progress checkpoints are saved locally (using WAL trigram SQLite databases) [CLAIM-177, CLAIM-178].
+1.  **Durable Session Checkpointing**: The core cognitive loops are stateless. Session state, conversation history, and progress checkpoints are saved locally (using WAL trigram SQLite databases) [CLAIM-177](../00_index/citation_map.md#claim-177), [CLAIM-178](../00_index/citation_map.md#claim-178).
 2.  **Tasks Extension Progress Streams**: Long-running background processes (such as remote compile or test execution checks) are modeled as client-driven durable Tasks, emitting step progress notifications (`mcp/taskProgress`) to keep connection sockets ephemeral and prevent memory leaks [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 For the complete technical breakdown, security sandboxing, and TypeScript sdk configurations, refer to the topic research: **[mcp_apps_and_ui.md](08_mcps/mcp_apps_and_ui.md)**.
@@ -315,7 +315,7 @@ For the complete technical breakdown, security sandboxing, and TypeScript sdk co
 
 ## 10. Human-in-the-Loop (HITL) & Conversation Steering Specifications
 
-To guarantee safety, steerability, and control during autonomous executions, the harness implements a dual-layer Human-in-the-Loop (HITL) subsystem supporting message steering, request-local cancellations, and multi-tier auto-approve policies [CLAIM-190, CLAIM-194].
+To guarantee safety, steerability, and control during autonomous executions, the harness implements a dual-layer Human-in-the-Loop (HITL) subsystem supporting message steering, request-local cancellations, and multi-tier auto-approve policies [CLAIM-190](../00_index/citation_map.md#claim-190), [CLAIM-194](../00_index/citation_map.md#claim-194).
 
 ### A. Conversation Steering Protocol
 1.  **Steering Intercept Node**: When executing loops (either state graphs or linear while-loops), the runner checks a shared message buffer before the next generation step [CLAIM-190](../00_index/citation_map.md#claim-190).
@@ -351,7 +351,7 @@ For detailed code paradigms, cascading cancellation fixes, and framework impleme
 
 ## 11. Agent Scratchpads & Session Memory Specifications
 
-To maintain planning integrity, preserve context across compactions, and isolate testing scripts, the harness implements a tripartite session memory architecture comprising in-memory checklist stores, isolated workspace rules, and Knowledge Graph indexing [CLAIM-197, CLAIM-203, CLAIM-205].
+To maintain planning integrity, preserve context across compactions, and isolate testing scripts, the harness implements a tripartite session memory architecture comprising in-memory checklist stores, isolated workspace rules, and Knowledge Graph indexing [CLAIM-197](../00_index/citation_map.md#claim-197), [CLAIM-203](../00_index/citation_map.md#claim-203), [CLAIM-205](../00_index/citation_map.md#claim-205).
 
 ### A. In-Memory Todo & Re-Injection Specification
 1.  **State Schema**: The runtime allocates a session-isolated `TodoStore` tracking checklist items in JSON [CLAIM-198](../00_index/citation_map.md#claim-198):
@@ -379,8 +379,8 @@ To maintain planning integrity, preserve context across compactions, and isolate
 
 ### D. Knowledge Graph Memory Specification
 1.  **Triplet Extraction**: The memory manager runs an asynchronous pipeline that extracts entity-relation triplets (`[Subject] -> [Relation] -> [Object]`) from chat transcripts [CLAIM-205](../00_index/citation_map.md#claim-205).
-2.  **Pluggable Graph Providers**: The harness implements a pluggable `MemoryProvider` interface supporting graph-based engines (such as Mem0, Graphiti, or Cognee) [CLAIM-205, CLAIM-207].
-3.  **Temporal Edge Weighting**: Graph stores (e.g., local SQLite-based Hindsight or cloud Graphiti Neo4j databases) index triplets with edge timestamps [CLAIM-205, CLAIM-207].
+2.  **Pluggable Graph Providers**: The harness implements a pluggable `MemoryProvider` interface supporting graph-based engines (such as Mem0, Graphiti, or Cognee) [CLAIM-205](../00_index/citation_map.md#claim-205), [CLAIM-207](../00_index/citation_map.md#claim-207).
+3.  **Temporal Edge Weighting**: Graph stores (e.g., local SQLite-based Hindsight or cloud Graphiti Neo4j databases) index triplets with edge timestamps [CLAIM-205](../00_index/citation_map.md#claim-205), [CLAIM-207](../00_index/citation_map.md#claim-207).
 4.  **Personalization & Contradiction Resolution**:
     *   *Fact Resolution*: Stale relationships (e.g. `[App] -> [uses] -> [Node 20]`) are invalidated or updated dynamically when contradictory triplets flow in (e.g. `[App] -> [uses] -> [Node 24]`), resolving context amnesia [CLAIM-206](../00_index/citation_map.md#claim-206).
     *   *Semantic Compaction*: High context pressure triggers the compaction engine to replace raw conversation histories with multi-hop graph triplet traversals, reducing token load by up to 90% while retaining absolute logical grounding [CLAIM-206](../00_index/citation_map.md#claim-206).
@@ -391,7 +391,7 @@ For detailed research covering scratchpad patterns, auto-memory logs, and knowle
 
 ## 12. Agent Self-Improvement & Curation Specifications
 
-To continuously adapt to new development guidelines, resolve catalog drift, and track developer behavior without manual maintenance, the harness implements a background curation and self-improvement subsystem [CLAIM-208, CLAIM-213].
+To continuously adapt to new development guidelines, resolve catalog drift, and track developer behavior without manual maintenance, the harness implements a background curation and self-improvement subsystem [CLAIM-208](../00_index/citation_map.md#claim-208), [CLAIM-213](../00_index/citation_map.md#claim-213).
 
 ### A. Curation Telemetry sidecar (`.usage.json`)
 1.  **Observability Partitioning**: Telemetry metrics are isolated from instruction files to prevent context contamination and VCS conflicts. The system writes tracking logs to a central, lock-serialized sidecar file (`~/.hermes/skills/.usage.json`) [CLAIM-209](../00_index/citation_map.md#claim-209).

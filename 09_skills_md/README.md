@@ -47,7 +47,7 @@ Hermes implements an autonomous background self-improvement cycle:
 
 1.  **Adopt the SKILL.md standard**: Use YAML frontmatter for description-based matching.
 2.  **Isolate Telemetry**: Keep usage metrics in a JSON sidecar to preserve cache stability and avoid VCS pollution [CLAIM-209](../00_index/citation_map.md#claim-209).
-3.  **Implement an Idle Curation Daemon**: Run background reviews during inactivity to merge duplicate/narrow guidelines into class-level umbrellas [CLAIM-208, CLAIM-213].
+3.  **Implement an Idle Curation Daemon**: Run background reviews during inactivity to merge duplicate/narrow guidelines into class-level umbrellas [CLAIM-208](../00_index/citation_map.md#claim-208), [CLAIM-213](../00_index/citation_map.md#claim-213).
 4.  **Enforce Safe Sandbox Scanning**: Scan skills with AST tools before execution [CLAIM-215](../00_index/citation_map.md#claim-215).
 5.  **Enable Tarball Backups**: Auto-snapshot the skills directory before curation rollouts [CLAIM-216](../00_index/citation_map.md#claim-216).
 6.  **Expose Pinned Exemptions**: Allow developers to pin load-bearing guidelines [CLAIM-212](../00_index/citation_map.md#claim-212).

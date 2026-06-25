@@ -71,7 +71,7 @@ Adopt Hermes's "narrow core, capability at edges" principle as the foundational 
 | Tool extensibility | MCP first, plugins second | Codex + Hermes principle |
 | Token Calibration | Cumulative billing ratio scaling | Corrects local tokenizer discrepancies against provider bills [CLAIM-183](../00_index/citation_map.md#claim-183) |
 | Overhead Calibration | Dynamic tool schema ceiling (15% variance) | Corrects estimated schema overhead using real provider feedback [CLAIM-184](../00_index/citation_map.md#claim-184) |
-| Multi-Agent Handoffs | LangGraph Command-based transfers | Outgoing handoffs return Command parenting with incoming receiver context filtering [CLAIM-185, CLAIM-186] |
+| Multi-Agent Handoffs | LangGraph Command-based transfers | Outgoing handoffs return Command parenting with incoming receiver context filtering [CLAIM-185](../00_index/citation_map.md#claim-185), [CLAIM-186](../00_index/citation_map.md#claim-186) |
 | Observation Masking | Character-limited ToolMessage previews (~300 chars) | Mask consumed tool results above 80% context pressure to keep system cache hits high [CLAIM-187](../00_index/citation_map.md#claim-187) |
 | Summary Infiltration | HumanMessage injection on clean state | Mid-run summaries compete for message budget rather than inflating system instructions [CLAIM-188](../00_index/citation_map.md#claim-188) |
 
@@ -251,10 +251,10 @@ For detailed research including taxonomy, self-hosted implementation code, anti-
 
 | Recommendation | Implementation Details | Rationale |
 |:---|:---|:---|
-| **Declarative Registry Gating** | Client-side Component Registry mapping schemas to React components | Blocks arbitrary code execution, establishing a strict security perimeter [CLAIM-171, CLAIM-175] |
+| **Declarative Registry Gating** | Client-side Component Registry mapping schemas to React components | Blocks arbitrary code execution, establishing a strict security perimeter [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175) |
 | **Isolated Sandbox Rendering** | Load remote MCP widgets inside an isolated `<iframe>` with `sandbox="allow-scripts"` and a strict Content Security Policy (CSP) | Prevents remote server templates from stealing user cookies or parent window access [CLAIM-175](../00_index/citation_map.md#claim-175) |
 | **Bi-directional postMessage Sync** | Establish JSON-RPC bridges over `postMessage` to sync iframe widget state to host agent variables | Keeps host-engine and visual views in lockstep, letting user interactions run subsequent tools [CLAIM-174](../00_index/citation_map.md#claim-174) |
-| **Stateless Core Tasks** | Implement client-driven durable state machines (durable Tasks) storing checkpoint state in SQLite | Eliminates TCP/HTTP socket exhaustion on background loops [CLAIM-177, CLAIM-178] |
+| **Stateless Core Tasks** | Implement client-driven durable state machines (durable Tasks) storing checkpoint state in SQLite | Eliminates TCP/HTTP socket exhaustion on background loops [CLAIM-177](../00_index/citation_map.md#claim-177), [CLAIM-178](../00_index/citation_map.md#claim-178) |
 
 ### Framework Selection for Agent UIs
 

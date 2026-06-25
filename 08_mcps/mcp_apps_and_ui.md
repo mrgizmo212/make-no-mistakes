@@ -37,7 +37,7 @@ Generative UI represents a paradigm shift where the LLM does not merely generate
 ```
 
 ### A. Structured outputs Gating
-To enforce type safety and protect the client application from executing arbitrary code, GenUI implementations use strict schema constraints in the model's responses API (such as the OpenAI Responses API or the self-hosted Open Responses proxy) [CLAIM-171, CLAIM-118].
+To enforce type safety and protect the client application from executing arbitrary code, GenUI implementations use strict schema constraints in the model's responses API (such as the OpenAI Responses API or the self-hosted Open Responses proxy) [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-118](../00_index/citation_map.md#claim-118).
 *   **API Payload**: Outbound LLM requests include a structured JSON Schema under the `response_format` configuration [CLAIM-171](../00_index/citation_map.md#claim-171):
     ```json
     {
@@ -194,9 +194,9 @@ This lets the frontend render smooth progress bars, detailed nested sub-task che
 
 ## What Is Confirmed
 
-1.  **Allowlist Component Gating is Mandatory**: To prevent security compromises, only components defined in the client registry can be rendered from completions JSON [CLAIM-170, CLAIM-171, CLAIM-175].
-2.  **SEP-1865 Iframe Isolation is the Extension Standard**: All remote MCP servers offering visual widgets run inside isolated, non-cookie-inheriting iframes using postMessage JSON-RPC bridges [CLAIM-174, CLAIM-175].
-3.  **Stateless MCP Core + Tasks**: Solves connection bloat by storing execution state and checkpoints locally on the client (using FTS5 SQLite databases) [CLAIM-177, CLAIM-178].
+1.  **Allowlist Component Gating is Mandatory**: To prevent security compromises, only components defined in the client registry can be rendered from completions JSON [CLAIM-170](../00_index/citation_map.md#claim-170), [CLAIM-171](../00_index/citation_map.md#claim-171), [CLAIM-175](../00_index/citation_map.md#claim-175).
+2.  **SEP-1865 Iframe Isolation is the Extension Standard**: All remote MCP servers offering visual widgets run inside isolated, non-cookie-inheriting iframes using postMessage JSON-RPC bridges [CLAIM-174](../00_index/citation_map.md#claim-174), [CLAIM-175](../00_index/citation_map.md#claim-175).
+3.  **Stateless MCP Core + Tasks**: Solves connection bloat by storing execution state and checkpoints locally on the client (using FTS5 SQLite databases) [CLAIM-177](../00_index/citation_map.md#claim-177), [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 ## What Is Uncertain
 

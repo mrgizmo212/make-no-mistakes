@@ -9,7 +9,7 @@ Because LLMs are stateless and have finite, cost-sensitive context windows, rely
 2. **Instruction Drift**: Long system prompts carrying verbose plans suffer from the "lost in the middle" effect, causing the agent to diverge from its target objectives.
 3. **Workspace Contamination**: Allowing agents to write temporary notes directly into the user's codebase root clutters version control history and risks contaminating build artifacts.
 
-To solve this, modern agent harnesses implement **Agent Scratchpads and Session Memory** using three distinct patterns [CLAIM-197, CLAIM-201, CLAIM-203].
+To solve this, modern agent harnesses implement **Agent Scratchpads and Session Memory** using three distinct patterns [CLAIM-197](../00_index/citation_map.md#claim-197), [CLAIM-201](../00_index/citation_map.md#claim-201), [CLAIM-203](../00_index/citation_map.md#claim-203).
 
 ---
 
@@ -51,7 +51,7 @@ def format_for_injection(self) -> Optional[str]:
     return "\n".join(lines)
 ```
 
-By injecting this block dynamically, the plan survives the compression barrier without inflating the system instructions ceiling [CLAIM-199, CLAIM-200].
+By injecting this block dynamically, the plan survives the compression barrier without inflating the system instructions ceiling [CLAIM-199](../00_index/citation_map.md#claim-199), [CLAIM-200](../00_index/citation_map.md#claim-200).
 
 ---
 
