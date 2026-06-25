@@ -1,32 +1,277 @@
+/* Make No Mistakes — black theme (HonKit) */
+
+:root {
+  --bg: #000000;
+  --bg-raised: #0a0a0a;
+  --bg-panel: #0d1117;
+  --bg-code: #161b22;
+  --border: rgba(88, 166, 255, 0.14);
+  --border-strong: rgba(163, 113, 247, 0.35);
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --heading: #f0f6fc;
+  --link: #58a6ff;
+  --link-hover: #a371f7;
+  --accent-red: #ff4444;
+  --accent-glow: rgba(255, 68, 68, 0.15);
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+
+html,
+body,
+.book {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+body.color-theme-1,
+body.color-theme-2,
+body.color-theme-3 {
+  background: var(--bg) !important;
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+
 .book .book-summary {
-  background: #0d1117;
-  color: #c9d1d9;
+  background: var(--bg-panel) !important;
+  color: var(--text-muted) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.book .book-summary ul.summary li a,
+.book .book-summary ul.summary li span {
+  color: var(--text-muted) !important;
+}
+
+.book .book-summary ul.summary li a:hover {
+  color: var(--link) !important;
+  background: rgba(88, 166, 255, 0.06) !important;
+  text-decoration: none !important;
 }
 
 .book .book-summary ul.summary li.active > a {
-  color: #58a6ff;
-  border-right: 3px solid #a371f7;
+  color: var(--link) !important;
+  background: rgba(88, 166, 255, 0.08) !important;
+  border-right: 3px solid var(--accent-red) !important;
+  font-weight: 600;
+}
+
+.book .book-summary ul.summary li.divider {
+  border-top: 1px solid var(--border) !important;
+}
+
+/* ── Header bar ─────────────────────────────────────────── */
+
+.book .book-header {
+  background: var(--bg-raised) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.book .book-header h1,
+.book .book-header .btn {
+  color: var(--heading) !important;
+}
+
+.book .book-header .btn:hover {
+  color: var(--link) !important;
+}
+
+/* ── Content area ───────────────────────────────────────── */
+
+.book .book-body,
+.book .book-body .body-inner,
+.book .book-body .page-wrapper,
+.book .book-body .page-inner {
+  background: var(--bg) !important;
+  color: var(--text) !important;
 }
 
 .book .book-body .page-inner {
   max-width: 960px;
 }
 
-.book .book-header h1 {
-  letter-spacing: -0.02em;
+.markdown-section {
+  color: var(--text) !important;
+}
+
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  color: var(--heading) !important;
 }
 
 .markdown-section h1 {
-  border-bottom: 1px solid rgba(88, 166, 255, 0.25);
+  border-bottom: 1px solid var(--border-strong);
   padding-bottom: 0.35em;
+  letter-spacing: -0.02em;
+}
+
+.markdown-section h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25em;
+  margin-top: 1.75em;
+}
+
+.markdown-section strong {
+  color: var(--heading);
+}
+
+.markdown-section a {
+  color: var(--link) !important;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.markdown-section a:hover {
+  color: var(--link-hover) !important;
+  border-bottom-color: var(--link-hover);
+}
+
+.markdown-section hr {
+  border-color: var(--border) !important;
+  background: var(--border) !important;
 }
 
 .markdown-section blockquote {
-  border-left: 4px solid #a371f7;
-  background: rgba(163, 113, 247, 0.08);
+  border-left: 4px solid var(--accent-red) !important;
+  background: var(--accent-glow) !important;
+  color: var(--text) !important;
 }
+
+/* ── Tables ─────────────────────────────────────────────── */
+
+.markdown-section table {
+  border-collapse: collapse;
+  width: 100%;
+  display: table;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.markdown-section table th,
+.markdown-section table td {
+  border: 1px solid var(--border) !important;
+  padding: 0.55em 0.85em;
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+.markdown-section table thead th,
+.markdown-section table tr:nth-child(2n) td {
+  background: rgba(88, 166, 255, 0.04) !important;
+}
+
+.markdown-section table thead th {
+  color: var(--heading) !important;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-strong) !important;
+}
+
+/* ── Code ───────────────────────────────────────────────── */
+
+.markdown-section code {
+  background: rgba(110, 118, 129, 0.22) !important;
+  color: #ff7b72 !important;
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+}
+
+.markdown-section pre {
+  background: var(--bg-code) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.markdown-section pre > code {
+  background: transparent !important;
+  color: var(--text) !important;
+  padding: 0;
+}
+
+/* ── Navigation (prev / next) ───────────────────────────── */
+
+.book .navigation {
+  background: var(--bg-raised) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.book .navigation .link {
+  color: var(--text-muted) !important;
+}
+
+.book .navigation .link:hover {
+  color: var(--link) !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+
+.gitbook-link {
+  background: var(--bg-panel) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+}
+
+.gitbook-link a {
+  color: var(--link) !important;
+}
+
+/* ── Font settings toggle ───────────────────────────────── */
+
+.book .font-settings {
+  background: var(--bg-panel) !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+.book .font-settings .dropdown-menu {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.book .font-settings .dropdown-menu a {
+  color: var(--text-muted) !important;
+}
+
+.book .font-settings .dropdown-menu a:hover {
+  color: var(--link) !important;
+  background: rgba(88, 166, 255, 0.08) !important;
+}
+
+/* ── Logo on intro page ─────────────────────────────────── */
 
 .markdown-section img[alt="Make No Mistakes"] {
   display: block;
   margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 0 24px rgba(255, 68, 68, 0.25));
+}
+
+/* ── Scrollbar (WebKit) ─────────────────────────────────── */
+
+.book-summary::-webkit-scrollbar,
+.markdown-section pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.book-summary::-webkit-scrollbar-track,
+.markdown-section pre::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.book-summary::-webkit-scrollbar-thumb,
+.markdown-section pre::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+.book-summary::-webkit-scrollbar-thumb:hover,
+.markdown-section pre::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
 }
