@@ -101,7 +101,7 @@ The sparse and dense result lists are merged.
 
 ## 4. Architectural Integration in the Harness
 
-To remain model-agnostic, the agent harness should define modular abstract interfaces for both embeddings and rerankers, aligning with the industry-standard LiteLLM provider model:
+To remain model-agnostic, the agent harness should define modular abstract interfaces for both embeddings and rerankers — the same pluggable-provider idea used across OpenRouter, LangChain, and optional proxies like LiteLLM:
 
 ### 4.1 Embedding Provider Interface
 ```python

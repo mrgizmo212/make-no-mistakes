@@ -33,7 +33,7 @@ We adhere to the composite architecture detailed in [18 — Architecture Recomme
 │  Provider translation │ Streaming │ Tool calling │ Caching   │
 ├──────────────────────────────────────────────────────────────┤
 │                    MODEL PROVIDERS                           │
-│  OpenAI │ Anthropic │ Google │ xAI │ NVIDIA │ via LiteLLM   │
+│  OpenAI │ Anthropic │ Google │ Ollama │ OpenRouter │ direct APIs │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -43,7 +43,7 @@ We adhere to the composite architecture detailed in [18 — Architecture Recomme
 - **Frontend**: React + Vite + [assistant-ui](https://github.com/assistant-ui/assistant-ui) (Reference component library)
 - **Database**: SQLite + FTS5 (Local-first, fast checkpoints)
 - **Package Manager**: `uv` (Python), `pnpm` workspaces (TypeScript monorepo)
-- **Model Router**: LiteLLM (Supports 100+ providers via BaseConfig pattern)
+- **Model backend**: Configurable OpenAI-compat endpoint — **Ollama** (local), **OpenRouter** (hosted), **LiteLLM** (optional self-hosted proxy), or direct provider APIs
 
 ---
 
@@ -93,7 +93,7 @@ harness/
 | Task | Status | Target | Reference / Action |
 |:---|:---:|:---|:---|
 | Create project structure | ⏳ Planned | Monorepo layout setup | Use `pnpm` and `uv` |
-| Define LiteLLM gateway config | ⏳ Planned | Layer 1 configuration | Map OpenAI API interface |
+| Define model backend config | ⏳ Planned | Layer 1 configuration | Ollama / OpenRouter / LiteLLM / direct — OpenAI-compat client |
 | Implement Core Agent loop | ⏳ Planned | Layer 2 agent runtime | Python-based while-loop with budget tracking |
 | Integrate Memory Provider | ⏳ Planned | SQLite + FTS5 checkpoints | Pluggable SQLite backend |
 | Setup Gateway Routing | ⏳ Planned | Layer 3 Node.js Gateway | Webhook and WebSocket session handling |

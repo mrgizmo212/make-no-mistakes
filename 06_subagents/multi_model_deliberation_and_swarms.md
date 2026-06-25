@@ -279,7 +279,7 @@ The following architecture describes how to implement OpenRouter Fusion-like mul
 
 ```mermaid
 flowchart LR
-    User[User Request] --> Gateway[Gateway / LiteLLM Proxy]
+    User[User Request] --> Gateway[Gateway / Model Backend]
     Gateway --> Primary[Primary Model]
     Primary -- "calls tool: harness:fusion" --> Dispatcher[Fusion Dispatcher]
     Dispatcher --> Panel_A[Panel Model A + web_search]
@@ -324,7 +324,7 @@ const fusionToolSchema = {
 
 #### Step 2: Parallel Panel Dispatch
 
-When the primary model invokes `harness__fusion`, the gateway dispatches the query to all panel models **in parallel** via the LiteLLM proxy:
+When the primary model invokes `harness__fusion`, the gateway dispatches the query to all panel models **in parallel** via the configured OpenAI-compatible backend (OpenRouter, Ollama, LiteLLM, etc.):
 
 ```typescript
 async function dispatchPanel(

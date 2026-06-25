@@ -30,7 +30,7 @@
 [Q-003] What LLM providers must be supported for "model-agnostic" to be satisfied (OpenAI, Anthropic, Google, local/Ollama, etc.)?
   Status: RESOLVED
   Context: Impacts `13_model_agnostic_harness_architecture`
-  Resolution: 25 models across 11 providers profiled. LiteLLM's BaseConfig pattern supports 100+ providers. See `13_model_agnostic_harness_architecture/model_landscape_june_2026.md`.
+  Resolution: 25 models across 11 providers profiled. Backends: Ollama (local), OpenRouter (hosted), optional LiteLLM proxy, or direct APIs — all via OpenAI-compat clients. See `13_model_agnostic_harness_architecture/model_landscape_june_2026.md`.
 
 [Q-004] Is there a preferred programming language/runtime for the harness backend (Python, TypeScript/Node, Rust, etc.)?
   Status: OPEN

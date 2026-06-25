@@ -137,7 +137,7 @@ The most advanced open-source relational database. Full ACID compliance, JSONB s
 
 **LiteLLM Proxy — `schema.prisma` (57KB, 1402 lines, 50+ models)**
 
-The gold standard for multi-tenant agent infrastructure. LiteLLM's Prisma schema defines 50+ PostgreSQL models:
+One **reference pattern** for multi-tenant agent infrastructure (when self-hosting a proxy). LiteLLM's Prisma schema defines 50+ PostgreSQL models:
 
 ```prisma
 datasource client {

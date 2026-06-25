@@ -147,19 +147,21 @@ The router (`router.py`, 512KB) provides:
 
 ## How This Applies to Building a Modern Model-Agnostic Agent Harness
 
-LiteLLM is the **most directly applicable reference** for the model abstraction layer of the harness:
+> **LiteLLM is an optional reference** for teams building a self-hosted multi-provider proxy. If you use **Ollama** (local) or **OpenRouter** (hosted), you already have OpenAI-compatible routing — study this codebase for proxy patterns, not as a mandatory dependency.
 
-1. **Provider Translation Pattern**: The `BaseConfig` → `transform_request()`/`transform_response()` pattern is the gold standard for model-agnostic request transformation. The harness MUST adopt this pattern
-2. **Router Architecture**: Load balancing, fallbacks, cooldowns, TPM/RPM tracking — the harness routing layer should mirror this
-3. **Gateway as a Service**: The proxy server model (standalone service with auth, rate limiting, budgets) is directly applicable to enterprise harness deployments
+LiteLLM is a **strong reference** for self-hosted proxy design:
+
+1. **Provider Translation Pattern**: The `BaseConfig` → `transform_request()`/`transform_response()` pattern is worth studying **if you build your own translation layer** — not required when backends already speak OpenAI-compat
+2. **Router Architecture**: Load balancing, fallbacks, cooldowns, TPM/RPM tracking — useful patterns for enterprise proxy deployments
+3. **Gateway as a Service**: The proxy server model (standalone service with auth, rate limiting, budgets) applies when you self-host at scale
 4. **Cost Tracking**: Per-response cost calculation with Redis queuing and PostgreSQL batch writes is production-proven
 5. **MCP Gateway**: Demonstrates how to bridge MCP tools to any LLM provider
 6. **A2A Protocol**: Shows how inter-agent communication can be integrated at the gateway level
-7. **Provider Coverage**: The sheer breadth (100+ providers) makes LiteLLM the strongest candidate for the harness's LLM abstraction layer — either as a dependency or as the pattern to replicate
+7. **Provider Coverage**: Breadth (100+ providers) makes LiteLLM a useful study for **proxy** design — OpenRouter covers similar ground as a hosted alternative
 8. **Anti-Patterns to Avoid**:
    - `main.py` at 342KB, `router.py` at 512KB — extreme file sizes that impede maintainability
    - The SDK should have enforced module size limits much earlier
-9. **OpenAI Format as Lingua Franca**: LiteLLM proves that OpenAI's API format is the de facto standard — the harness should standardize on it
-10. **Enterprise Readiness**: Virtual keys, spend tracking, guardrails, admin dashboard — these features define production readiness for agent infrastructure
+9. **OpenAI Format as Lingua Franca**: LiteLLM proves that OpenAI's API format is the de facto standard — the harness should standardize on it regardless of backend
+10. **Enterprise Readiness**: Virtual keys, spend tracking, guardrails, admin dashboard — features to consider **if** you run your own proxy
 
-### Relevance Score: CRITICAL — primary reference for model abstraction and routing
+### Relevance Score: HIGH — reference for optional self-hosted proxy; not required for Ollama/OpenRouter setups

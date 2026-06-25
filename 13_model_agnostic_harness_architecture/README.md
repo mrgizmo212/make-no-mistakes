@@ -43,6 +43,8 @@ Key takeaways:
 
 ## How This Applies to Building a Modern Model-Agnostic Agent Harness
 
+> **Model routing is not LiteLLM-specific.** Use an OpenAI-compatible client pointed at Ollama (local), OpenRouter (hosted), a LiteLLM proxy (optional), or direct provider APIs.
+
 This is the central architectural question. The harness must define a clean abstraction boundary that allows swapping LLM providers without changing agent logic, while still exposing provider-specific capabilities through an extension mechanism.
 
 The model landscape research directly informs:

@@ -85,4 +85,4 @@ The ideal harness would combine:
 - **Codex's security model** (sandboxing, context discipline)
 - **Pi's clean separation** (AI → Agent → Application layers)
 - **LangGraph's state management** (checkpointing, interrupts)
-- **LiteLLM's provider translation** (100+ models, BaseConfig pattern)
+- **OpenAI-compat model access** (Ollama local, OpenRouter hosted, or optional LiteLLM proxy — not all three)

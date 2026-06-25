@@ -721,7 +721,7 @@ Beyond the tiering system, the harness should have dedicated slots for:
 | **Open** | GLM 5.2, Nemotron 3 Ultra, Kimi K2.7 Code | ✅ Can run locally for zero API cost |
 | **Closed** | Grok 4.3, Claude family, GPT family, Gemini | ❌ API-only |
 
-> **Design principle**: The harness should support both API-based and local (e.g., vLLM, TGI) model backends through a unified interface. LiteLLM's `BaseConfig` pattern (studied in `16_local_codebase_studies/litellm/`) is the reference architecture for this.
+> **Design principle**: The harness should support both API-based and local (Ollama, vLLM, TGI) model backends through a unified **OpenAI-compatible client**. Study LiteLLM's `BaseConfig` pattern only if you build a self-hosted translation proxy; for most setups, point at **Ollama** or **OpenRouter** directly.
 
 ---
 

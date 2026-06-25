@@ -239,7 +239,7 @@ To debug agent loops, analyze performance bottlenecks, and monitor production ru
 | **CrewAI** | Supervisor-Worker | Intuitive role-based setup, quick prototyping |
 | **OpenAI Agents SDK** | Supervisor-Worker (handoffs) | Production-grade, built-in tracing |
 | **Microsoft Agent Framework** | Enterprise graph workflows | Type-safe, Azure-native, successor to AutoGen |
-| **Custom Gateway Tool** | Panel + Judge (Fusion) | Lightweight, no framework dependency, integrates with LiteLLM proxy |
+| **Custom Gateway Tool** | Panel + Judge (Fusion) | Lightweight, no framework dependency; dispatches via configured model backend (OpenRouter, Ollama, LiteLLM, etc.) |
 
 For detailed research including taxonomy, self-hosted implementation code, anti-patterns, benchmarks, and decision matrices, see [multi_model_deliberation_and_swarms.md](06_subagents/multi_model_deliberation_and_swarms.md).
 

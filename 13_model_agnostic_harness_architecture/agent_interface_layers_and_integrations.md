@@ -10,8 +10,8 @@ An agentic platform is structured across five primary layers, each operating wit
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ Tier 5: Gateway & Proxy Servers                         │
-│ (LiteLLM, Open Responses, OpenCode API)                 │
+│ Tier 5: Model Gateway & Runtimes                          │
+│ (Ollama, OpenRouter, LiteLLM, Open Responses, direct)   │
 └───────────────────────────┬─────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────┐
@@ -56,9 +56,9 @@ An agentic platform is structured across five primary layers, each operating wit
 *   **Examples**: [OpenClaw](https://github.com/openclaw/openclaw) (voice-enabled multi-agent Canvas app), the **Codex Desktop App**, and Electron-wrapped agent consoles.
 
 ### Tier 5: Gateway & Proxy Servers
-*   **Definition**: Abstract API routers sitting between frontends, extensions, local engines, and backend model endpoints.
-*   **Scope & Context**: They expose standard OpenAI or Anthropic API endpoints (e.g., `/v1/chat/completions` or `/v1/responses`) to clients. Behind the scenes, they translate payloads, manage token rate-limiting, audit costs, execute telemetry logging, and handle OAuth tokens.
-*   **Examples**: [LiteLLM](https://github.com/BerriAI/litellm) (wrapping 100+ backends into an OpenAI format), [Open Responses](https://github.com/open-responses/open-responses) (a drop-in replacement proxy for OpenAI's stateful Responses API), and custom enterprise proxies like **OpenCode**.
+*   **Definition**: Abstract API routers or local runtimes sitting between frontends, extensions, local engines, and backend model endpoints.
+*   **Scope & Context**: They expose standard OpenAI or Anthropic API endpoints (e.g., `/v1/chat/completions` or `/v1/responses`) to clients. Behind the scenes, they may translate payloads, manage rate-limiting, audit costs, or run local inference.
+*   **Examples**: **[Ollama](https://ollama.com)** (local models, OpenAI-compat `/v1`), **[OpenRouter](https://openrouter.ai)** (hosted multi-provider routing), [LiteLLM](https://github.com/BerriAI/litellm) (optional self-hosted proxy for 100+ providers), [Open Responses](https://github.com/open-responses/open-responses) (stateful Responses API proxy), and custom enterprise proxies like **OpenCode**.
 
 ---
 
@@ -78,9 +78,10 @@ To support tools like **Cursor** or the **OpenAI Agents SDK** without binding th
 *   **LiteLLM**: Provides parameter translation. When a client requests `/v1/chat/completions`, LiteLLM translates standard parameters (`max_tokens`, `temperature`, `response_format`) to the specific shapes required by Cohere, Anthropic, Gemini, or local HuggingFace endpoints.
 
 ### 2.3 Local Daemon Spawning & Subprocess Orchestration
-For developers running local open-weight models (like Llama 3.2 or DeepSeek R1 via **Ollama**), gateways must manage the local model server process.
-*   **Subprocess Spawning**: LiteLLM's initialization helper [_run_ollama_serve](https://github.com/BerriAI/litellm/tests/test_litellm/proxy/proxy_server/test_lifecycle.py#L442-L457) checks if the `ollama` CLI is available and automatically invokes `ollama serve` in a background subprocess (`subprocess.Popen`).
-*   **Wildcard Routing**: The gateway maps model calls prefixing `ollama/` (e.g. `ollama/gemma3:1b`) directly to Ollama's local port (typically `12700.0.0.1:11434`), translating the OpenAI request format to Ollama's native endpoint specs.
+For developers running local open-weight models (like Llama 3.2 or DeepSeek R1 via **Ollama**), the harness talks to Ollama's native OpenAI-compatible server (`http://localhost:11434/v1`) — no proxy required.
+*   **Ollama (direct)**: Run `ollama serve` (or let the Ollama app manage it). Point any OpenAI SDK at `base_url=http://localhost:11434/v1` and model names like `llama3.2`.
+*   **LiteLLM (optional)**: Some self-hosted proxies can spawn Ollama automatically — e.g. LiteLLM's [_run_ollama_serve](https://github.com/BerriAI/litellm/tests/test_litellm/proxy/proxy_server/test_lifecycle.py#L442-L457) helper invokes `ollama serve` in a background subprocess when configured.
+*   **Wildcard Routing**: Proxies like LiteLLM map prefixes such as `ollama/gemma3:1b` to Ollama's local port; with direct Ollama you use the plain model id instead.
 
 ### 2.4 Bridge Protocols (MCP & WebSockets)
 To decouple the engine's execution capabilities from the visual presentation layer, systems rely on standard bridge protocols:
@@ -242,7 +243,7 @@ User browser ──> API Gateway (Tier 5 Proxy) ──> Spawn isolated Workspace
 *   **The Problem**: A shared platform cannot run entirely on a single master OpenAI or Anthropic API key without rate-limiting conflicts and cost tracing difficulties.
 *   **The Architecture**: Intercept all client outbound LLM requests at the gateway level.
     *   *Key Pools & Rotation*: The gateway manages a pool of provider API keys, mapping request costs directly to the `tenant_id` extracted from the client's JWT auth token.
-    *   *Rate-limiting & Token Caching*: Implemented in Tier 5 layers like **LiteLLM** or **Open Responses**, the gateway tracks active tokens per user/organization and rejects requests that exceed quotas before forwarding them to LLM providers.
+    *   *Rate-limiting & Token Caching*: Implemented in Tier 5 layers like **OpenRouter**, **LiteLLM**, or **Open Responses** when you use a managed or self-hosted gateway — not required for direct Ollama or single-provider API calls.
 
 ---
 
@@ -253,6 +254,7 @@ User browser ──> API Gateway (Tier 5 Proxy) ──> Spawn isolated Workspace
 | **Claude Code** | Tier 2 | CLI Engine (terminal) | Direct system commands, file I/O, git | Anthropic Claude models only | Direct client-to-console via OAuth |
 | **Cursor** | Tier 3 | IDE Fork (custom VS Code) | Editor workspace APIs, local terminal | OpenAI, Anthropic, Gemini, local models | Local/cloud API endpoints, custom proxies |
 | **Codex** | Tier 2/3/4 | CLI Engine + VS Code Ext + Desktop | Direct shell execution, MCP servers | OpenAI, Anthropic, Local (Ollama) | Emulates OpenAI Responses, runs MCP servers |
-| **LiteLLM** | Tier 5 | Gateway Proxy Server | Local system (spawns subprocesses) | 100+ LLM API providers + Ollama | translates OpenAI spec -> provider spec |
-| **Open Responses** | Tier 5 | Gateway Proxy Server | N/A (routes to LLM providers) | Model-agnostic (routes to any LLM) | Emulates OpenAI stateful Responses API |
 | **Ollama** | Tier 5 | Local Model Runtime | N/A (runs GGUF inference) | Open-weight GGUF models | Exposes local `/v1/chat/completions` API |
+| **OpenRouter** | Tier 5 | Hosted Model Router | N/A (cloud API) | 100+ hosted models | OpenAI-compat API, one key |
+| **LiteLLM** | Tier 5 | Gateway Proxy Server (optional) | Local system (may spawn subprocesses) | 100+ LLM API providers + Ollama | Self-hosted OpenAI-compat proxy |
+| **Open Responses** | Tier 5 | Gateway Proxy Server | N/A (routes to LLM providers) | Model-agnostic (routes to any LLM) | Emulates OpenAI stateful Responses API |

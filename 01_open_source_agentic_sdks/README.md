@@ -10,7 +10,7 @@ SDKs and libraries that provide the building blocks for constructing AI agents �
 |--------|------|-----|-----------|
 | LangChain (`langchain/`) | Local codebase | https://github.com/langchain-ai/langchain | CRITICAL |
 | Pi AI package (`pi-mono/packages/ai/`) | Local codebase | https://github.com/badlogic/pi-mono | HIGH |
-| LiteLLM (`litellm/`) | Local codebase | https://github.com/BerriAI/litellm | CRITICAL |
+| LiteLLM (`litellm/`) | Local codebase | https://github.com/BerriAI/litellm | HIGH (optional proxy reference) |
 | OpenRouter SDK (`openrouter-sdk/`) | Local codebase | https://github.com/OpenRouterTeam/typescript-sdk | HIGH |
 | Open Responses (`open-responses/`) | Local codebase | https://github.com/open-responses/open-responses | MEDIUM |
 | LibreChat Agents SDK (`librechat-agents/`) | Local codebase | https://github.com/danny-avila/agents | CRITICAL |
@@ -50,7 +50,7 @@ Dual-layer architecture (studied in depth in `16_local_codebase_studies/litellm/
 - **SDK layer** — Direct Python SDK: `litellm.completion()` translates any provider's API into OpenAI format
 - **Proxy layer** — HTTP gateway that exposes a unified OpenAI-compatible API endpoint for any downstream consumer
 
-**Key architectural pattern**: `BaseConfig` per provider with `transform_request()` / `transform_response()` methods. Each provider implements its own config class that handles the translation. Supports 100+ providers. This is the gold standard for provider translation.
+**Key architectural pattern**: `BaseConfig` per provider with `transform_request()` / `transform_response()` methods. Useful **reference if you build a self-hosted multi-provider proxy** — not required when using Ollama or OpenRouter directly (both already speak OpenAI-compat).
 
 ### 4. OpenRouter SDK (`OpenRouterTeam/typescript-sdk`)
 
@@ -83,21 +83,21 @@ An agentic runtime SDK supporting token-calibrated ReAct execution and context m
 ## What Is Confirmed
 
 1. **Provider:model URI format** is becoming standard (LangChain, Pi, Hermes all use it)
-2. **Provider translation pattern** (LiteLLM's `BaseConfig`) is the most battle-tested approach to model-agnostic design
+2. **OpenAI-compatible wire format** is the lingua franca — Ollama, OpenRouter, LiteLLM, and Open Responses all expose it
 3. **Three-layer separation** (AI SDK → Agent Runtime → Application) produces the cleanest architecture (Pi's design)
-4. **OpenAI-compatible API** is the lingua franca — both LiteLLM and Open Responses default to it as the standard wire format
-5. **Separate provider packages** (LangChain's approach) scales better than monolithic provider support
+4. **Separate provider packages** (LangChain's approach) scales better than monolithic provider support
+5. **Provider translation layers** (LiteLLM `BaseConfig`, LangChain provider packages) matter when you self-host a multi-provider proxy — skip them if you point at Ollama or OpenRouter directly
 
 ## What Is Uncertain
 
-- Whether to build a custom SDK or adopt LangChain/LiteLLM as a dependency
+- Whether to use a hosted router (OpenRouter), local runtime (Ollama), self-hosted proxy (LiteLLM), or direct provider APIs
 - How to handle provider-specific features (extended thinking, reasoning effort) in a generic SDK
 - The right granularity for streaming abstractions across different SDK approaches
 
 ## How This Applies to Building a Modern Model-Agnostic Agent Harness
 
-1. **Adopt LiteLLM's `BaseConfig` pattern** for provider translation — it's proven at scale
-2. **Use the `provider:model` URI format** for model specification — it's becoming the ecosystem standard
+1. **Default to an OpenAI-compatible client** — set `base_url` to Ollama, OpenRouter, a LiteLLM proxy, or a direct provider endpoint
+2. **Use the `provider:model` URI format** where your backend expects it (OpenRouter, LangChain, Hermes)
 3. **Separate the AI SDK from the agent runtime** — Pi's three-layer approach is the reference architecture
-4. **Default to OpenAI-compatible wire format** — maximizes ecosystem compatibility
-5. **Consider LiteLLM as a dependency** rather than building provider translation from scratch — 100+ providers already supported
+4. **Study LiteLLM's `BaseConfig` pattern** only if you need a self-hosted translation layer — otherwise OpenRouter or Ollama is enough
+5. **Do not treat LiteLLM as a required dependency** — it is one studied option for enterprise proxy features (auth, budgets, 100+ providers)

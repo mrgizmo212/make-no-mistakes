@@ -31,7 +31,7 @@ The locally cloned repositories listed above, plus their official documentation 
 | Codebase | Relevance | Key Insight |
 |----------|-----------|-------------|
 | **Codex** | CRITICAL | 128 Rust crate workspace — gold standard for modular agent architecture. Sandboxing, MCP, AGENTS.md convention |
-| **LiteLLM** | CRITICAL | Provider translation pattern (BaseConfig → transform_request/response). 100+ providers. Production-proven gateway |
+| **LiteLLM** | HIGH (optional) | Self-hosted proxy reference: BaseConfig translation, auth, budgets. Skip if using Ollama or OpenRouter directly |
 | **OpenRouter SDK** | HIGH | Three-tier tool system (regular/generator/manual). Stop conditions. Async parameter resolution. Streaming architecture |
 | **Open Responses** | HIGH | Responses API compatibility layer. Multi-provider self-hosted proxy. Drop-in OpenAI SDK replacement |
 | **Hermes Agent** | CRITICAL | Pluggable memory/model adapters, AST tool registration, prompt caching preservation, autonomous skill learning loop |

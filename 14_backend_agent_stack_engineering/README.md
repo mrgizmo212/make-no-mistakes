@@ -53,11 +53,11 @@ Backend technology stacks used to build AI agent systems — languages, runtimes
 - **Sandboxing**: Native OS sandboxing (Seatbelt, Landlock)
 - **Key insight**: Rust is ideal for the sandboxing and tool execution layer
 
-#### 4. LLM Proxy (LiteLLM)
+#### 4. Optional Self-Hosted LLM Proxy (LiteLLM — one studied example)
 - **Dual layer**: SDK (Python library) + Proxy (HTTP server)
 - **Database**: PostgreSQL via Prisma ORM for proxy state
 - **Caching**: Redis for response caching
-- **Key insight**: Proxy architecture enables centralized model management
+- **Key insight**: Useful when you need centralized auth/budgets across many providers — **not required** if you use Ollama or OpenRouter directly
 
 ### Database Choices
 
