@@ -76,9 +76,9 @@ Drop-in replacement for OpenAI's Responses API (studied in `16_local_codebase_st
 **Language**: TypeScript | **License**: MIT | **Status**: Active development
 
 An agentic runtime SDK supporting token-calibrated ReAct execution and context management:
-- **Token Calibration Ratio** — Computes `calibrationRatio = cumulativeProviderReported / cumulativeRawSent` from `usageMetadata` return objects to correct discrepancies between local tokenizers (like tiktoken) and the provider's billing [CLAIM-183].
-- **Dynamic Overhead Calibration** — Adjusts the tool schema token ceiling when estimated vs. calibrated variance exceeds a 15% threshold (`CALIBRATION_VARIANCE_THRESHOLD`) [CLAIM-184].
-- **Observation Masking & Compaction** — Truncates consumed `ToolMessage` payloads to ~300 character previews when context pressure exceeds 80% [CLAIM-187], and uses full LLM compaction to summarize long run histories [CLAIM-188].
+- **Token Calibration Ratio** — Computes `calibrationRatio = cumulativeProviderReported / cumulativeRawSent` from `usageMetadata` return objects to correct discrepancies between local tokenizers (like tiktoken) and the provider's billing [CLAIM-183](../00_index/citation_map.md#claim-183).
+- **Dynamic Overhead Calibration** — Adjusts the tool schema token ceiling when estimated vs. calibrated variance exceeds a 15% threshold (`CALIBRATION_VARIANCE_THRESHOLD`) [CLAIM-184](../00_index/citation_map.md#claim-184).
+- **Observation Masking & Compaction** — Truncates consumed `ToolMessage` payloads to ~300 character previews when context pressure exceeds 80% [CLAIM-187](../00_index/citation_map.md#claim-187), and uses full LLM compaction to summarize long run histories [CLAIM-188](../00_index/citation_map.md#claim-188).
 
 ## What Is Confirmed
 

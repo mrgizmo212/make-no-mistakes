@@ -17,12 +17,12 @@ In model-agnostic agent harnesses, HITL is categorized into four distinct operat
 Steering allows developers and users to direct an agent mid-flight. There are two primary architectural patterns for steering:
 
 ### Graph State Patching (LangGraph)
-LangGraph manages state via checkpoints in state channels. Conversation steering is achieved by injecting a Pydantic `Command` containing a state update [CLAIM-189].
-When a node executes the `interrupt()` function [CLAIM-091]:
+LangGraph manages state via checkpoints in state channels. Conversation steering is achieved by injecting a Pydantic `Command` containing a state update [CLAIM-189](../00_index/citation_map.md#claim-189).
+When a node executes the `interrupt()` function [CLAIM-091](../00_index/citation_map.md#claim-091):
 1. The execution raises a `GraphInterrupt` exception and bubbles up to the Pregel runner.
 2. The current thread state is serialized and persisted in a Checkpointer (e.g., `InMemorySaver`).
 3. To resume, the client sends a `Command(resume="value")`.
-4. The graph re-enters the node, re-executes its code, and matches the incoming `Command.resume` values to the `interrupt()` call by invocation index (tracked via `scratchpad.interrupt_counter()`) [CLAIM-189].
+4. The graph re-enters the node, re-executes its code, and matches the incoming `Command.resume` values to the `interrupt()` call by invocation index (tracked via `scratchpad.interrupt_counter()`) [CLAIM-189](../00_index/citation_map.md#claim-189).
 
 ```python
 # langgraph/libs/langgraph/langgraph/types.py lines 810-850
@@ -61,7 +61,7 @@ In a linear while-loop (e.g., Nous Hermes `run_conversation()`), steering is imp
 Interrupting an active LLM generation is notoriously bug-prone. If the connection is closed abruptly without correct exception categorization, loops can hang indefinitely.
 
 ### The Cascading Hang Vulnerability (PR #6600)
-In Nous Hermes [SRC-002], Christian Vastveit (@kristianvast) resolved a critical cascading hang (PR #6600) [CLAIM-191]:
+In Nous Hermes [SRC-002], Christian Vastveit (@kristianvast) resolved a critical cascading hang (PR #6600) [CLAIM-191](../00_index/citation_map.md#claim-191):
 *   **The Bug**: When a user cancels a run, the poll loop force-closes the HTTP connection (`httpx.Client`). This raises a transport-level error (like `RemoteProtocolError`) on the generation worker thread.
 *   **The Failure Cascade**: The connection retry engine (using `tenacity` or custom wrappers) misclassified `RemoteProtocolError` as a transient network dropped connection and attempted to retry up to 5 times, stalling for the full 300-second stream-stale timeout.
 *   **The Fix**: A request-local `_request_cancelled` cancellation token.
@@ -85,7 +85,7 @@ def interruptible_api_call(agent, api_params):
 ```
 
 ### Best Practices for Cancellation Loops
-1.  **Check flags at loop boundaries**: Verify `agent._interrupt_requested` before every API call and tool execution node [CLAIM-190].
+1.  **Check flags at loop boundaries**: Verify `agent._interrupt_requested` before every API call and tool execution node [CLAIM-190](../00_index/citation_map.md#claim-190).
 2.  **Thread safety**: Run generation and execution loops on separate threads or async tasks from the API request receiver.
 3.  **Signal Propagation**: Cascading cancels down to nested processes (e.g., terminating active child terminal sessions spawned by a bash tool using process group signals like `os.killpg(os.getpgid(p.pid), signal.SIGINT)`).
 
@@ -116,8 +116,8 @@ Governance gates force the agent to yield control back to the user before execut
 ```
 
 ### Notification & Callback Bridges
-*   **Apple Push Notifications (APNS) (OpenClaw)**: OpenClaw [SRC-001] maps tool executions directly to mobile push notifications (`exec-approval-ios-push.ts`) [CLAIM-192]. When an agent attempts a terminal call, the runner stalls, publishes a push token transaction, and awaits a web socket resolution payload signed by the developer's mobile device [CLAIM-192].
-*   **Web Sandbox Dialogs (assistant-ui)**: The assistant-ui library [SRC-006] provides React components (e.g., `ToolApproval`) that render dynamic confirmation panels [CLAIM-192]. The loops yield state over Server-Sent Events (SSE), streaming a `tool_call_pending` event and waiting for a client response before calling the execution backend.
+*   **Apple Push Notifications (APNS) (OpenClaw)**: OpenClaw [SRC-001] maps tool executions directly to mobile push notifications (`exec-approval-ios-push.ts`) [CLAIM-192](../00_index/citation_map.md#claim-192). When an agent attempts a terminal call, the runner stalls, publishes a push token transaction, and awaits a web socket resolution payload signed by the developer's mobile device [CLAIM-192](../00_index/citation_map.md#claim-192).
+*   **Web Sandbox Dialogs (assistant-ui)**: The assistant-ui library [SRC-006] provides React components (e.g., `ToolApproval`) that render dynamic confirmation panels [CLAIM-192](../00_index/citation_map.md#claim-192). The loops yield state over Server-Sent Events (SSE), streaming a `tool_call_pending` event and waiting for a client response before calling the execution backend.
 
 ---
 
@@ -126,13 +126,13 @@ Governance gates force the agent to yield control back to the user before execut
 A practical agent harness cannot require human prompts for every single action. Modern agent suites implement layered security gates.
 
 ### Auto-Approval Policies (Hermes)
-In `acp_adapter/edit_approval.py`, Hermes defines three distinct policies [CLAIM-194]:
+In `acp_adapter/edit_approval.py`, Hermes defines three distinct policies [CLAIM-194](../00_index/citation_map.md#claim-194):
 1.  `AUTO_APPROVE_ASK` ("ask"): Never auto-approve. Prompt the user for every edit.
 2.  `AUTO_APPROVE_WORKSPACE` ("workspace_session"): Automatically approve file operations if they occur within the workspace tree and do not target sensitive folders.
 3.  `AUTO_APPROVE_SESSION` ("session"): Allow all edits within the current active thread lifecycle.
 
 ### Sensitive File Exclusions (Allowlists & Blocklists)
-Regardless of auto-approve settings, certain paths must be hard-gated. In Hermes, the `edit_approval.py` script enforces a strict blocklist [CLAIM-195]:
+Regardless of auto-approve settings, certain paths must be hard-gated. In Hermes, the `edit_approval.py` script enforces a strict blocklist [CLAIM-195](../00_index/citation_map.md#claim-195):
 ```python
 # acp_adapter/edit_approval.py lines 44-45
 SENSITIVE_AUTO_APPROVE_NAMES = {
@@ -157,8 +157,8 @@ def should_auto_approve_edit(proposal: EditProposal, policy: str) -> bool:
 
 ### Delegation Safety & Subagent Gating
 When orchestrating multi-agent hierarchical swarms, top-level agents delegate work to nested child agents. 
-*   **Subagent Auto-Deny**: In Hermes `tools/delegate_tool.py` [CLAIM-196], if a subagent triggers a dangerous prompt (such as executing shell commands or database deletes) but is executing headlessly (e.g., inside a cron job/webhook worker loop), the loop defaults to auto-denying the action to prevent runaway loops [CLAIM-196].
-*   **Auto-Approve Opt-In**: The policy is configurable via `delegation.subagent_auto_approve: true` [CLAIM-196] to allow fully autonomous swarms under controlled sandboxes.
+*   **Subagent Auto-Deny**: In Hermes `tools/delegate_tool.py` [CLAIM-196](../00_index/citation_map.md#claim-196), if a subagent triggers a dangerous prompt (such as executing shell commands or database deletes) but is executing headlessly (e.g., inside a cron job/webhook worker loop), the loop defaults to auto-denying the action to prevent runaway loops [CLAIM-196](../00_index/citation_map.md#claim-196).
+*   **Auto-Approve Opt-In**: The policy is configurable via `delegation.subagent_auto_approve: true` [CLAIM-196](../00_index/citation_map.md#claim-196) to allow fully autonomous swarms under controlled sandboxes.
 
 ---
 

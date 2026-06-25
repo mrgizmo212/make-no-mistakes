@@ -42,15 +42,15 @@ The Model Context Protocol (MCP) — an open standard for connecting AI agents t
 
 ### MCP in LibreChat & Agents SDK
 
-- **Redis-Based Flow Management** — Resolves user-scoped MCP connection status dynamically through stateful flows in a Redis cache (`flowsCache`), mapping client OAuth states to active connection flows [CLAIM-179].
-- **CSRF Token Binding** — Establishes secure cookie bindings (`OAUTH_CSRF_COOKIE`) to validate the callback browser match and prevent session hijack during cross-origin OAuth callbacks [CLAIM-179].
-- **Programmatic Handoff Tools** — Generates transfer tools dynamically based on graph edges, routing state changes using LangGraph Command structures (`Command.PARENT`) [CLAIM-185].
+- **Redis-Based Flow Management** — Resolves user-scoped MCP connection status dynamically through stateful flows in a Redis cache (`flowsCache`), mapping client OAuth states to active connection flows [CLAIM-179](../00_index/citation_map.md#claim-179).
+- **CSRF Token Binding** — Establishes secure cookie bindings (`OAUTH_CSRF_COOKIE`) to validate the callback browser match and prevent session hijack during cross-origin OAuth callbacks [CLAIM-179](../00_index/citation_map.md#claim-179).
+- **Programmatic Handoff Tools** — Generates transfer tools dynamically based on graph edges, routing state changes using LangGraph Command structures (`Command.PARENT`) [CLAIM-185](../00_index/citation_map.md#claim-185).
 
 ### Generative UI, MCP Apps, and MCP UI (June 2026)
 
-- **Structured Output Gating**: Enforces component safety using rigid schemas in outbound Responses API calls (`response_format`) [CLAIM-171].
+- **Structured Output Gating**: Enforces component safety using rigid schemas in outbound Responses API calls (`response_format`) [CLAIM-171](../00_index/citation_map.md#claim-171).
 - **Isolated Iframe Widgets**: SEP-1865 standardizes rendering of interactive UI widgets served by remote MCP servers inside sandboxed iframes (`sandbox="allow-scripts"`) [CLAIM-174, CLAIM-175].
-- **Bi-directional JSON-RPC Sync**: Communication maps interactive iframe buttons and form events to host agent actions via postMessage JSON-RPC [CLAIM-174].
+- **Bi-directional JSON-RPC Sync**: Communication maps interactive iframe buttons and form events to host agent actions via postMessage JSON-RPC [CLAIM-174](../00_index/citation_map.md#claim-174).
 - **Stateless Core Tasks**: Transition to a stateless core utilizes the Tasks extension to run client-driven state machines, avoiding socket-connection memory bloat on servers [CLAIM-177, CLAIM-178].
 
 For detailed research, specifications, and TS component registry/iframe hooks, see the dedicated document: **[mcp_apps_and_ui.md](08_mcps/mcp_apps_and_ui.md)**.
@@ -107,6 +107,6 @@ For detailed research, specifications, and TS component registry/iframe hooks, s
 3. **Support OAuth for MCP** — required for authenticated services
 4. **Prefer MCP over core tools** for non-fundamental capabilities
 5. **Implement MCP server catalog** — curated list of connectable servers
-6. **Support sandboxed iframe rendering** for remote MCP server visual tools [CLAIM-175].
-7. **Adopt client-driven Tasks checkpointing** to support long-running agent threads without bloating sockets [CLAIM-178].
+6. **Support sandboxed iframe rendering** for remote MCP server visual tools [CLAIM-175](../00_index/citation_map.md#claim-175).
+7. **Adopt client-driven Tasks checkpointing** to support long-running agent threads without bloating sockets [CLAIM-178](../00_index/citation_map.md#claim-178).
 

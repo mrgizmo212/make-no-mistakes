@@ -24,7 +24,7 @@ Every agent maintains the current conversation as a message array. The challenge
 - **LangGraph**: Explicit state object passed between nodes. Checkpointed automatically.
 - **Codex**: 10K token cap per tool output. Aggressive truncation.
 - **OpenClaw**: `/compact` command for context compression.
-- **LibreChat**: Context compaction through **observation masking** (truncating consumed ToolMessages when pressure reaches 80% to ~300 character previews) [CLAIM-187] and **full compaction** (summarizing the whole conversation and injecting it as a `HumanMessage` on clean state turns to optimize system prompt cache hits and message budgets) [CLAIM-188]. Also uses a dynamic **calibration ratio** to keep token counts aligned with provider billing [CLAIM-183].
+- **LibreChat**: Context compaction through **observation masking** (truncating consumed ToolMessages when pressure reaches 80% to ~300 character previews) [CLAIM-187](../00_index/citation_map.md#claim-187) and **full compaction** (summarizing the whole conversation and injecting it as a `HumanMessage` on clean state turns to optimize system prompt cache hits and message budgets) [CLAIM-188](../00_index/citation_map.md#claim-188). Also uses a dynamic **calibration ratio** to keep token counts aligned with provider billing [CLAIM-183](../00_index/citation_map.md#claim-183).
 
 #### 2. Long-Term Persistent Memory (Cross-Session)
 - **Hermes memory system**: `memory_tool.py` (47KB) with pluggable backend:
@@ -34,7 +34,7 @@ Every agent maintains the current conversation as a message array. The challenge
   - **Periodic nudges** — Agent periodically reminds itself to persist important knowledge
 - **LangGraph**: Built-in memory system with short-term + long-term storage. Persistent across sessions via checkpointers.
 - **OpenClaw**: Workspace-based memory files (AGENTS.md, SOUL.md)
-- **LibreChat**: Stateful **Memories** database sync using custom personalization gates and token window filters to clean skill-primed meta messages [CLAIM-182].
+- **LibreChat**: Stateful **Memories** database sync using custom personalization gates and token window filters to clean skill-primed meta messages [CLAIM-182](../00_index/citation_map.md#claim-182).
 
 #### 3. Session Search (Episodic Memory)
 - **Hermes**: `session_search_tool.py` (34KB) — FTS5 full-text search across all past sessions with LLM summarization
@@ -67,7 +67,7 @@ Every agent maintains the current conversation as a message array. The challenge
 3. **Session search** (FTS5/vector) enables cross-session recall and is a significant differentiator
 4. **Autonomous skill creation** is Hermes's unique contribution and represents the cutting edge
 5. **SQLite + FTS5** is a proven, lightweight solution for session storage and search
-6. **Agent scratchpads and session todo lists** (investigated in [agent_scratchpads_and_session_memory.md](05_agent_memory/agent_scratchpads_and_session_memory.md)) are vital to maintaining task planning context across context compression events [CLAIM-199] and isolating experimental scratch scripts from the user's workspace [CLAIM-203].
+6. **Agent scratchpads and session todo lists** (investigated in [agent_scratchpads_and_session_memory.md](05_agent_memory/agent_scratchpads_and_session_memory.md)) are vital to maintaining task planning context across context compression events [CLAIM-199](../00_index/citation_map.md#claim-199) and isolating experimental scratch scripts from the user's workspace [CLAIM-203](../00_index/citation_map.md#claim-203).
 
 ## What Is Uncertain
 
@@ -82,4 +82,4 @@ Every agent maintains the current conversation as a message array. The challenge
 3. **Support context compression** — critical for long-running conversations
 4. **Plan for user modeling** — even a simple key-value store for user preferences is valuable
 5. **Consider autonomous skill creation** — Hermes's learning loop is the most advanced pattern studied
-6. **Isolate scratch files and scripts** to a private, conversation-locked directory outside the workspace tree to prevent VCS pollution [CLAIM-203], and support in-memory todo list re-injection after compression [CLAIM-199].
+6. **Isolate scratch files and scripts** to a private, conversation-locked directory outside the workspace tree to prevent VCS pollution [CLAIM-203](../00_index/citation_map.md#claim-203), and support in-memory todo list re-injection after compression [CLAIM-199](../00_index/citation_map.md#claim-199).

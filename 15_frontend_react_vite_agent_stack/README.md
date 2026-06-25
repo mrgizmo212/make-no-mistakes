@@ -11,14 +11,14 @@ Frontend technologies used to build AI agent user interfaces — chat UIs, termi
 | assistant-ui (`assistant-ui/`) | Local codebase | https://github.com/assistant-ui/assistant-ui | CRITICAL |
 | Hermes Agent (ui-tui, apps/desktop, web) | Local codebase | https://github.com/NousResearch/hermes-agent | CRITICAL |
 | OpenClaw (Control UI, companion apps) | Local codebase | https://github.com/openclaw/openclaw | HIGH |
-| Codex Desktop App | Standalone App | https://openai.com/codex-desktop-app | HIGH [CLAIM-158] |
-| GitHub Copilot Agent Mode in VS Code | IDE Extension | https://code.visualstudio.com/docs/copilot/agent-mode | HIGH [CLAIM-161] |
-| Cursor Composer & Agent Mode | IDE Editor | https://cursor.sh/docs/composer | HIGH [CLAIM-164] |
-| Google Antigravity | IDE & App | https://antigravity.google/docs | HIGH [CLAIM-166] |
-| Model Context Protocol Spec | Protocol Spec | https://github.com/modelcontextprotocol/specification | HIGH [CLAIM-174] |
-| CopilotKit (AG-UI) | React Framework | https://github.com/copilotkit/copilotkit | HIGH [CLAIM-173] |
-| Vercel AI SDK | React SDK | https://sdk.vercel.ai/docs/ai-sdk-ui | HIGH [CLAIM-172] |
-| Mastra & mcp-use | TS Frameworks | https://github.com/mastra-ai/mastra | HIGH [CLAIM-176] |
+| Codex Desktop App | Standalone App | https://openai.com/codex-desktop-app | HIGH [CLAIM-158](../00_index/citation_map.md#claim-158) |
+| GitHub Copilot Agent Mode in VS Code | IDE Extension | https://code.visualstudio.com/docs/copilot/agent-mode | HIGH [CLAIM-161](../00_index/citation_map.md#claim-161) |
+| Cursor Composer & Agent Mode | IDE Editor | https://cursor.sh/docs/composer | HIGH [CLAIM-164](../00_index/citation_map.md#claim-164) |
+| Google Antigravity | IDE & App | https://antigravity.google/docs | HIGH [CLAIM-166](../00_index/citation_map.md#claim-166) |
+| Model Context Protocol Spec | Protocol Spec | https://github.com/modelcontextprotocol/specification | HIGH [CLAIM-174](../00_index/citation_map.md#claim-174) |
+| CopilotKit (AG-UI) | React Framework | https://github.com/copilotkit/copilotkit | HIGH [CLAIM-173](../00_index/citation_map.md#claim-173) |
+| Vercel AI SDK | React SDK | https://sdk.vercel.ai/docs/ai-sdk-ui | HIGH [CLAIM-172](../00_index/citation_map.md#claim-172) |
+| Mastra & mcp-use | TS Frameworks | https://github.com/mastra-ai/mastra | HIGH [CLAIM-176](../00_index/citation_map.md#claim-176) |
 | LibreChat Client | Local codebase | https://github.com/danny-avila/LibreChat | HIGH |
 
 ## Key Findings
@@ -77,13 +77,13 @@ Three distinct frontends:
 | PTY bridge + xterm.js | Hermes dashboard | Embed terminal in web |
 | WebSocket nodes | OpenClaw | Thin mobile/desktop clients |
 | pnpm workspace | OpenClaw | Shared code across apps |
-| Parallel Threading Dashboard | Codex Desktop | Multi-tasking workspace management [CLAIM-158] |
-| Separate Agent Surface | VS Code Copilot Agents Window | Orchestrates cross-repo/multi-project tasks [CLAIM-161] |
-| Multi-file Edit Composer | Cursor Composer | High-context side-by-side editing in editor [CLAIM-164] |
-| Planning & Artifact Tracking | Google Antigravity | Transparent visual plan-to-walkthrough pipeline [CLAIM-167] |
+| Parallel Threading Dashboard | Codex Desktop | Multi-tasking workspace management [CLAIM-158](../00_index/citation_map.md#claim-158) |
+| Separate Agent Surface | VS Code Copilot Agents Window | Orchestrates cross-repo/multi-project tasks [CLAIM-161](../00_index/citation_map.md#claim-161) |
+| Multi-file Edit Composer | Cursor Composer | High-context side-by-side editing in editor [CLAIM-164](../00_index/citation_map.md#claim-164) |
+| Planning & Artifact Tracking | Google Antigravity | Transparent visual plan-to-walkthrough pipeline [CLAIM-167](../00_index/citation_map.md#claim-167) |
 | Declarative Generative UI | CopilotKit / Vercel AI SDK | Dynamic schema-based React component rendering [CLAIM-172, CLAIM-173] |
 | Sandboxed Widget Host | MCP Apps (SEP-1865) | Secure HTML/JS widget rendering in iframes [CLAIM-174, CLAIM-175] |
-| Open Responses Stream Adapter | LibreChat Client / Server | Translates SSE completions to semantic event structures (`response.output_text.delta`) [CLAIM-180] |
+| Open Responses Stream Adapter | LibreChat Client / Server | Translates SSE completions to semantic event structures (`response.output_text.delta`) [CLAIM-180](../00_index/citation_map.md#claim-180) |
 
 ### Key Design Principle (Hermes)
 
@@ -101,8 +101,8 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 6. **JSON-RPC** is the standard transport between frontend and agent backend
 7. **Workspace Orchestration requires dual surfaces**: a chat interface for inline changes and a dedicated window/pane for multi-project planning and background agents [CLAIM-158, CLAIM-161, CLAIM-166].
 8. **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170, CLAIM-171, CLAIM-175].
-9. **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174].
-10. **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178].
+9. **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174](../00_index/citation_map.md#claim-174).
+10. **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 ## What Is Uncertain
 
@@ -121,4 +121,4 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 6. **Build UI once, embed everywhere** — Hermes's approach is the reference pattern
 7. **Provide a dedicated 3-column workspace with a planning artifact panel** — modeled after Google Antigravity's lifecycle and Cursor's Composer [CLAIM-164, CLAIM-167].
 8. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172, CLAIM-175].
-9. **Support the MCP Tasks extension** for client-driven asynchronous agent execution [CLAIM-178].
+9. **Support the MCP Tasks extension** for client-driven asynchronous agent execution [CLAIM-178](../00_index/citation_map.md#claim-178).

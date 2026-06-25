@@ -373,7 +373,7 @@
 - **Actions Taken**:
   1. **Prompt & Context Engineering**: Added Section 10.4 and prompt caching guidelines to `prompt_context_instruction_engineering.md` and updated `context_management_and_evolution.md` with SQLite WAL write lock contention details [CLAIM-136, CLAIM-137, CLAIM-138].
   2. **Sandbox & Tooling Gotchas**: Appended init reapers (`tini`), path validators, and sudo/background executions to `built_in_local_tools.md` [CLAIM-139, CLAIM-140, CLAIM-141].
-  3. **Execution Loops**: Appended self-healing error recovery loop patterns and bounds to `execution_loops.md` [CLAIM-142].
+  3. **Execution Loops**: Appended self-healing error recovery loop patterns and bounds to `execution_loops.md` [CLAIM-142](citation_map.md#claim-142).
   4. **Channel connectors**: Documented Twilio SSL proxy mismatches and WhatsApp credentials corruption gotchas in `channel_connectors_and_pairing.md` [CLAIM-143, CLAIM-144].
   5. **Architecture Recommendations**: Added design constraints on prompt caching, regex avoidance, and standardized Tracing & Observability sections in `architecture_recommendations/README.md`.
   6. **Specification Report**: Updated `harness_architecture_specification_report.md` with sections detailing Caching, Tracing, Gotchas, and Regex constraints.
@@ -401,10 +401,10 @@
   5. **Source Registry**: Registered SRC-011 through SRC-018 (8 new sources) across online docs, papers, and GitHub repos.
   6. **Citation Map**: Registered CLAIM-145 through CLAIM-157 (13 new claims) with source traceability and file usage mappings.
 - **Key Findings**:
-  - Budget fusion panels outperform standalone frontier models on DRACO at ~50% cost [CLAIM-157]
-  - Multi-agent consensus reduces hallucination by ~35.9% [CLAIM-151]
-  - Open-source MoA beat GPT-4 on AlpacaEval 2.0 [CLAIM-147]
-  - Self-synthesis (model with itself) improves quality [CLAIM-157]
+  - Budget fusion panels outperform standalone frontier models on DRACO at ~50% cost [CLAIM-157](citation_map.md#claim-157)
+  - Multi-agent consensus reduces hallucination by ~35.9% [CLAIM-151](citation_map.md#claim-151)
+  - Open-source MoA beat GPT-4 on AlpacaEval 2.0 [CLAIM-147](citation_map.md#claim-147)
+  - Self-synthesis (model with itself) improves quality [CLAIM-157](citation_map.md#claim-157)
   - Panel isolation prevents anchoring bias; anonymity prevents lab-bias [CLAIM-145, CLAIM-150]
 - **Status**: Multi-model deliberation research COMPLETE.
 

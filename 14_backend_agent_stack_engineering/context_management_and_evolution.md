@@ -773,8 +773,8 @@ except Exception as _lock_err:
 SQLite in Write-Ahead Log (WAL) mode enables concurrent reads from multiple processes/threads. However, concurrent writes are strictly serialized. If two concurrent threads attempt to write to the same database file simultaneously, one will fail with `SQLITE_BUSY`. 
 
 **The Gotcha**: Under high concurrency (such as multi-user gateways), concurrent writes to user session history or memory checkpoints can crash active agent turns.
-*   **Design Pattern 1 (Tenancy Isolation)**: Provision one isolated SQLite database file per user/tenant workspace (`state.db`) rather than pointing all users to a shared local database, eliminating lock contention between distinct sessions [CLAIM-122].
-*   **Design Pattern 2 (Jittered Retries)**: Implement an exponential backoff loop for all database write transactions, trying up to 15 times with a randomized jitter between 20ms and 150ms before failing [CLAIM-084].
+*   **Design Pattern 1 (Tenancy Isolation)**: Provision one isolated SQLite database file per user/tenant workspace (`state.db`) rather than pointing all users to a shared local database, eliminating lock contention between distinct sessions [CLAIM-122](../00_index/citation_map.md#claim-122).
+*   **Design Pattern 2 (Jittered Retries)**: Implement an exponential backoff loop for all database write transactions, trying up to 15 times with a randomized jitter between 20ms and 150ms before failing [CLAIM-084](../00_index/citation_map.md#claim-084).
 *   **Design Pattern 3 (Write-Ahead Logging)**: Always configure `PRAGMA journal_mode=WAL` and `PRAGMA synchronous=NORMAL` during database initialization.
 
 ### 8.9 Message Role Alternation Violations
@@ -782,8 +782,8 @@ SQLite in Write-Ahead Log (WAL) mode enables concurrent reads from multiple proc
 Providers like Anthropic Messages API enforce strict user-assistant role alternation. If consecutive user messages or consecutive assistant messages are dispatched, the API throws a non-recoverable `400` parameter validation error.
 
 **The Gotcha**: Real-time user steering (`/steer`), background evaluation runs, or automated subagent feedbacks frequently append messages out-of-band, causing consecutive user messages.
-*   **Mitigation (Programmatic Message Merger)**: The adapter must run a message sequence pass immediately before formatting the final JSON payload. If consecutive messages share the same role (e.g. User turn followed by another User steer), they must be merged programmatically into a single message with double-newline spacing (`\n\n`) [CLAIM-106].
-*   **Mitigation (Orphaned Tool Call Handling)**: Assistant messages containing tool calls whose matching results were dropped during compaction must be sanitized by inserting placeholder results, avoiding API validation failure [CLAIM-108].
+*   **Mitigation (Programmatic Message Merger)**: The adapter must run a message sequence pass immediately before formatting the final JSON payload. If consecutive messages share the same role (e.g. User turn followed by another User steer), they must be merged programmatically into a single message with double-newline spacing (`\n\n`) [CLAIM-106](../00_index/citation_map.md#claim-106).
+*   **Mitigation (Orphaned Tool Call Handling)**: Assistant messages containing tool calls whose matching results were dropped during compaction must be sanitized by inserting placeholder results, avoiding API validation failure [CLAIM-108](../00_index/citation_map.md#claim-108).
 
 ### 8.10 Gotcha: Brittle Regex Code/JSON Extraction
 

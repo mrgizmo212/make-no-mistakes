@@ -104,9 +104,9 @@ OpenAI's open-source agentic coding CLI (studied in `16_local_codebase_studies/c
 **Language**: TypeScript | **License**: MIT | **Architecture**: Graph-based multi-agent state machines
 
 A production-grade implementation of LangGraph JS/TS for multi-agent loops and tool handoffs:
-- **Command-Based Multi-Agent Routing** — Outgoing handoff edges compile to transfer tools (e.g. `transfer_to_expert`) that return a LangGraph `Command` to update parent state graphs (`graph: Command.PARENT`) [CLAIM-185].
-- **Handoff Reception Filtering** — Filters out transfer messages when receiving a handoff so the destination agent gets a clean context and doesn't terminate prematurely [CLAIM-186].
-- **Multi-Tenant MCP Isolation** — Routes user-scoped MCP servers using stateful Redis flow managers and secure CSRF-binding cookies (`OAUTH_CSRF_COOKIE`) to handle SSE/chat client authentication callbacks [CLAIM-179].
+- **Command-Based Multi-Agent Routing** — Outgoing handoff edges compile to transfer tools (e.g. `transfer_to_expert`) that return a LangGraph `Command` to update parent state graphs (`graph: Command.PARENT`) [CLAIM-185](../00_index/citation_map.md#claim-185).
+- **Handoff Reception Filtering** — Filters out transfer messages when receiving a handoff so the destination agent gets a clean context and doesn't terminate prematurely [CLAIM-186](../00_index/citation_map.md#claim-186).
+- **Multi-Tenant MCP Isolation** — Routes user-scoped MCP servers using stateful Redis flow managers and secure CSRF-binding cookies (`OAUTH_CSRF_COOKIE`) to handle SSE/chat client authentication callbacks [CLAIM-179](../00_index/citation_map.md#claim-179).
 
 ## What Is Confirmed
 

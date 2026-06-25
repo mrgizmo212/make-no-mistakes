@@ -1553,34 +1553,34 @@ In this section, we analyze four leading AI developer environments across five p
 
 | Criteria | OpenAI Codex Desktop App [SRC-019] | VS Code Copilot Chat (Agent Mode) [SRC-020] | Cursor Composer (Agent Mode) [SRC-021] | Google Antigravity IDE & Standalone App [SRC-022] |
 |:---|:---|:---|:---|:---|
-| **Layout Model** | Centered 3-column project-based control center [CLAIM-158] | Split side panel (Chat) or dedicated Agents Window [CLAIM-161] | In-editor chat sidebar + Composer panel overlay [CLAIM-164] | Standalone companion app + custom IDE fork [CLAIM-166] |
-| **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159] | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164] | Planning-stage file checklist + diff review [CLAIM-167] |
-| **Terminal Integration** | Stdio/WebSocket jsonrpc via codex app-server [CLAIM-160] | Integrated terminal with Rich Shell Integration [CLAIM-163] | Integrated terminal with settings auto-run toggles [CLAIM-165] | Proposed execution logs + bg task tracking [CLAIM-169] |
-| **Approval Mechanism** | Local sandboxing + manual approval prompts [CLAIM-159] | Security-gated execution prompts in chat [CLAIM-162] | Auto-run levels (Ask Every Time, Sandbox, YOLO) [CLAIM-165] | Strict programmatic tool approval gates [CLAIM-169] |
-| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158] | Task/Agent manager window + Copilot CLI [CLAIM-161] | In-pane task lists + .cursorrules formatting [CLAIM-164] | Dedicated Manager Surface + artifact pipeline [CLAIM-166, CLAIM-167] |
+| **Layout Model** | Centered 3-column project-based control center [CLAIM-158](../00_index/citation_map.md#claim-158) | Split side panel (Chat) or dedicated Agents Window [CLAIM-161](../00_index/citation_map.md#claim-161) | In-editor chat sidebar + Composer panel overlay [CLAIM-164](../00_index/citation_map.md#claim-164) | Standalone companion app + custom IDE fork [CLAIM-166](../00_index/citation_map.md#claim-166) |
+| **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159](../00_index/citation_map.md#claim-159) | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164](../00_index/citation_map.md#claim-164) | Planning-stage file checklist + diff review [CLAIM-167](../00_index/citation_map.md#claim-167) |
+| **Terminal Integration** | Stdio/WebSocket jsonrpc via codex app-server [CLAIM-160](../00_index/citation_map.md#claim-160) | Integrated terminal with Rich Shell Integration [CLAIM-163](../00_index/citation_map.md#claim-163) | Integrated terminal with settings auto-run toggles [CLAIM-165](../00_index/citation_map.md#claim-165) | Proposed execution logs + bg task tracking [CLAIM-169](../00_index/citation_map.md#claim-169) |
+| **Approval Mechanism** | Local sandboxing + manual approval prompts [CLAIM-159](../00_index/citation_map.md#claim-159) | Security-gated execution prompts in chat [CLAIM-162](../00_index/citation_map.md#claim-162) | Auto-run levels (Ask Every Time, Sandbox, YOLO) [CLAIM-165](../00_index/citation_map.md#claim-165) | Strict programmatic tool approval gates [CLAIM-169](../00_index/citation_map.md#claim-169) |
+| **Orchestration Surface** | Threaded workspace threads running in parallel [CLAIM-158](../00_index/citation_map.md#claim-158) | Task/Agent manager window + Copilot CLI [CLAIM-161](../00_index/citation_map.md#claim-161) | In-pane task lists + .cursorrules formatting [CLAIM-164](../00_index/citation_map.md#claim-164) | Dedicated Manager Surface + artifact pipeline [CLAIM-166, CLAIM-167] |
 
 ### Key UI/UX Implementations & Takeaways
 
 #### A. OpenAI Codex Desktop App (standalone) [SRC-019]
-- **Multi-Threaded Layout**: Relies on a card-based multi-threaded control center interface to allow parallel agent project sessions [CLAIM-158].
-- **Computer Use & Visual Previews**: Uses a Visual Design Loop where the agent can run Chrome browser subagents or Playwright tests, capture screenshots, and allow the user to draw annotations/feedback directly in the UI for real-time UI/UX fixes [CLAIM-159].
+- **Multi-Threaded Layout**: Relies on a card-based multi-threaded control center interface to allow parallel agent project sessions [CLAIM-158](../00_index/citation_map.md#claim-158).
+- **Computer Use & Visual Previews**: Uses a Visual Design Loop where the agent can run Chrome browser subagents or Playwright tests, capture screenshots, and allow the user to draw annotations/feedback directly in the UI for real-time UI/UX fixes [CLAIM-159](../00_index/citation_map.md#claim-159).
 - **Local Sandbox Execution**: Binds all commands and tool calls to local secure sandboxes (Bubblewrap/Landlock for Linux, Seatbelt for macOS, restricted tokens on Windows) and routes them through a local WebSocket/Unix socket using `codex app-server` [CLAIM-160, CLAIM-007].
 
 #### B. VS Code Copilot Chat (Agent Mode) [SRC-020]
-- **Chat vs Agents Surface**: Splitting the UX into a code-first Chat view for focused file editing and a dedicated *Agents Window* for executing broader, cross-project tasks [CLAIM-161].
-- **Dynamic Tool Pickers**: Renders an interactive Tool Picker inside the composer input, letting the user toggle permission profiles or custom MCP tools for each turn [CLAIM-163].
-- **Rich Shell Integration**: Reads and analyzes terminal outputs (using VS Code's rich terminal capabilities) to feed errors/warnings back into the agent loop for self-healing runs [CLAIM-162].
+- **Chat vs Agents Surface**: Splitting the UX into a code-first Chat view for focused file editing and a dedicated *Agents Window* for executing broader, cross-project tasks [CLAIM-161](../00_index/citation_map.md#claim-161).
+- **Dynamic Tool Pickers**: Renders an interactive Tool Picker inside the composer input, letting the user toggle permission profiles or custom MCP tools for each turn [CLAIM-163](../00_index/citation_map.md#claim-163).
+- **Rich Shell Integration**: Reads and analyzes terminal outputs (using VS Code's rich terminal capabilities) to feed errors/warnings back into the agent loop for self-healing runs [CLAIM-162](../00_index/citation_map.md#claim-162).
 
 #### C. Cursor Composer (Agent Mode) [SRC-021]
-- **Composer Panel Layout**: High-context multi-file editor panel overlaying the workspace. Edits are applied as red/green inline diffs inside the editor so the user can verify changes side-by-side [CLAIM-164].
-- **Granular Settings**: Exposes `Auto-Run Mode` to control shell execution safety: `Ask Every Time` (requires click), `Run in Sandbox` (restricted scopes), and `Run Everything` (YOLO mode) [CLAIM-165].
-- **CLI Policy Control**: Supports project-level rules (like `.cursor/cli.json`) to white-list or black-list specific terminal tools and CLI utilities [CLAIM-165].
+- **Composer Panel Layout**: High-context multi-file editor panel overlaying the workspace. Edits are applied as red/green inline diffs inside the editor so the user can verify changes side-by-side [CLAIM-164](../00_index/citation_map.md#claim-164).
+- **Granular Settings**: Exposes `Auto-Run Mode` to control shell execution safety: `Ask Every Time` (requires click), `Run in Sandbox` (restricted scopes), and `Run Everything` (YOLO mode) [CLAIM-165](../00_index/citation_map.md#claim-165).
+- **CLI Policy Control**: Supports project-level rules (like `.cursor/cli.json`) to white-list or black-list specific terminal tools and CLI utilities [CLAIM-165](../00_index/citation_map.md#claim-165).
 
 #### D. Google Antigravity [SRC-022]
-- **Dedicated Manager Surface**: A visual workspace monitor tracking active agent execution states, background tasks, directory scopes, and subagent lifecycles [CLAIM-166].
-- **Lifecycle Artifacts**: Standardizes plan-to-walkthrough workflows by generating and updating `implementation_plan.md`, `task.md`, and `walkthrough.md` files in the user's workspace [CLAIM-167].
-- **WebGL/WebP Visual logs**: Automatically captures and records browser subagent visual testing logs as WebP animation loops [CLAIM-168].
-- **Interactivity & Approvals**: Gates shell commands and filesystem edits behind granular approval prompts, accepting keyboard shortcuts and slash commands like `/goal`, `/schedule`, and `/grill-me` [CLAIM-169].
+- **Dedicated Manager Surface**: A visual workspace monitor tracking active agent execution states, background tasks, directory scopes, and subagent lifecycles [CLAIM-166](../00_index/citation_map.md#claim-166).
+- **Lifecycle Artifacts**: Standardizes plan-to-walkthrough workflows by generating and updating `implementation_plan.md`, `task.md`, and `walkthrough.md` files in the user's workspace [CLAIM-167](../00_index/citation_map.md#claim-167).
+- **WebGL/WebP Visual logs**: Automatically captures and records browser subagent visual testing logs as WebP animation loops [CLAIM-168](../00_index/citation_map.md#claim-168).
+- **Interactivity & Approvals**: Gates shell commands and filesystem edits behind granular approval prompts, accepting keyboard shortcuts and slash commands like `/goal`, `/schedule`, and `/grill-me` [CLAIM-169](../00_index/citation_map.md#claim-169).
 
 ---
 
@@ -1591,9 +1591,9 @@ In June 2026, the AI frontend ecosystem has shifted from static, passive text ch
 ### A. Open Source Ecosystem & Tools (June 2026)
 
 Several frameworks form the standard stack for authoring and rendering agentic UIs:
-- **Vercel AI SDK (AI SDK UI)**: The dominant React/TypeScript toolkit for handling token streaming, structured outputs, and rendering dynamic UI cards on the fly [CLAIM-172].
-- **CopilotKit**: An open-source agentic application framework designed specifically for React. It uses the **AG-UI protocol** to allow autonomous backend agents to invoke, modify, and synchronize frontend React components dynamically [CLAIM-173].
-- **Mastra AI & `mcp-use`**: High-performance TypeScript frameworks for building agents and workflows. They provide native primitives for authoring MCP servers that expose rich interactive UI components as visual tools alongside traditional data endpoints [CLAIM-176].
+- **Vercel AI SDK (AI SDK UI)**: The dominant React/TypeScript toolkit for handling token streaming, structured outputs, and rendering dynamic UI cards on the fly [CLAIM-172](../00_index/citation_map.md#claim-172).
+- **CopilotKit**: An open-source agentic application framework designed specifically for React. It uses the **AG-UI protocol** to allow autonomous backend agents to invoke, modify, and synchronize frontend React components dynamically [CLAIM-173](../00_index/citation_map.md#claim-173).
+- **Mastra AI & `mcp-use`**: High-performance TypeScript frameworks for building agents and workflows. They provide native primitives for authoring MCP servers that expose rich interactive UI components as visual tools alongside traditional data endpoints [CLAIM-176](../00_index/citation_map.md#claim-176).
 
 ### B. Generative UI in the Responses API
 
@@ -1612,7 +1612,7 @@ Rather than letting models output raw unstructured text, applications leverage s
      }
    }
    ```
-2. **Client-Side Component Registry**: The React client hosts a type-safe registry mapping schema keys to concrete React components [CLAIM-171]:
+2. **Client-Side Component Registry**: The React client hosts a type-safe registry mapping schema keys to concrete React components [CLAIM-171](../00_index/citation_map.md#claim-171):
    ```tsx
    const ComponentRegistry: Record<string, React.ComponentType<any>> = {
      WeatherCard: (props) => <WeatherCard {...props} />,
@@ -1620,11 +1620,11 @@ Rather than letting models output raw unstructured text, applications leverage s
      InvoiceForm: (props) => <InvoiceForm {...props} />,
    };
    ```
-3. **Progressive JSON Parsing**: The client streams the JSON output using Vercel AI SDK's parsing utility, rendering components optimistically as their JSON property nodes materialize [CLAIM-172].
+3. **Progressive JSON Parsing**: The client streams the JSON output using Vercel AI SDK's parsing utility, rendering components optimistically as their JSON property nodes materialize [CLAIM-172](../00_index/citation_map.md#claim-172).
 
 ### C. MCP Apps and MCP UI (SEP-1865)
 
-The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to support **MCP Apps**—an extensible protocol standard for delivering rich, interactive UIs directly from remote MCP servers to compatible host environments [CLAIM-174].
+The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to support **MCP Apps**—an extensible protocol standard for delivering rich, interactive UIs directly from remote MCP servers to compatible host environments [CLAIM-174](../00_index/citation_map.md#claim-174).
 
 ```
 ┌──────────────────────────────┐                   ┌──────────────────────────────┐
@@ -1642,9 +1642,9 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 └──────────────────────────────┘                   └──────────────────────────────┘
 ```
 
-1. **Security Isolation (Sandboxed Iframe)**: To prevent malicious code execution, the host never renders raw HTML/JS from the server directly into the main DOM. Instead, MCP Apps enforce rendering within an isolated `<iframe>` container with strict sandbox permissions (e.g. `sandbox="allow-scripts"`, blocking top-level navigation and credential cookies) [CLAIM-175].
-2. **Bi-directional State Synchronization**: The iframe communicates with the parent host application via JSON-RPC messages routed over window postMessage. Button clicks or form changes in the MCP UI emit notifications that update the agent state or trigger subsequent tool calls [CLAIM-174].
-3. **Stateless Core and the Tasks Extension**: With MCP's transition to a stateless protocol core in 2026, the **Tasks Extension** was introduced to model long-running, asynchronous agent processes [CLAIM-177]. Instead of holding connection sockets open (which bloats server memory), tasks are modeled as client-driven durable state machines, updating the MCP UI progress step-by-step [CLAIM-178].
+1. **Security Isolation (Sandboxed Iframe)**: To prevent malicious code execution, the host never renders raw HTML/JS from the server directly into the main DOM. Instead, MCP Apps enforce rendering within an isolated `<iframe>` container with strict sandbox permissions (e.g. `sandbox="allow-scripts"`, blocking top-level navigation and credential cookies) [CLAIM-175](../00_index/citation_map.md#claim-175).
+2. **Bi-directional State Synchronization**: The iframe communicates with the parent host application via JSON-RPC messages routed over window postMessage. Button clicks or form changes in the MCP UI emit notifications that update the agent state or trigger subsequent tool calls [CLAIM-174](../00_index/citation_map.md#claim-174).
+3. **Stateless Core and the Tasks Extension**: With MCP's transition to a stateless protocol core in 2026, the **Tasks Extension** was introduced to model long-running, asynchronous agent processes [CLAIM-177](../00_index/citation_map.md#claim-177). Instead of holding connection sockets open (which bloats server memory), tasks are modeled as client-driven durable state machines, updating the MCP UI progress step-by-step [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 ---
 
@@ -1664,8 +1664,8 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 - React Compiler (2026) largely eliminates need for manual memoization
 - **Two-tier workspace orchestration surfaces** (chat panel for immediate editing + multi-threaded planning surface/manager window for background tasks) is the UX benchmark [CLAIM-158, CLAIM-161, CLAIM-166].
 - **Generative UI pipelines must be allowlist-driven or declarative** (JSON schema parsing) to prevent code injection vulnerabilities [CLAIM-170, CLAIM-171, CLAIM-175].
-- **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174].
-- **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178].
+- **MCP Apps (SEP-1865) represent the modern standard** for modular UI extensibility in agent hosts [CLAIM-174](../00_index/citation_map.md#claim-174).
+- **MCP Tasks modeling is key** to avoiding context bloat during long-running loops [CLAIM-178](../00_index/citation_map.md#claim-178).
 
 ## What Is Uncertain
 
@@ -1689,9 +1689,9 @@ The Model Context Protocol (MCP) was upgraded in mid-2026 via **SEP-1865** to su
 | Content-visibility messages | **P1** | `[content-visibility:auto]` on message containers |
 | Lazy-loaded admin views | **P1** | `React.lazy()` + Suspense for settings pages |
 | Side-by-side diff previews & task settings | **P1** | Multi-file diff viewer with Ask/Sandbox/YOLO auto-run toggles [CLAIM-164, CLAIM-165] |
-| Plan/Task/Walkthrough check loop | **P1** | Integrated artifact planning lifecycle and state tracker [CLAIM-167] |
+| Plan/Task/Walkthrough check loop | **P1** | Integrated artifact planning lifecycle and state tracker [CLAIM-167](../00_index/citation_map.md#claim-167) |
 | Structured outputs & Sandboxed UI Widgets | **P1** | Structured JSON schema mapping + sandboxed iframe components (MCP Apps style) [CLAIM-172, CLAIM-175] |
-| MCP Tasks runtime support | **P1** | Long-running asynchronous execution state machines via MCP Tasks [CLAIM-178] |
+| MCP Tasks runtime support | **P1** | Long-running asynchronous execution state machines via MCP Tasks [CLAIM-178](../00_index/citation_map.md#claim-178) |
 | Skeleton loading states | **P2** | Randomized-width skeletons for natural look |
 | Dot matrix status | **P2** | 20-state CSS animation system |
 | Number roll animation | **P3** | CSS Houdini `@property` with feature detection |

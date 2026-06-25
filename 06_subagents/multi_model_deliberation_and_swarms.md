@@ -43,7 +43,7 @@ flowchart TB
 
 **Architecture**: Fan-out → Parallel Panel → Structured Judge → Synthesis
 **Communication**: Unidirectional (panel members never see each other)
-**Hallmark Product**: OpenRouter Fusion [CLAIM-145]
+**Hallmark Product**: OpenRouter Fusion [CLAIM-145](../00_index/citation_map.md#claim-145)
 
 The Panel + Judge pattern dispatches a prompt to a panel of 2–8 models that answer in **complete isolation** (preventing anchoring bias). A designated **judge model** then receives all panel responses and produces a **structured JSON analysis** — not a merge — identifying:
 
@@ -51,81 +51,81 @@ The Panel + Judge pattern dispatches a prompt to a panel of 2–8 models that an
 - **Contradictions**: Areas of direct conflict between models
 - **Partial Coverage**: Information present in some responses but missing from others
 - **Unique Insights**: High-value perspectives found in only one response
-- **Blind Spots**: Important areas none of the panelists addressed [CLAIM-145]
+- **Blind Spots**: Important areas none of the panelists addressed [CLAIM-145](../00_index/citation_map.md#claim-145)
 
 The structured analysis is then fed to a **synthesis model** (which may be the caller or a separate frontier model) that writes the final answer informed by this meta-analysis.
 
 **Key Properties**:
 - Panel models operate in **strict isolation** — no cross-contamination
 - Judge produces **structured JSON**, not freeform text — enabling programmatic downstream processing
-- Single-level recursion: fusion calls cannot invoke fusion again (depth protection via `x-openrouter-fusion-depth` headers) [CLAIM-146]
+- Single-level recursion: fusion calls cannot invoke fusion again (depth protection via `x-openrouter-fusion-depth` headers) [CLAIM-146](../00_index/citation_map.md#claim-146)
 - Latency is bounded by the **slowest panelist** + judge synthesis time
 
 ### Pattern 2: Mixture-of-Agents (MoA)
 
 **Architecture**: Multi-layered, iterative refinement
 **Communication**: Each layer consumes outputs from the prior layer
-**Hallmark Paper**: Wang et al., "Mixture-of-Agents Enhances Large Language Model Capabilities" (ICLR 2025) [CLAIM-147]
+**Hallmark Paper**: Wang et al., "Mixture-of-Agents Enhances Large Language Model Capabilities" (ICLR 2025) [CLAIM-147](../00_index/citation_map.md#claim-147)
 
 MoA organizes models into **sequential layers**. In each layer, every agent receives the original query **plus** the outputs from all agents in the preceding layer as "auxiliary information." The final layer typically uses a single **aggregator model** to synthesize the refined outputs into a final answer.
 
-The foundational insight is the **collaborativeness** property: LLMs tend to produce better outputs when they can reference and build upon prior responses, even from weaker models. The MoA paper demonstrated that an **open-source-only MoA** (using Llama, Qwen, and similar models) achieved state-of-the-art results on AlpacaEval 2.0, **outperforming GPT-4** as a standalone model [CLAIM-147].
+The foundational insight is the **collaborativeness** property: LLMs tend to produce better outputs when they can reference and build upon prior responses, even from weaker models. The MoA paper demonstrated that an **open-source-only MoA** (using Llama, Qwen, and similar models) achieved state-of-the-art results on AlpacaEval 2.0, **outperforming GPT-4** as a standalone model [CLAIM-147](../00_index/citation_map.md#claim-147).
 
 **Key Properties**:
 - **Iterative refinement**: Each layer improves on the previous (typically 2–3 layers)
 - Agents within a layer see **previous layer outputs** (unlike Fusion's strict isolation)
 - Computationally expensive: $N \times L$ model calls for $N$ models across $L$ layers
-- Open-source reference implementation from Together AI in ~50 lines of Python [CLAIM-148]
+- Open-source reference implementation from Together AI in ~50 lines of Python [CLAIM-148](../00_index/citation_map.md#claim-148)
 
 ### Pattern 3: Council / Debate
 
 **Architecture**: Multi-round deliberation with peer review
 **Communication**: Bidirectional — models critique and rank each other
-**Hallmark Project**: Karpathy's `llm-council` (GitHub) [CLAIM-149]
+**Hallmark Project**: Karpathy's `llm-council` (GitHub) [CLAIM-149](../00_index/citation_map.md#claim-149)
 
 The Council pattern runs a 3-stage workflow:
 
-1. **Stage 1 — Independent Opinions**: The query is sent to multiple LLMs simultaneously. Models answer in isolation to prevent anchoring bias [CLAIM-149].
-2. **Stage 2 — Peer Review / Voting**: Models receive each other's responses (**anonymized** to prevent lab-bias, e.g., GPT models favoring GPT outputs). They rank, critique, and score each other based on accuracy, insight, and clarity [CLAIM-149].
-3. **Stage 3 — Chairman Synthesis**: A designated "Chairman" LLM reviews all initial responses and peer critiques to compile a single, refined final answer [CLAIM-149].
+1. **Stage 1 — Independent Opinions**: The query is sent to multiple LLMs simultaneously. Models answer in isolation to prevent anchoring bias [CLAIM-149](../00_index/citation_map.md#claim-149).
+2. **Stage 2 — Peer Review / Voting**: Models receive each other's responses (**anonymized** to prevent lab-bias, e.g., GPT models favoring GPT outputs). They rank, critique, and score each other based on accuracy, insight, and clarity [CLAIM-149](../00_index/citation_map.md#claim-149).
+3. **Stage 3 — Chairman Synthesis**: A designated "Chairman" LLM reviews all initial responses and peer critiques to compile a single, refined final answer [CLAIM-149](../00_index/citation_map.md#claim-149).
 
 **Key Properties**:
-- **Anonymity is critical**: Strip model identifiers to prevent self-preference bias [CLAIM-150]
-- **Anti-sycophancy measures**: Use "rotating challengers" or anti-capitulation prompts to prevent models from simply agreeing with the majority [CLAIM-150]
-- **Adaptive stopping**: Advanced implementations end deliberation when models converge, rather than running fixed rounds [CLAIM-150]
-- Research shows ~35.9% hallucination reduction via multi-agent consensus compared to single-model setups [CLAIM-151]
+- **Anonymity is critical**: Strip model identifiers to prevent self-preference bias [CLAIM-150](../00_index/citation_map.md#claim-150)
+- **Anti-sycophancy measures**: Use "rotating challengers" or anti-capitulation prompts to prevent models from simply agreeing with the majority [CLAIM-150](../00_index/citation_map.md#claim-150)
+- **Adaptive stopping**: Advanced implementations end deliberation when models converge, rather than running fixed rounds [CLAIM-150](../00_index/citation_map.md#claim-150)
+- Research shows ~35.9% hallucination reduction via multi-agent consensus compared to single-model setups [CLAIM-151](../00_index/citation_map.md#claim-151)
 
 ### Pattern 4: Supervisor-Worker Swarm
 
 **Architecture**: Hierarchical tree — manager delegates to specialized workers
 **Communication**: Top-down delegation, bottom-up results
-**Hallmark Implementations**: Hermes `Team*` tools, CrewAI `Process.hierarchical`, OpenAI Agents SDK handoffs [CLAIM-152]
+**Hallmark Implementations**: Hermes `Team*` tools, CrewAI `Process.hierarchical`, OpenAI Agents SDK handoffs [CLAIM-152](../00_index/citation_map.md#claim-152)
 
 A **supervisor agent** (or "manager") receives the high-level objective, decomposes it into sub-tasks, and delegates each to **specialized worker agents**. Workers may have unique tools, model tiers, and context windows. Results flow back up to the supervisor for assembly.
 
 **Key Properties**:
-- **Context isolation**: Each worker has its own conversation context (doesn't pollute parent's prompt cache) [CLAIM-076]
-- **Budget sharing**: Parent shares its remaining token/cost budget with workers [CLAIM-076]
-- **RPC-based tool access**: Workers call parent's tools via RPC without duplicating registrations [CLAIM-076]
-- **Kanban orchestration**: Hermes implements structured multi-agent workflows via a Kanban plugin (board → dispatcher → workers) [CLAIM-076]
+- **Context isolation**: Each worker has its own conversation context (doesn't pollute parent's prompt cache) [CLAIM-076](../00_index/citation_map.md#claim-076)
+- **Budget sharing**: Parent shares its remaining token/cost budget with workers [CLAIM-076](../00_index/citation_map.md#claim-076)
+- **RPC-based tool access**: Workers call parent's tools via RPC without duplicating registrations [CLAIM-076](../00_index/citation_map.md#claim-076)
+- **Kanban orchestration**: Hermes implements structured multi-agent workflows via a Kanban plugin (board → dispatcher → workers) [CLAIM-076](../00_index/citation_map.md#claim-076)
 
 ### Pattern 5: Graph-Based Orchestration
 
 **Architecture**: Explicit state machine with conditional edges and cycles
 **Communication**: Via shared state channels and reducer functions
-**Hallmark Framework**: LangGraph `StateGraph` [CLAIM-153]
+**Hallmark Framework**: LangGraph `StateGraph` [CLAIM-153](../00_index/citation_map.md#claim-153)
 
 Graph-based orchestration models multi-model deliberation as a **directed graph** where:
 - **Nodes** represent individual model calls (specialists, critics, synthesizers)
 - **Edges** define routing logic (conditional branching based on confidence scores or vote tallies)
 - **Cycles** enable iterative refinement (debate loops that re-enter nodes until consensus)
-- **Reducers** merge messages from parallel branches into unified state [CLAIM-153]
+- **Reducers** merge messages from parallel branches into unified state [CLAIM-153](../00_index/citation_map.md#claim-153)
 
 **Key Properties**:
 - **Explicit control flow**: Every transition is auditable and debuggable
 - **Conditional routing**: A supervisor node can loop back to critics if consensus confidence is below threshold
-- **Human-in-the-loop**: First-class support for governance gates as graph nodes [CLAIM-153]
-- **State persistence**: Full deliberation history is persisted for auditability [CLAIM-153]
+- **Human-in-the-loop**: First-class support for governance gates as graph nodes [CLAIM-153](../00_index/citation_map.md#claim-153)
+- **State persistence**: Full deliberation history is persisted for auditability [CLAIM-153](../00_index/citation_map.md#claim-153)
 
 ---
 
@@ -146,7 +146,7 @@ Graph-based orchestration models multi-model deliberation as a **directed graph*
 
 ### 3.1 OpenRouter Fusion (Hosted API)
 
-OpenRouter Fusion is the most polished hosted implementation of the Panel + Judge pattern [CLAIM-145]. It offers three entry points — all hitting the same pipeline:
+OpenRouter Fusion is the most polished hosted implementation of the Panel + Judge pattern [CLAIM-145](../00_index/citation_map.md#claim-145). It offers three entry points — all hitting the same pipeline:
 
 1. **Model alias**: `model: "openrouter/fusion"` — router auto-injects fusion tools
 2. **Server tool**: Include `openrouter:fusion` in your tools array — model decides when to invoke
@@ -170,23 +170,23 @@ OpenRouter Fusion is the most polished hosted implementation of the Panel + Judg
 
 **Presets** allow quick configuration without naming models:
 - `general-high`: Strongest all-round panel (frontier models)
-- `general-budget`: Cheaper panel with a frontier judge for cost-effective synthesis [CLAIM-145]
+- `general-budget`: Cheaper panel with a frontier judge for cost-effective synthesis [CLAIM-145](../00_index/citation_map.md#claim-145)
 
-Panel and judge models both have `openrouter:web_search` and `openrouter:web_fetch` enabled for grounded, current information [CLAIM-145].
+Panel and judge models both have `openrouter:web_search` and `openrouter:web_fetch` enabled for grounded, current information [CLAIM-145](../00_index/citation_map.md#claim-145).
 
 ### 3.2 Karpathy's `llm-council` (Open Source Reference)
 
-The most widely cited open-source council implementation, created by Andrej Karpathy as a local web application [CLAIM-149]:
+The most widely cited open-source council implementation, created by Andrej Karpathy as a local web application [CLAIM-149](../00_index/citation_map.md#claim-149):
 
 - **Stage 1**: Sends user query to multiple LLMs simultaneously
 - **Stage 2**: Models receive anonymized peer responses and rank/critique them
 - **Stage 3**: Chairman LLM compiles final answer from all opinions and critiques
 
-The repository is intentionally minimal ("vibe coded weekend hack") but has spawned a large ecosystem of derived projects curated at **[danielrosehill/Awesome-LLM-Council-Projects](https://github.com/danielrosehill/Awesome-LLM-Council-Projects)** [CLAIM-154]:
+The repository is intentionally minimal ("vibe coded weekend hack") but has spawned a large ecosystem of derived projects curated at **[danielrosehill/Awesome-LLM-Council-Projects](https://github.com/danielrosehill/Awesome-LLM-Council-Projects)** [CLAIM-154](../00_index/citation_map.md#claim-154):
 
 | Project | Focus |
 | :--- | :--- |
-| **Consilium** | CLI with anti-sycophancy prompts and rotating challengers [CLAIM-150] |
+| **Consilium** | CLI with anti-sycophancy prompts and rotating challengers [CLAIM-150](../00_index/citation_map.md#claim-150) |
 | **PolyCouncil** | Local-model councils (via LM Studio) with shared rubrics |
 | **`judges` library** | `Jury` objects for LLM-as-judge aggregation |
 | **`llm-deliberate`** | Social choice theory voting mechanisms for model convergence |
@@ -194,14 +194,14 @@ The repository is intentionally minimal ("vibe coded weekend hack") but has spaw
 
 ### 3.3 Together AI MoA Reference (Open Source)
 
-Together AI provides a minimal ~50-line Python reference implementation of the Mixture-of-Agents paper [CLAIM-148]. It uses the `together` Python SDK to orchestrate:
+Together AI provides a minimal ~50-line Python reference implementation of the Mixture-of-Agents paper [CLAIM-148](../00_index/citation_map.md#claim-148). It uses the `together` Python SDK to orchestrate:
 - **Proposer models**: Multiple models generate independent responses
 - **Aggregator model**: A single model synthesizes all proposer outputs
 - Models and layer count are configurable
 
 ### 3.4 CrewAI Hierarchical Process
 
-CrewAI implements the Supervisor-Worker pattern via its `Process.hierarchical` configuration [CLAIM-152]:
+CrewAI implements the Supervisor-Worker pattern via its `Process.hierarchical` configuration [CLAIM-152](../00_index/citation_map.md#claim-152):
 
 ```python
 from crewai import Crew, Process
@@ -217,11 +217,11 @@ council = Crew(
 - A **Manager agent** is automatically created (or explicitly defined) to delegate sub-tasks
 - Workers have role-specific tools and backstories
 - `allow_delegation=True` enables agent-to-agent task passing
-- Native support for A2A protocols, built-in memory, and checkpointing [CLAIM-152]
+- Native support for A2A protocols, built-in memory, and checkpointing [CLAIM-152](../00_index/citation_map.md#claim-152)
 
 ### 3.5 LangGraph StateGraph Deliberation
 
-LangGraph implements council patterns via explicit graph topologies [CLAIM-153]:
+LangGraph implements council patterns via explicit graph topologies [CLAIM-153](../00_index/citation_map.md#claim-153):
 
 ```python
 from langgraph.graph import StateGraph
@@ -253,21 +253,21 @@ Key primitives:
 - **Conditional edges**: Route based on confidence scores or vote tallies
 - **Reducers**: Merge messages from parallel branches into unified state
 - **Cycles**: Re-enter panel nodes if critic deems consensus insufficient
-- **Human-in-the-loop**: Insert governance gate nodes [CLAIM-153]
+- **Human-in-the-loop**: Insert governance gate nodes [CLAIM-153](../00_index/citation_map.md#claim-153)
 
 ### 3.6 Microsoft Agent Framework (MAF)
 
-The production successor to AutoGen and Semantic Kernel [CLAIM-155]:
+The production successor to AutoGen and Semantic Kernel [CLAIM-155](../00_index/citation_map.md#claim-155):
 - Shifts from "conversational chaos" (unbounded debate loops) to **explicit graph-based workflows**
 - Provides strict type safety, durable state, enterprise telemetry, and checkpointing
-- The community fork **AG2** preserves the original AutoGen conversational debate style for research use [CLAIM-155]
+- The community fork **AG2** preserves the original AutoGen conversational debate style for research use [CLAIM-155](../00_index/citation_map.md#claim-155)
 
 ### 3.7 OpenAI Agents SDK
 
-The production evolution of the experimental Swarm framework (March 2025) [CLAIM-156]:
+The production evolution of the experimental Swarm framework (March 2025) [CLAIM-156](../00_index/citation_map.md#claim-156):
 - Built-in tracing, guardrails, session management, and observability
 - Agent-to-agent **handoff** primitives for structured delegation
-- Replaces Swarm's educational/experimental scope with production-grade tooling [CLAIM-156]
+- Replaces Swarm's educational/experimental scope with production-grade tooling [CLAIM-156](../00_index/citation_map.md#claim-156)
 
 ---
 
@@ -358,7 +358,7 @@ async function dispatchPanel(
 }
 ```
 
-> **Design Decision**: Use `Promise.allSettled()` (not `Promise.all()`) to ensure a single panel failure doesn't abort the entire deliberation. Partial panels are often still valuable [CLAIM-145].
+> **Design Decision**: Use `Promise.allSettled()` (not `Promise.all()`) to ensure a single panel failure doesn't abort the entire deliberation. Partial panels are often still valuable [CLAIM-145](../00_index/citation_map.md#claim-145).
 
 #### Step 3: Judge Prompt Engineering
 
@@ -427,7 +427,7 @@ if (config.enableAdaptiveStopping &&
 | **Quality** (3× frontier + 1 frontier judge) | ~$0.15 | ~$0.05 | ~$0.20/query | 15–30s |
 | **Maximum** (8× frontier + web search + frontier judge) | ~$0.40 | ~$0.10 | ~$0.50/query | 30–60s |
 
-> **Critical Insight**: Budget panels with frontier judges have been shown to **outperform** standalone frontier models on the DRACO benchmark at ~25% of the cost. Even self-synthesis (pairing a model with itself) improves quality [CLAIM-157].
+> **Critical Insight**: Budget panels with frontier judges have been shown to **outperform** standalone frontier models on the DRACO benchmark at ~25% of the cost. Even self-synthesis (pairing a model with itself) improves quality [CLAIM-157](../00_index/citation_map.md#claim-157).
 
 ---
 
@@ -435,35 +435,35 @@ if (config.enableAdaptiveStopping &&
 
 ### 5.1 Anchoring Bias
 **Gotcha**: If panel models see each other's outputs during the initial response phase, they "anchor" to the first response and produce less diverse perspectives.
-**Rule**: Panel models **must** deliberate in complete isolation during the initial response phase. Cross-pollination is only permitted in explicit peer-review rounds (Council pattern) or subsequent MoA layers [CLAIM-145].
+**Rule**: Panel models **must** deliberate in complete isolation during the initial response phase. Cross-pollination is only permitted in explicit peer-review rounds (Council pattern) or subsequent MoA layers [CLAIM-145](../00_index/citation_map.md#claim-145).
 
 ### 5.2 Sycophancy
 **Gotcha**: During peer review rounds, models tend to change their answers to match the majority or the most confident-sounding response without genuine reasoning.
 **Mitigations**:
-- Use **rotating challengers**: Assign one model the explicit role of devil's advocate in each round [CLAIM-150]
-- Use **anti-capitulation prompts**: Instruct models to maintain their position unless presented with genuine evidence [CLAIM-150]
+- Use **rotating challengers**: Assign one model the explicit role of devil's advocate in each round [CLAIM-150](../00_index/citation_map.md#claim-150)
+- Use **anti-capitulation prompts**: Instruct models to maintain their position unless presented with genuine evidence [CLAIM-150](../00_index/citation_map.md#claim-150)
 - **Adaptive stopping**: End deliberation when positions stabilize rather than running fixed rounds
 
 ### 5.3 Judge Bias
 **Gotcha**: Judge models may prefer responses that match their own training style or "voice." A GPT judge may systematically favor GPT panel responses.
 **Mitigations**:
-- **Anonymize responses**: Strip all model identifiers, formatting signatures, and provider-specific patterns before presenting to the judge [CLAIM-150]
+- **Anonymize responses**: Strip all model identifiers, formatting signatures, and provider-specific patterns before presenting to the judge [CLAIM-150](../00_index/citation_map.md#claim-150)
 - **Structured rubrics**: Provide explicit scoring rubrics covering accuracy, completeness, and logical consistency to reduce reliance on subjective style preferences
-- **Evaluate truth and usefulness on separate axes**: This prevents a judge from conflating "sounds authoritative" with "is correct" [CLAIM-157]
+- **Evaluate truth and usefulness on separate axes**: This prevents a judge from conflating "sounds authoritative" with "is correct" [CLAIM-157](../00_index/citation_map.md#claim-157)
 
 ### 5.4 Cost Explosion
 **Gotcha**: Enabling web search on all 8 panel models with 16 max tool calls each can multiply costs 8× or more beyond the base panel cost.
 **Mitigations**:
-- Cap `max_tool_calls` (default 8, max 16) per panel model [CLAIM-145]
+- Cap `max_tool_calls` (default 8, max 16) per panel model [CLAIM-145](../00_index/citation_map.md#claim-145)
 - Use **budget presets**: Cheaper panel models with a single frontier judge
 - Implement **per-query cost ceilings**: Abort the panel if accumulated costs exceed a threshold
 
 ### 5.5 Over-Engineering
 **Gotcha**: Multi-model deliberation adds latency, cost, and complexity. Using fusion for simple extraction, summarization, or tactical prompts wastes resources.
-**Rule**: Fusion is an **escalation lane**. Use it only when the cost of being wrong outweighs the cost of multiple completions — research, expert critique, high-stakes decisions, or contentious topics [CLAIM-145].
+**Rule**: Fusion is an **escalation lane**. Use it only when the cost of being wrong outweighs the cost of multiple completions — research, expert critique, high-stakes decisions, or contentious topics [CLAIM-145](../00_index/citation_map.md#claim-145).
 
 ### 5.6 Regex Avoidance in Deliberation Parsing
-Consistent with the harness-wide design constraint [CLAIM-137]: parsing judge analysis JSON must use programmatic JSON/JSON5 decoders, never regex extraction. Judge outputs may include markdown wrappers, code fences, or trailing commentary that break regex-based extraction.
+Consistent with the harness-wide design constraint [CLAIM-137](../00_index/citation_map.md#claim-137): parsing judge analysis JSON must use programmatic JSON/JSON5 decoders, never regex extraction. Judge outputs may include markdown wrappers, code fences, or trailing commentary that break regex-based extraction.
 
 ---
 
@@ -471,23 +471,23 @@ Consistent with the harness-wide design constraint [CLAIM-137]: parsing judge an
 
 ### 6.1 DRACO Benchmark (2026)
 
-The **DRACO** (Deep Research Accuracy, Completeness, and Objectivity) benchmark evaluates deep research AI agents using real-world, anonymized research queries across four dimensions: factual accuracy, breadth/depth of analysis, presentation quality, and source citation [CLAIM-157].
+The **DRACO** (Deep Research Accuracy, Completeness, and Objectivity) benchmark evaluates deep research AI agents using real-world, anonymized research queries across four dimensions: factual accuracy, breadth/depth of analysis, presentation quality, and source citation [CLAIM-157](../00_index/citation_map.md#claim-157).
 
 Key findings:
-- **Budget fusion panels outperform individual frontier models**: Combinations like Gemini 3 Flash + Kimi K2.6 + DeepSeek V4 Pro, synthesized by a frontier judge, consistently outperform standalone GPT-5.5 or Claude Opus 4.8 at ~50% of the cost [CLAIM-157]
-- **Self-synthesis improves quality**: Even pairing a single model with itself (running it twice and synthesizing) produces measurably better outputs than a single run [CLAIM-157]
-- **Beyond-frontier performance**: Multi-model fusion achieves scores that no individual model can reach on its own [CLAIM-157]
+- **Budget fusion panels outperform individual frontier models**: Combinations like Gemini 3 Flash + Kimi K2.6 + DeepSeek V4 Pro, synthesized by a frontier judge, consistently outperform standalone GPT-5.5 or Claude Opus 4.8 at ~50% of the cost [CLAIM-157](../00_index/citation_map.md#claim-157)
+- **Self-synthesis improves quality**: Even pairing a single model with itself (running it twice and synthesizing) produces measurably better outputs than a single run [CLAIM-157](../00_index/citation_map.md#claim-157)
+- **Beyond-frontier performance**: Multi-model fusion achieves scores that no individual model can reach on its own [CLAIM-157](../00_index/citation_map.md#claim-157)
 
 ### 6.2 MoA Paper Results (ICLR 2025)
 
-The Mixture-of-Agents paper demonstrated [CLAIM-147]:
+The Mixture-of-Agents paper demonstrated [CLAIM-147](../00_index/citation_map.md#claim-147):
 - An **open-source-only MoA** (using Llama, Qwen, and similar models) achieved **state-of-the-art on AlpacaEval 2.0**, outperforming GPT-4 as a standalone model
 - The collaborativeness property: models produce better outputs when they can reference prior responses, even from weaker models
 - 2–3 layers provide the optimal quality-to-cost tradeoff
 
 ### 6.3 Hallucination Reduction
 
-Research demonstrates a **~35.9% reduction in hallucination rates** via multi-agent consensus compared to single-model setups [CLAIM-151]. The mechanism: when models independently arrive at the same factual claim, the confidence in that claim is much higher than any single model's assertion.
+Research demonstrates a **~35.9% reduction in hallucination rates** via multi-agent consensus compared to single-model setups [CLAIM-151](../00_index/citation_map.md#claim-151). The mechanism: when models independently arrive at the same factual claim, the confidence in that claim is much higher than any single model's assertion.
 
 ---
 

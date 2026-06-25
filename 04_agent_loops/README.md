@@ -96,14 +96,14 @@ The agent loop should support setting reasoning effort per-turn, potentially ada
 4. **Graph-based execution** (LangGraph) provides superior debuggability and interruptibility
 5. **Message role alternation** must be strictly enforced (Hermes documents this as a hard requirement)
 6. **Interrupt support** is required for production agents
-7. **Human-in-the-loop and steering** (investigated in [human_in_the_loop_steering.md](04_agent_loops/human_in_the_loop_steering.md)) is standard for production agents to govern dangerous tools [CLAIM-192], support runtime context injection [CLAIM-189], and allow configurable bypass modes [CLAIM-194].
+7. **Human-in-the-loop and steering** (investigated in [human_in_the_loop_steering.md](04_agent_loops/human_in_the_loop_steering.md)) is standard for production agents to govern dangerous tools [CLAIM-192](../00_index/citation_map.md#claim-192), support runtime context injection [CLAIM-189](../00_index/citation_map.md#claim-189), and allow configurable bypass modes [CLAIM-194](../00_index/citation_map.md#claim-194).
 
 ## What Is Uncertain
 
 - Whether graph-based or while-loop patterns are better for a new harness
 - Optimal default iteration cap (Hermes uses 90, Codex appears lower)
 - How to dynamically adjust reasoning effort based on task complexity
-- The UX balance between micro-approvals (every tool) and macro-approvals (session bypasses) [CLAIM-193]
+- The UX balance between micro-approvals (every tool) and macro-approvals (session bypasses) [CLAIM-193](../00_index/citation_map.md#claim-193)
 
 ## How This Applies to Building a Modern Model-Agnostic Agent Harness
 

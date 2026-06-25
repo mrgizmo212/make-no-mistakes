@@ -66,43 +66,43 @@ To link mobile companion apps (such as the OpenClaw iOS app) or remote CLI shell
          │                               │                               │
 ```
 
-1.  **Setup Payload Generation**: The gateway generates a short-lived `SetupPayload` structure containing the gateway's public URL, a single-use cryptographically random bootstrap token, and an expiration timestamp `expiresAtMs` (typically 3 minutes) `[CLAIM-124]`.
-2.  **Payload Encoding**: The JSON payload is serialized, converted to a Base64 string, and normalized into a URL-safe format by replacing `+` with `-`, replacing `/` with `_`, and stripping any trailing padding characters `=` (`encodeSetupCode`) `[CLAIM-125]`.
-3.  **Visual Dispatch (QR Codes)**: The URL-safe setup code is converted into a QR PNG image using a temporary file system pipeline (`writeQrPngTempFile` inside a dedicated `device-pair-qr-` subfolder) `[CLAIM-126]`. The gateway sends this image as media via the platform-specific connector's `sendMedia` adapter `[CLAIM-127]`.
+1.  **Setup Payload Generation**: The gateway generates a short-lived `SetupPayload` structure containing the gateway's public URL, a single-use cryptographically random bootstrap token, and an expiration timestamp `expiresAtMs` (typically 3 minutes) `[CLAIM-124](../00_index/citation_map.md#claim-124)`.
+2.  **Payload Encoding**: The JSON payload is serialized, converted to a Base64 string, and normalized into a URL-safe format by replacing `+` with `-`, replacing `/` with `_`, and stripping any trailing padding characters `=` (`encodeSetupCode`) `[CLAIM-125](../00_index/citation_map.md#claim-125)`.
+3.  **Visual Dispatch (QR Codes)**: The URL-safe setup code is converted into a QR PNG image using a temporary file system pipeline (`writeQrPngTempFile` inside a dedicated `device-pair-qr-` subfolder) `[CLAIM-126](../00_index/citation_map.md#claim-126)`. The gateway sends this image as media via the platform-specific connector's `sendMedia` adapter `[CLAIM-127](../00_index/citation_map.md#claim-127)`.
 4.  **Pairing Network Policies**:
-    *   Cleartext WebSockets (`ws://`) are strictly blocked for mobile setup codes unless the resolved gateway host is loopback (`localhost`/`::1`), the Android emulator bridge IP (`10.0.2.2`), or private LAN domains/addresses (`.local`, IPv4 `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, or `169.254.0.0/16` link-local) `[CLAIM-128]`.
-    *   Public connections, external domains, and Tailscale hosts force the use of secure WebSockets (`wss://`) to prevent credential sniffing on public networks `[CLAIM-128]`.
-5.  **Approval Queue Isolation**: When the companion client scans the QR code and initiates the WebSocket handshake, it sends the bootstrap token. The gateway validates the token, extracts the request, and queues it in a pending approvals list (`list.pending`) `[CLAIM-129]`. An operator must explicitly approve it via a CLI trigger (`/pair approve [requestId]`) or via automated one-shot events (`armPairNotifyOnce`) before the client is granted a persistent API key `[CLAIM-129]`.
+    *   Cleartext WebSockets (`ws://`) are strictly blocked for mobile setup codes unless the resolved gateway host is loopback (`localhost`/`::1`), the Android emulator bridge IP (`10.0.2.2`), or private LAN domains/addresses (`.local`, IPv4 `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, or `169.254.0.0/16` link-local) `[CLAIM-128](../00_index/citation_map.md#claim-128)`.
+    *   Public connections, external domains, and Tailscale hosts force the use of secure WebSockets (`wss://`) to prevent credential sniffing on public networks `[CLAIM-128](../00_index/citation_map.md#claim-128)`.
+5.  **Approval Queue Isolation**: When the companion client scans the QR code and initiates the WebSocket handshake, it sends the bootstrap token. The gateway validates the token, extracts the request, and queues it in a pending approvals list (`list.pending`) `[CLAIM-129](../00_index/citation_map.md#claim-129)`. An operator must explicitly approve it via a CLI trigger (`/pair approve [requestId]`) or via automated one-shot events (`armPairNotifyOnce`) before the client is granted a persistent API key `[CLAIM-129](../00_index/citation_map.md#claim-129)`.
 
 ---
 
 ### B. Twilio SMS Connector
 
-*   **Outbound Transport**: SMS dispatches are sent as POST requests to `https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Messages.json` using HTTP Basic Authentication (`AccountSid:AuthToken`) `[CLAIM-130]`. Payload parameters must include the recipient (`To`), text body (`Body`), and either a Twilio sender phone number (`From`) or a messaging service identifier (`MessagingServiceSid`) `[CLAIM-130]`.
-*   **Webhook Signature Verification**: Incoming SMS webhooks must verify origin authenticity to prevent spoofing. The connector retrieves the `X-Twilio-Signature` header, reconstructs the request URL, appends all url-encoded form body parameters sorted alphabetically by key, hashes the concatenated string using the account's `AuthToken` via SHA-1 HMAC, and executes a timing-safe check (`timingSafeEqual`) against the signature `[CLAIM-131]`.
+*   **Outbound Transport**: SMS dispatches are sent as POST requests to `https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Messages.json` using HTTP Basic Authentication (`AccountSid:AuthToken`) `[CLAIM-130](../00_index/citation_map.md#claim-130)`. Payload parameters must include the recipient (`To`), text body (`Body`), and either a Twilio sender phone number (`From`) or a messaging service identifier (`MessagingServiceSid`) `[CLAIM-130](../00_index/citation_map.md#claim-130)`.
+*   **Webhook Signature Verification**: Incoming SMS webhooks must verify origin authenticity to prevent spoofing. The connector retrieves the `X-Twilio-Signature` header, reconstructs the request URL, appends all url-encoded form body parameters sorted alphabetically by key, hashes the concatenated string using the account's `AuthToken` via SHA-1 HMAC, and executes a timing-safe check (`timingSafeEqual`) against the signature `[CLAIM-131](../00_index/citation_map.md#claim-131)`.
 
 ---
 
 ### C. Slack Connector
 
-*   **Inbound Security**: Validates incoming events by reading `X-Slack-Signature` and `X-Slack-Request-Timestamp`. It hashes the timestamp and request raw body using the app's `Slack Signing Secret` via HMAC-SHA256 and verifies the result `[CLAIM-132]`.
-*   **Layout Translation (Block Kit)**: The connector translates agent-generated Markdown text, interactive elements, and thinking signatures into Slack **Block Kit** JSON layouts `[CLAIM-132]`. Large content outputs are formatted as accessory elements or collapsed attachments to prevent chat log clutter.
-*   **Thread Mapping (`thread_ts`)**: Conversation session threads are anchored using Slack's `thread_ts` parameter. The connector writes outbound message-to-session relationships into a `sent-thread-cache.ts` cache to route subsequent user inputs and agent responses to the correct thread `[CLAIM-132]`.
+*   **Inbound Security**: Validates incoming events by reading `X-Slack-Signature` and `X-Slack-Request-Timestamp`. It hashes the timestamp and request raw body using the app's `Slack Signing Secret` via HMAC-SHA256 and verifies the result `[CLAIM-132](../00_index/citation_map.md#claim-132)`.
+*   **Layout Translation (Block Kit)**: The connector translates agent-generated Markdown text, interactive elements, and thinking signatures into Slack **Block Kit** JSON layouts `[CLAIM-132](../00_index/citation_map.md#claim-132)`. Large content outputs are formatted as accessory elements or collapsed attachments to prevent chat log clutter.
+*   **Thread Mapping (`thread_ts`)**: Conversation session threads are anchored using Slack's `thread_ts` parameter. The connector writes outbound message-to-session relationships into a `sent-thread-cache.ts` cache to route subsequent user inputs and agent responses to the correct thread `[CLAIM-132](../00_index/citation_map.md#claim-132)`.
 
 ---
 
 ### D. Telegram Connector
 
-*   **Inbound Spooling & Workers**: To prevent performance degradation under concurrent message spikes, Telegram updates are spooled to a central queue (`telegram-ingress-spool.ts`) and ingested asynchronously by dedicated workers (`telegram-ingress-worker.ts`) `[CLAIM-133]`.
-*   **Forum Topic Threading**: Telegram supports multi-topic forum groups. The connector uses `parseTelegramTopicConversation` to resolve sub-threads by creating canonical session keys mapped as `chatId:topicId` `[CLAIM-134]`. This isolates agent conversations into separate topics within the same chat group.
+*   **Inbound Spooling & Workers**: To prevent performance degradation under concurrent message spikes, Telegram updates are spooled to a central queue (`telegram-ingress-spool.ts`) and ingested asynchronously by dedicated workers (`telegram-ingress-worker.ts`) `[CLAIM-133](../00_index/citation_map.md#claim-133)`.
+*   **Forum Topic Threading**: Telegram supports multi-topic forum groups. The connector uses `parseTelegramTopicConversation` to resolve sub-threads by creating canonical session keys mapped as `chatId:topicId` `[CLAIM-134](../00_index/citation_map.md#claim-134)`. This isolates agent conversations into separate topics within the same chat group.
 *   **Interactive Callbacks**: Action menus, parameter overrides, and pairing approval confirmations are routed via Telegram's inline keyboards and `callback_query` answer loops.
 
 ---
 
 ### E. WhatsApp Connector
 
-*   **Socket Client Emulation**: Since WhatsApp does not offer a public websocket protocol for personal clients, the connector implements WhatsApp Web client socket hooks (using Baileys or similar engines) `[CLAIM-135]`.
-*   **QR Authentication Loop**: The backend spawns a socket connection that emits raw QR strings dynamically. The `login-qr.ts` controller captures these strings, renders them as temporary data-URLs, and updates the state. Once scanned, the authenticated credentials (`creds.json`) are cached in a local `auth-store` folder for silent reconnections `[CLAIM-135]`.
+*   **Socket Client Emulation**: Since WhatsApp does not offer a public websocket protocol for personal clients, the connector implements WhatsApp Web client socket hooks (using Baileys or similar engines) `[CLAIM-135](../00_index/citation_map.md#claim-135)`.
+*   **QR Authentication Loop**: The backend spawns a socket connection that emits raw QR strings dynamically. The `login-qr.ts` controller captures these strings, renders them as temporary data-URLs, and updates the state. Once scanned, the authenticated credentials (`creds.json`) are cached in a local `auth-store` folder for silent reconnections `[CLAIM-135](../00_index/citation_map.md#claim-135)`.
 *   **Media Compression**: Outbound screenshots or document uploads are automatically compressed (e.g. converting heavy PNG/TIFF images to JPEG formats) to prevent WhatsApp socket limits from rejecting the transaction.
 
 ---

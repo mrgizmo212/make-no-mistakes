@@ -57,9 +57,9 @@ Hermes has the most sophisticated subagent system studied:
 2. **Budget sharing prevents runaway costs** — Parent must limit subagent token consumption
 3. **RPC-based tool access** is elegant — subagents call parent's tools without duplicating registrations
 4. **Kanban/task-board pattern** (Hermes) enables structured multi-agent workflows
-5. **Multi-model deliberation achieves beyond-frontier performance** — Budget fusion panels outperform individual frontier models on DRACO benchmarks [CLAIM-157]
-6. **Panel isolation prevents anchoring bias** — Models must deliberate independently before cross-pollination [CLAIM-145]
-7. **Anonymity in peer review prevents lab-bias** — Strip model identifiers to prevent self-preference [CLAIM-150]
+5. **Multi-model deliberation achieves beyond-frontier performance** — Budget fusion panels outperform individual frontier models on DRACO benchmarks [CLAIM-157](../00_index/citation_map.md#claim-157)
+6. **Panel isolation prevents anchoring bias** — Models must deliberate independently before cross-pollination [CLAIM-145](../00_index/citation_map.md#claim-145)
+7. **Anonymity in peer review prevents lab-bias** — Strip model identifiers to prevent self-preference [CLAIM-150](../00_index/citation_map.md#claim-150)
 
 ## What Is Uncertain
 
@@ -76,8 +76,8 @@ Hermes has the most sophisticated subagent system studied:
 3. **Support parallel execution** — multiple subagents working simultaneously
 4. **RPC-based tool sharing** — subagents access parent's tools via RPC
 5. **Consider task-board orchestration** (Hermes Kanban) for complex multi-agent workflows
-6. **Implement gateway-level fusion tool** — Panel + Judge deliberation as a reusable tool [CLAIM-145]
-7. **Use structured JSON judge schemas** — consensus, contradictions, blind spots, unique insights [CLAIM-145]
+6. **Implement gateway-level fusion tool** — Panel + Judge deliberation as a reusable tool [CLAIM-145](../00_index/citation_map.md#claim-145)
+7. **Use structured JSON judge schemas** — consensus, contradictions, blind spots, unique insights [CLAIM-145](../00_index/citation_map.md#claim-145)
 8. **Support multiple deliberation patterns** — Fusion for research, Council for debate, Swarm for task decomposition
 
 ## Multi-Model Deliberation Patterns (Detailed Research)

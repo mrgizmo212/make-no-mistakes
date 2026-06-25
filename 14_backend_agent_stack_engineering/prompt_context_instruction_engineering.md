@@ -545,7 +545,7 @@ To maximize cache hits, the system prompt and payload must be structured strictl
       ]
     }
     ```
-3.  **Strict Byte-Stability (The Date-Only Rule)**: Dynamic context generation must enforce stable representations. For example, injecting a real-time timestamp down to the minute will invalidate the cache on every turn. In contrast, using date-only string formatting (`now.strftime('%A, %B %d, %Y')` [CLAIM-045]) preserves cache hits for the entire day.
+3.  **Strict Byte-Stability (The Date-Only Rule)**: Dynamic context generation must enforce stable representations. For example, injecting a real-time timestamp down to the minute will invalidate the cache on every turn. In contrast, using date-only string formatting (`now.strftime('%A, %B %d, %Y')` [CLAIM-045](../00_index/citation_map.md#claim-045)) preserves cache hits for the entire day.
 4.  **Deterministic Serialization**:
     *   **Tool Ordering**: Ensure that tool schemas are serialized in a alphabetically sorted sequence rather than their registration sequence, preventing unexpected cache misses due to dynamic loading ordering.
     *   **Whitespace Normalization**: Strip duplicate carriage returns, variable indentation, and trailing spaces from dynamic components before joining.
@@ -553,7 +553,7 @@ To maximize cache hits, the system prompt and payload must be structured strictl
 
 ### 6.4 Codex and Open-Source Gateway Cache Implementations
 
-*   **Codex**: Codex utilizes server-side prefix caching via OpenAI's Responses API [CLAIM-039]. The system prompt is passed as `developer`-role messages which the gateway caches natively. The `TruncationPolicy` dynamically adjusts tool output sizes to ensure they stay within cache-friendly bounds [CLAIM-039].
+*   **Codex**: Codex utilizes server-side prefix caching via OpenAI's Responses API [CLAIM-039](../00_index/citation_map.md#claim-039). The system prompt is passed as `developer`-role messages which the gateway caches natively. The `TruncationPolicy` dynamically adjusts tool output sizes to ensure they stay within cache-friendly bounds [CLAIM-039](../00_index/citation_map.md#claim-039).
 *   **LiteLLM**: The gateway routes cache settings dynamically, mapping the user's `cache_control` headers across different model adapters to standardize ephemeral caching on Anthropic and context caching on Google Gemini.
 
 ---
@@ -729,7 +729,7 @@ In designing dynamic prompt builders and instruction-extraction engines, **regul
     *   Evaluating lines sequentially via tokenizer loops (e.g. splitting by lines and scanning matching prefixes) instead of executing multi-line wildcard regexes.
 *   **LLM-First Semantic Parsing**: When extracting unstructured intents, matching complex user configurations, or classifying prompt payloads, delegate parsing logic to a lightweight, fast model (e.g. Flash or Nano tier model) configured with structured outputs (using Zod or JSON schemas) instead of coding complex, fragile deterministic matching cascades.
 *   **Restricted Regex Usage**: Restrict regular expressions exclusively to:
-    *   Well-defined, regular token transformations (such as replacing `+` and `/` characters during Base64 URL normalization in `encodeSetupCode` [CLAIM-125]).
+    *   Well-defined, regular token transformations (such as replacing `+` and `/` characters during Base64 URL normalization in `encodeSetupCode` [CLAIM-125](../00_index/citation_map.md#claim-125)).
     *   Strict character set limits (like matching digits for ID extraction `/\d+/`).
     *   Obfuscation stripping where string signatures are simple and bounded.
 
