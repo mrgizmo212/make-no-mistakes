@@ -24,6 +24,10 @@ jobs:
           node-version: "20"
       - run: npm install -g honkit@6.0.0
       - run: honkit build
+      - name: Inject Google Analytics (GA4)
+        env:
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+        run: node scripts/inject-ga.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _book
