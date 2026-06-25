@@ -93,7 +93,7 @@ cd make-no-mistakes
 
 ---
 
-## About
+## About the guy who used AI to put all this together
 
 Adam Heimann is the co-founder and CEO of [True Trading Group](https://truetradinggroup.com/), where he also leads AI strategy and product. He started out on the promotional side of penny stocks — he literally wrote [*The Penny Stock Gospel*](https://www.amazon.com/Penny-Stock-Gospel-Adam-Heimann-ebook/dp/B01J4CTWJE/), though not proud of it. Now he builds the tools he wishes those traders had had: multi-agent research workflows and practical AI that help traders and investors analyze markets faster, document plans, and manage risk.
 
