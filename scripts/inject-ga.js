@@ -1,18 +1,14 @@
 #!/usr/bin/env node
 /**
  * Inject GA4 gtag into built HonKit HTML pages.
- * Set GA_MEASUREMENT_ID (e.g. G-XXXXXXXXXX) in GitHub repo secrets for production.
+ * Default: G-X1WD7Y4M50 (make-no-mistakes). Override with GA_MEASUREMENT_ID env.
  */
 const fs = require("fs");
 const path = require("path");
 
-const id = process.env.GA_MEASUREMENT_ID?.trim();
+const DEFAULT_GA_ID = "G-X1WD7Y4M50";
+const id = (process.env.GA_MEASUREMENT_ID?.trim() || DEFAULT_GA_ID);
 const bookDir = path.join(__dirname, "..", "_book");
-
-if (!id) {
-  console.log("inject-ga: GA_MEASUREMENT_ID not set — skipping analytics");
-  process.exit(0);
-}
 
 if (!/^G-[A-Z0-9]+$/i.test(id)) {
   console.warn(`inject-ga: "${id}" does not look like a GA4 measurement ID (G-...)`);
@@ -24,7 +20,7 @@ const snippet = `<!-- Google tag (gtag.js) -->
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '${id}', { anonymize_ip: true });
+  gtag('config', '${id}');
 </script>`;
 
 function inject(file) {
