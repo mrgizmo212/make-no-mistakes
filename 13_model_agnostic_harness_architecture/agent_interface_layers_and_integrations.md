@@ -1,6 +1,6 @@
 # Developer Agent Interface Layers and Interoperability Architectures
 
-As the agentic coding ecosystem has matured, developer-oriented AI agent platforms have shifted from simple command-line utilities to complex multi-layered environments. To build a modern, model-agnostic agent harness, it is critical to taxonomize these distinct layers and understand the interoperability architectures that allow gateways to support or unify tools like **Claude Code**, **Codex**, **Cursor**, and **Ollama**.
+As the agentic coding ecosystem has matured, developer-oriented AI agent platforms have shifted from simple command-line utilities to complex multi-layered environments. To build a modern, model-agnostic agent harness, it is critical to taxonomize these distinct layers and understand the interoperability architectures that allow gateways to support or unify tools like **Claude Code**, **Codex**, **[Cursor](https://cursor.com/docs)**, and **Ollama**.
 
 ---
 
@@ -48,7 +48,7 @@ An agentic platform is structured across five primary layers, each operating wit
 ### Tier 3: IDE & Editor Extensions
 *   **Definition**: Integrations running inside the developer's primary IDE (either as a plugin or a custom editor fork).
 *   **Scope & Context**: They hook directly into editor-specific APIs. They read active editor buffers, file selection arrays, workspace trees, and language server protocols (LSP) to provide autocomplete, inline edits (e.g. diff views), and sidebars.
-*   **Examples**: Custom IDE forks like **Cursor** (a proprietary fork of VS Code) or **Positron** (a fork of VS Code for data science), and extensions like the **Codex VS Code Extension** or the Copilot extension.
+*   **Examples**: Custom IDE forks like **[Cursor](https://cursor.com/docs)** (a proprietary fork of VS Code) or **Positron** (a fork of VS Code for data science), and extensions like the **Codex VS Code Extension** or the Copilot extension.
 
 ### Tier 4: Desktop / Mobile Frontends
 *   **Definition**: Graphical wrappers enclosing the engine and providing cross-platform visual UI, settings panels, canvas flows, and notifications.
@@ -73,7 +73,7 @@ When a client wishes to run a custom local loop but utilize the developer's offi
 *   **Spoofing & Signature Verification**: To bypass subscription gates, the adapter appends Claude Code's official OAuth client ID (`9d1c250a-e61b-44d9-88ed-5944d1962f5e`), sets custom headers (`"User-Agent": "claude-cli/2.1.74"`), and sends specific beta headers like `oauth-2025-04-20` and `claude-code-20250219`.
 
 ### 2.2 API Emulation & Wire-Protocol Translation
-To support tools like **Cursor** or the **OpenAI Agents SDK** without binding them to a single closed provider, developers insert an emulation proxy.
+To support tools like **[Cursor](https://cursor.com/docs/agent/overview)** or the **OpenAI Agents SDK** without binding them to a single closed provider, developers insert an emulation proxy.
 *   **Open Responses**: As detailed in [open-responses/README.md](https://github.com/open-responses/open-responses/README.md#L17-L32), the proxy emulates OpenAI's new stateful [Responses API](https://platform.openai.com/docs/api-reference/responses). The client points its SDK base URL to the local proxy (`http://localhost:8080/v1`). The proxy manages the server-side state machine (run loops, tool requests, thread logs) but delegates the actual LLM generation to any configured backend (like Anthropic Claude, DeepSeek R1, or Qwen).
 *   **LiteLLM**: Provides parameter translation. When a client requests `/v1/chat/completions`, LiteLLM translates standard parameters (`max_tokens`, `temperature`, `response_format`) to the specific shapes required by Cohere, Anthropic, Gemini, or local HuggingFace endpoints.
 
@@ -252,7 +252,7 @@ User browser ──> API Gateway (Tier 5 Proxy) ──> Spawn isolated Workspace
 | Platform / Tool | Tier Level | Primary Execution Layer | Access to Local System | Model Compatibility | Integration Architecture |
 |:---|:---|:---|:---|:---|:---|
 | **Claude Code** | Tier 2 | CLI Engine (terminal) | Direct system commands, file I/O, git | Anthropic Claude models only | Direct client-to-console via OAuth |
-| **Cursor** | Tier 3 | IDE Fork (custom VS Code) | Editor workspace APIs, local terminal | OpenAI, Anthropic, Gemini, local models | Local/cloud API endpoints, custom proxies |
+| **[Cursor](https://cursor.com/docs/agent/overview)** | Tier 3 | IDE Fork (custom VS Code) | Editor workspace APIs, local terminal | OpenAI, Anthropic, Gemini, local models | Local/cloud API endpoints, custom proxies |
 | **Codex** | Tier 2/3/4 | CLI Engine + VS Code Ext + Desktop | Direct shell execution, MCP servers | OpenAI, Anthropic, Local (Ollama) | Emulates OpenAI Responses, runs MCP servers |
 | **Ollama** | Tier 5 | Local Model Runtime | N/A (runs GGUF inference) | Open-weight GGUF models | Exposes local `/v1/chat/completions` API |
 | **OpenRouter** | Tier 5 | Hosted Model Router | N/A (cloud API) | 100+ hosted models | OpenAI-compat API, one key |

@@ -70,7 +70,7 @@ Claude Code features a learned preference manager [CLAIM-204](../00_index/citati
 
 ## 4. Private Sandbox Scratch Areas (The Antigravity Pattern)
 
-For IDE-based developer agents (like Google Antigravity or Cursor), cluttering the user's workspace with scratch files, experimental script variants, or raw text blocks is undesirable.
+For IDE-based developer agents (like Google Antigravity or [Cursor](https://cursor.com/docs/agent/overview)), cluttering the user's workspace with scratch files, experimental script variants, or raw text blocks is undesirable.
 
 ### Private Directory Isolation
 Antigravity [SRC-022] isolates scratchpads to a private, conversation-locked directory on the filesystem [CLAIM-203](../00_index/citation_map.md#claim-203):

@@ -2,7 +2,7 @@
 
 ## What Was Researched
 
-Comprehensive analysis of frontend UI/UX patterns for AI-powered agent interfaces as of June 2026. Covers component architecture, styling systems, layout patterns, optimistic vs pessimistic rendering, animation systems, streaming UX, human-in-the-loop (HITL) patterns, generative UI, voice interfaces, accessibility, and performance optimization. Based on deep analysis of the assistant-ui codebase ([SRC-006](https://github.com/assistant-ui/assistant-ui)), OpenClaw ([SRC-001](https://github.com/openclaw/openclaw)), Hermes ([SRC-002](https://github.com/NousResearch/hermes-agent)), and case studies of OpenAI Codex Desktop App ([SRC-019](https://openai.com/codex-desktop-app)), VS Code Copilot Chat Agent Mode ([SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode)), Cursor Composer ([SRC-021](https://cursor.sh/docs/composer)), and Google Antigravity ([SRC-022](https://antigravity.google/docs)).
+Comprehensive analysis of frontend UI/UX patterns for AI-powered agent interfaces as of June 2026. Covers component architecture, styling systems, layout patterns, optimistic vs pessimistic rendering, animation systems, streaming UX, human-in-the-loop (HITL) patterns, generative UI, voice interfaces, accessibility, and performance optimization. Based on deep analysis of the assistant-ui codebase ([SRC-006](https://github.com/assistant-ui/assistant-ui)), OpenClaw ([SRC-001](https://github.com/openclaw/openclaw)), Hermes ([SRC-002](https://github.com/NousResearch/hermes-agent)), and case studies of OpenAI Codex Desktop App ([SRC-019](https://openai.com/codex-desktop-app)), VS Code Copilot Chat Agent Mode ([SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode)), [Cursor](https://cursor.com/docs/agent/overview) Agent Mode ([SRC-021](https://cursor.com/docs/agent/overview)), and Google Antigravity ([SRC-022](https://antigravity.google/docs)).
 
 ---
 
@@ -607,7 +607,7 @@ To inform our model-agnostic harness UI design, we analyze four leading AI devel
 
 ### UI/UX Comparison Matrix
 
-| Criteria | OpenAI Codex Desktop App [SRC-019] | VS Code Copilot Chat (Agent Mode) [SRC-020] | Cursor Composer (Agent Mode) [SRC-021] | Google Antigravity IDE & Standalone App [SRC-022] |
+| Criteria | OpenAI Codex Desktop App [SRC-019](https://openai.com/codex-desktop-app) | VS Code Copilot Chat (Agent Mode) [SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode) | [Cursor](https://cursor.com/docs/agent/overview) Agent Mode [SRC-021](https://cursor.com/docs/agent/overview) | Google Antigravity IDE & Standalone App [SRC-022](https://antigravity.google/docs) |
 |:---|:---|:---|:---|:---|
 | **Layout Model** | Centered 3-column project-based control center [CLAIM-158](../00_index/citation_map.md#claim-158) | Split side panel (Chat) or dedicated Agents Window [CLAIM-161](../00_index/citation_map.md#claim-161) | In-editor chat sidebar + Composer panel overlay [CLAIM-164](../00_index/citation_map.md#claim-164) | Standalone companion app + custom IDE fork [CLAIM-166](../00_index/citation_map.md#claim-166) |
 | **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159](../00_index/citation_map.md#claim-159) | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164](../00_index/citation_map.md#claim-164) | Planning-stage file checklist + diff review [CLAIM-167](../00_index/citation_map.md#claim-167) |
@@ -627,7 +627,7 @@ To inform our model-agnostic harness UI design, we analyze four leading AI devel
 - **Dynamic Tool Pickers**: Enables granular selection of active plugins (MCP) and terminal permissions directly inside the chat composer [CLAIM-163](../00_index/citation_map.md#claim-163).
 - **Feedback Loops**: Auto-reads test and compile terminal scrollback using Rich Shell Integration, feeding build outputs back to the agent for self-correction [CLAIM-162](../00_index/citation_map.md#claim-162).
 
-#### Cursor Composer (Agent Mode) [SRC-021]
+#### [Cursor](https://cursor.com/docs/agent/overview) Agent Mode [SRC-021](https://cursor.com/docs/agent/overview)
 - **Composer Panel**: High-context multi-file view overlaying the code editor. Edits compile in the background and show red/green side-by-side diff previews immediately inside the workspace [CLAIM-164](../00_index/citation_map.md#claim-164).
 - **Auto-Run Policy Configuration**: Lets users switch between `Ask Every Time` (maximum friction), `Run in Sandbox` (restricted execution), or `Run Everything` (YOLO mode) [CLAIM-165](../00_index/citation_map.md#claim-165).
 - **CLI Policy Control**: Grants permissions using JSON configurations (`.cursor/cli.json`) to white-list or black-list specific commands [CLAIM-165](../00_index/citation_map.md#claim-165).

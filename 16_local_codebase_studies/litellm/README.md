@@ -116,7 +116,7 @@ The router (`router.py`, 512KB) provides:
 
 - `litellm.experimental_mcp_client.load_mcp_tools()` — loads MCP tools in OpenAI format
 - MCP gateway endpoint at `/mcp/`
-- Compatible with Cursor IDE's MCP configuration
+- Compatible with [Cursor](https://cursor.com/docs/context/mcp) MCP configuration
 - Supports both SDK-level and gateway-level MCP
 
 ### A2A (Agent-to-Agent) Protocol Support

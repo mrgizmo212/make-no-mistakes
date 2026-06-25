@@ -51,7 +51,7 @@
 | SRC-018 | Together AI MoA Reference Implementation | GitHub Repo | https://github.com/togethercomputer/MoA | 2026-06-23 |
 | SRC-019 | OpenAI Codex Desktop App | Online Docs | https://openai.com/codex-desktop-app | 2026-06-23 |
 | SRC-020 | GitHub Copilot Agent Mode in VS Code | Online Docs | https://code.visualstudio.com/docs/copilot/agent-mode | 2026-06-23 |
-| SRC-021 | Cursor Composer & Agentic Editing | Online Docs | https://cursor.sh/docs/composer | 2026-06-23 |
+| SRC-021 | Cursor Agent Mode & Docs | Online Docs | https://cursor.com/docs/agent/overview | 2026-06-23 |
 | SRC-022 | Google Antigravity IDE and Standalone App | Online Docs | https://antigravity.google/docs | 2026-06-23 |
 | SRC-023 | Model Context Protocol Specification (SEP-1865: MCP Apps & Tasks) | Online Docs | https://github.com/modelcontextprotocol/specification | 2026-06-23 |
 | SRC-024 | CopilotKit - Open Source Agentic Application Framework | GitHub Repo | https://github.com/copilotkit/copilotkit | 2026-06-23 |

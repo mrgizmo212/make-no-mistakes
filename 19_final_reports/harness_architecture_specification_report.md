@@ -40,6 +40,8 @@ To separate graphical rendering, command execution, and network routing, the har
 
 **Model routing (pick one, not all):** The harness calls models through a standard OpenAI-compatible client. Common backends: **Ollama** (`localhost:11434/v1`) for local models, **OpenRouter** for hosted multi-provider access with one API key, **LiteLLM** when you want a self-hosted proxy with auth and budgets, or **direct provider APIs** for a single vendor. LiteLLM was studied as a reference implementation — it is not a hard dependency.
 
+**Tier 3 reference:** [Cursor](https://cursor.com/docs/agent/overview) (VS Code fork, Agent mode, `.cursor/rules`, MCP) — [SRC-021](https://cursor.com/docs/agent/overview).
+
 ### Interoperability Standards
 *   **Credential Shadowing**: Outbound model calls route through first-party plan limits by reading credentials from macOS Keychain (service `"Claude Code-credentials"`) or parsing `~/.claude/.credentials.json`, spoofing client signatures (`User-Agent: claude-cli/2.1.74`), and injecting header markers [CLAIM-116](../00_index/citation_map.md#claim-116), [CLAIM-117](../00_index/citation_map.md#claim-117).
 *   **API Emulation**: The gateway emulates OpenAI's stateful Responses wire protocol (`POST /v1/responses`), managing server-side runs while translating payloads to any backend model (Claude, DeepSeek, Qwen) [CLAIM-118](../00_index/citation_map.md#claim-118).

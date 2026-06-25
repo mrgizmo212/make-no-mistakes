@@ -13,7 +13,7 @@ Frontend technologies used to build AI agent user interfaces — chat UIs, termi
 | OpenClaw (Control UI, companion apps) | Local codebase | https://github.com/openclaw/openclaw | HIGH |
 | Codex Desktop App | Standalone App | https://openai.com/codex-desktop-app | HIGH [CLAIM-158](../00_index/citation_map.md#claim-158) |
 | GitHub Copilot Agent Mode in VS Code | IDE Extension | https://code.visualstudio.com/docs/copilot/agent-mode | HIGH [CLAIM-161](../00_index/citation_map.md#claim-161) |
-| Cursor Composer & Agent Mode | IDE Editor | https://cursor.sh/docs/composer | HIGH [CLAIM-164](../00_index/citation_map.md#claim-164) |
+| [Cursor](https://cursor.com/docs/agent/overview) Agent Mode | IDE Editor | https://cursor.com/docs/agent/overview | HIGH [CLAIM-164](../00_index/citation_map.md#claim-164) |
 | Google Antigravity | IDE & App | https://antigravity.google/docs | HIGH [CLAIM-166](../00_index/citation_map.md#claim-166) |
 | Model Context Protocol Spec | Protocol Spec | https://github.com/modelcontextprotocol/specification | HIGH [CLAIM-174](../00_index/citation_map.md#claim-174) |
 | CopilotKit (AG-UI) | React Framework | https://github.com/copilotkit/copilotkit | HIGH [CLAIM-173](../00_index/citation_map.md#claim-173) |
@@ -79,7 +79,7 @@ Three distinct frontends:
 | pnpm workspace | OpenClaw | Shared code across apps |
 | Parallel Threading Dashboard | Codex Desktop | Multi-tasking workspace management [CLAIM-158](../00_index/citation_map.md#claim-158) |
 | Separate Agent Surface | VS Code Copilot Agents Window | Orchestrates cross-repo/multi-project tasks [CLAIM-161](../00_index/citation_map.md#claim-161) |
-| Multi-file Edit Composer | Cursor Composer | High-context side-by-side editing in editor [CLAIM-164](../00_index/citation_map.md#claim-164) |
+| Multi-file Edit Composer | [Cursor](https://cursor.com/docs/agent/overview) Agent | High-context side-by-side editing in editor [CLAIM-164](../00_index/citation_map.md#claim-164) |
 | Planning & Artifact Tracking | Google Antigravity | Transparent visual plan-to-walkthrough pipeline [CLAIM-167](../00_index/citation_map.md#claim-167) |
 | Declarative Generative UI | CopilotKit / Vercel AI SDK | Dynamic schema-based React component rendering [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-173](../00_index/citation_map.md#claim-173) |
 | Sandboxed Widget Host | MCP Apps (SEP-1865) | Secure HTML/JS widget rendering in iframes [CLAIM-174](../00_index/citation_map.md#claim-174), [CLAIM-175](../00_index/citation_map.md#claim-175) |
@@ -119,6 +119,6 @@ This means: **build the core UI once (in Ink/React), embed it everywhere** via P
 4. **Consider PTY bridge** for embedding terminal UIs in web dashboards
 5. **Use Nanostore** for lightweight state management
 6. **Build UI once, embed everywhere** — Hermes's approach is the reference pattern
-7. **Provide a dedicated 3-column workspace with a planning artifact panel** — modeled after Google Antigravity's lifecycle and Cursor's Composer [CLAIM-164](../00_index/citation_map.md#claim-164), [CLAIM-167](../00_index/citation_map.md#claim-167).
+7. **Provide a dedicated 3-column workspace with a planning artifact panel** — modeled after Google Antigravity's lifecycle and [Cursor](https://cursor.com/docs/agent/overview)'s Agent mode [CLAIM-164](../00_index/citation_map.md#claim-164), [CLAIM-167](../00_index/citation_map.md#claim-167).
 8. **Implement structured output mapping and sandboxed iframe widgets** (MCP Apps style) for safe, dynamic UI rendering [CLAIM-172](../00_index/citation_map.md#claim-172), [CLAIM-175](../00_index/citation_map.md#claim-175).
 9. **Support the MCP Tasks extension** for client-driven asynchronous agent execution [CLAIM-178](../00_index/citation_map.md#claim-178).

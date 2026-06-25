@@ -29,7 +29,7 @@ Exhaustive architecture guide for building production-grade AI agent interfaces 
 
 ### The "Workbench" Pattern
 
-The dominant layout for AI agent apps in June 2026 is the **3-column workbench**, modeled after Claude Artifacts, Cursor, and Windsurf:
+The dominant layout for AI agent apps in June 2026 is the **3-column workbench**, modeled after Claude Artifacts, [Cursor](https://cursor.com/docs/agent/overview), and Windsurf:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -1551,7 +1551,7 @@ In this section, we analyze four leading AI developer environments across five p
 
 ### UI/UX Comparison Matrix
 
-| Criteria | OpenAI Codex Desktop App [SRC-019] | VS Code Copilot Chat (Agent Mode) [SRC-020] | Cursor Composer (Agent Mode) [SRC-021] | Google Antigravity IDE & Standalone App [SRC-022] |
+| Criteria | OpenAI Codex Desktop App [SRC-019](https://openai.com/codex-desktop-app) | VS Code Copilot Chat (Agent Mode) [SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode) | [Cursor](https://cursor.com/docs/agent/overview) Agent Mode [SRC-021](https://cursor.com/docs/agent/overview) | Google Antigravity IDE & Standalone App [SRC-022](https://antigravity.google/docs) |
 |:---|:---|:---|:---|:---|
 | **Layout Model** | Centered 3-column project-based control center [CLAIM-158](../00_index/citation_map.md#claim-158) | Split side panel (Chat) or dedicated Agents Window [CLAIM-161](../00_index/citation_map.md#claim-161) | In-editor chat sidebar + Composer panel overlay [CLAIM-164](../00_index/citation_map.md#claim-164) | Standalone companion app + custom IDE fork [CLAIM-166](../00_index/citation_map.md#claim-166) |
 | **Multi-file Edits** | Interactive tree view + diff inspect panel [CLAIM-159](../00_index/citation_map.md#claim-159) | Inline editor annotations / target edits | High-context side-by-side workspace edits [CLAIM-164](../00_index/citation_map.md#claim-164) | Planning-stage file checklist + diff review [CLAIM-167](../00_index/citation_map.md#claim-167) |
@@ -1571,7 +1571,7 @@ In this section, we analyze four leading AI developer environments across five p
 - **Dynamic Tool Pickers**: Renders an interactive Tool Picker inside the composer input, letting the user toggle permission profiles or custom MCP tools for each turn [CLAIM-163](../00_index/citation_map.md#claim-163).
 - **Rich Shell Integration**: Reads and analyzes terminal outputs (using VS Code's rich terminal capabilities) to feed errors/warnings back into the agent loop for self-healing runs [CLAIM-162](../00_index/citation_map.md#claim-162).
 
-#### C. Cursor Composer (Agent Mode) [SRC-021]
+#### C. [Cursor](https://cursor.com/docs/agent/overview) Agent Mode [SRC-021](https://cursor.com/docs/agent/overview)
 - **Composer Panel Layout**: High-context multi-file editor panel overlaying the workspace. Edits are applied as red/green inline diffs inside the editor so the user can verify changes side-by-side [CLAIM-164](../00_index/citation_map.md#claim-164).
 - **Granular Settings**: Exposes `Auto-Run Mode` to control shell execution safety: `Ask Every Time` (requires click), `Run in Sandbox` (restricted scopes), and `Run Everything` (YOLO mode) [CLAIM-165](../00_index/citation_map.md#claim-165).
 - **CLI Policy Control**: Supports project-level rules (like `.cursor/cli.json`) to white-list or black-list specific terminal tools and CLI utilities [CLAIM-165](../00_index/citation_map.md#claim-165).

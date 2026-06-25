@@ -69,11 +69,13 @@ This book treats them as **pattern donors** for different layers, connected thro
 flowchart TB
   T5["Tier 5 · Model Gateway<br/>Ollama · OpenRouter · LiteLLM · direct APIs"]
   T4["Tier 4 · Canvas GUI<br/>OpenClaw"]
-  T3["Tier 3 · IDE Extension<br/>Cursor / VS Code"]
+  T3["Tier 3 · IDE Extension<br/>Cursor · VS Code"]
   T2["Tier 2 · Cognitive Engine<br/>Hermes / Codex / Pi"]
   T1["Tier 1 · SDK / Hooks<br/>LangGraph / assistant-ui"]
   T5 --> T4 --> T3 --> T2 --> T1
 ```
+
+Tier 3 case study: [Cursor Agent docs](https://cursor.com/docs/agent/overview) · [SRC-021](https://github.com/mrgizmo212/make-no-mistakes/blob/main/00_index/source_registry.md)
 
 ---
 

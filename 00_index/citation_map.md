@@ -670,7 +670,7 @@
 [CLAIM-157] "DRACO benchmark testing shows budget fusion panels (e.g., Gemini 3 Flash + Kimi K2.6 + DeepSeek V4 Pro with a frontier judge) outperform standalone frontier models at ~50% cost, and even self-synthesis (pairing a model with itself) produces measurably better outputs than a single run." → [SRC-015](https://openrouter.ai/rankings), [SRC-011](https://openrouter.ai/docs/guides/features/plugins/fusion) (DRACO benchmark, OpenRouter Fusion documentation)
   └─ Used in: 06_subagents/README.md, 06_subagents/multi_model_deliberation_and_swarms.md, 18_architecture_recommendations/README.md, 19_final_reports/harness_architecture_specification_report.md
 
-### Case Studies: Codex Desktop, VS Code Copilot Chat, Cursor, and Google Antigravity ([SRC-019](https://openai.com/codex-desktop-app), [SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode), [SRC-021](https://cursor.sh/docs/composer), [SRC-022](https://antigravity.google/docs))
+### Case Studies: Codex Desktop, VS Code Copilot Chat, Cursor, and Google Antigravity ([SRC-019](https://openai.com/codex-desktop-app), [SRC-020](https://code.visualstudio.com/docs/copilot/agent-mode), [SRC-021](https://cursor.com/docs/agent/overview), [SRC-022](https://antigravity.google/docs))
 
 <a id="claim-158"></a>
 [CLAIM-158] "OpenAI Codex Desktop App is designed as a centralized command center supporting parallel multi-threaded project control and dedicated Plan Mode (interviewing/task breakdown) and Goal Mode (long-running autonomous execution)." → [SRC-019]
@@ -697,11 +697,11 @@
   └─ Used in: 15_frontend_react_vite_agent_stack/complete_frontend_architecture.md, 15_frontend_react_vite_agent_stack/frontend_architecture_and_ux.md
 
 <a id="claim-164"></a>
-[CLAIM-164] "Cursor Composer provides a multi-file edit workspace supporting concurrent inline editor diff previews (red/green highlight annotations) and programmatic change rejection/acceptance." → [SRC-021]
+[CLAIM-164] "Cursor Composer provides a multi-file edit workspace supporting concurrent inline editor diff previews (red/green highlight annotations) and programmatic change rejection/acceptance." → [SRC-021](https://cursor.com/docs/agent/overview)
   └─ Used in: 15_frontend_react_vite_agent_stack/README.md, 15_frontend_react_vite_agent_stack/complete_frontend_architecture.md, 15_frontend_react_vite_agent_stack/frontend_architecture_and_ux.md
 
 <a id="claim-165"></a>
-[CLAIM-165] "Cursor Composer Agent Mode controls execution safety through settings (Ask Every Time, Run in Sandbox, Run Everything) and allow/deny lists defined in project-level .cursor/cli.json configuration files." → [SRC-021]
+[CLAIM-165] "Cursor Composer Agent Mode controls execution safety through settings (Ask Every Time, Run in Sandbox, Run Everything) and allow/deny lists defined in project-level .cursor/cli.json configuration files." → [SRC-021](https://cursor.com/docs/agent/security)
   └─ Used in: 15_frontend_react_vite_agent_stack/README.md, 15_frontend_react_vite_agent_stack/complete_frontend_architecture.md, 15_frontend_react_vite_agent_stack/frontend_architecture_and_ux.md
 
 <a id="claim-166"></a>
@@ -849,7 +849,7 @@
   └─ Used in: 05_agent_memory/agent_scratchpads_and_session_memory.md, 18_architecture_recommendations/README.md, 19_final_reports/harness_architecture_specification_report.md
 
 <a id="claim-201"></a>
-[CLAIM-201] "Autonomous agents create and maintain user-visible workspace check-lists (like `TODO.md` or `NOTES.md`) directly in the project directory to track session objectives across ephemeral runs." → [SRC-021](https://cursor.sh/docs/composer) (Cursor Composer task listings; Claude Code CLI notes usage)
+[CLAIM-201] "Autonomous agents create and maintain user-visible workspace check-lists (like `TODO.md` or `NOTES.md`) directly in the project directory to track session objectives across ephemeral runs." → [SRC-021](https://cursor.com/docs/agent/overview) (Cursor Composer task listings; Claude Code CLI notes usage)
   └─ Used in: 05_agent_memory/agent_scratchpads_and_session_memory.md
 
 <a id="claim-202"></a>
