@@ -31,20 +31,27 @@ Adopt Hermes's "narrow core, capability at edges" principle as the foundational 
 │  Provider translation │ Streaming │ Tool calling │ Caching   │
 ├──────────────────────────────────────────────────────────────┤
 │                    MODEL PROVIDERS                           │
-│  OpenAI │ Anthropic │ Google │ xAI │ NVIDIA │ via LiteLLM   │
+│  OpenAI │ Anthropic │ Google │ xAI │ Ollama │ OpenRouter │ … │
 └──────────────────────────────────────────────────────────────┘
 ```
 
 ### Layer 1: AI SDK (Narrow Waist)
 
-**Recommendation**: Use LiteLLM as the provider translation layer
+**Recommendation**: Standardize on an **OpenAI-compatible client** (`base_url` + `api_key`). **LiteLLM is optional** — not required.
+
+| Backend | Typical `base_url` | Good for |
+|---------|-------------------|----------|
+| **Ollama** (local) | `http://localhost:11434/v1` | Dev, privacy, no cloud keys |
+| **OpenRouter** (hosted) | `https://openrouter.ai/api/v1` | One key, many models, fast setup |
+| **LiteLLM** (self-hosted proxy) | Your proxy `/v1` | Auth, budgets, 100+ providers at scale |
+| **Direct provider** | `api.openai.com`, Anthropic, etc. | Single vendor, simplest path |
 
 | Decision | Recommendation | Rationale |
 |----------|---------------|-----------|
-| Provider translation | LiteLLM's BaseConfig pattern | 100+ providers, battle-tested, OpenAI-compat output |
-| Model specification | `provider:model` URI format | Industry standard (LangChain, Pi, Hermes) |
-| Wire format | OpenAI Chat Completions | Universal, maximum ecosystem compatibility |
-| Streaming | SSE (Server-Sent Events) | Standard for LLM streaming |
+| Wire format | OpenAI Chat Completions / Responses | Works with Ollama, OpenRouter, LiteLLM, and most SDKs unchanged |
+| Provider translation | Only when you need it | OpenRouter and Ollama already speak OpenAI-compat; LiteLLM adds value for self-hosted multi-tenant routing |
+| Model specification | `provider/model` or plain model id | Depends on backend (OpenRouter: `anthropic/claude-3.5-sonnet`; Ollama: `llama3.2`) |
+| Streaming | SSE (Server-Sent Events) | Standard across all backends above |
 | Type system | TypeScript with Zod | Pi/OpenRouter SDK pattern for type safety |
 
 ### Layer 2: Agent Runtime
@@ -314,7 +321,7 @@ For detailed research covering curation engines, preferences, and RISE/TT-SI loo
 
 1. **Python or TypeScript for agent core?** — Python has ecosystem, TS has full-stack advantage.
 2. **Monolithic or distributed?** — Hermes monolith is simpler, OpenClaw gateway scales better.
-3. **LiteLLM as dependency or custom provider layer?** — Dependency saves years of work.
+3. **Which model backend first?** — Ollama for local dev, OpenRouter for quick multi-model access, LiteLLM when you need self-hosted auth/budgets at scale.
 4. **Graph-based or while-loop?** — While-loop for v1, graph for v2?
 5. **Which memory providers to support first?** — Start with SQLite + one cloud provider?
 

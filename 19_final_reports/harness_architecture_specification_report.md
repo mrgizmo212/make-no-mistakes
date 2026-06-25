@@ -13,8 +13,8 @@ To separate graphical rendering, command execution, and network routing, the har
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ Tier 5: Gateway & Proxy Server (LiteLLM/Open Responses)  │
-│ - Exposes OpenAI-compatible API, routes to 100+ models  │
+│ Tier 5: Model Gateway (Ollama / OpenRouter / LiteLLM / direct) │
+│ - OpenAI-compatible API; route to local or hosted models        │
 └───────────────────────────┬─────────────────────────────┘
                             ▼
 ┌─────────────────────────────────────────────────────────┐
@@ -37,6 +37,8 @@ To separate graphical rendering, command execution, and network routing, the har
 │ - Graph supersteps, SSE parsing, state channels         │
 └─────────────────────────────────────────────────────────┘
 ```
+
+**Model routing (pick one, not all):** The harness calls models through a standard OpenAI-compatible client. Common backends: **Ollama** (`localhost:11434/v1`) for local models, **OpenRouter** for hosted multi-provider access with one API key, **LiteLLM** when you want a self-hosted proxy with auth and budgets, or **direct provider APIs** for a single vendor. LiteLLM was studied as a reference implementation — it is not a hard dependency.
 
 ### Interoperability Standards
 *   **Credential Shadowing**: Outbound model calls route through first-party plan limits by reading credentials from macOS Keychain (service `"Claude Code-credentials"`) or parsing `~/.claude/.credentials.json`, spoofing client signatures (`User-Agent: claude-cli/2.1.74`), and injecting header markers [CLAIM-116, CLAIM-117].
@@ -253,7 +255,7 @@ To achieve **beyond-frontier performance** on complex research, analysis, and hi
 
 ### B. Specifications
 
-*   **Panel Dispatch**: The gateway dispatches the query to 2–8 panel models in parallel via `Promise.allSettled()` through the LiteLLM proxy. `allSettled` ensures partial panel failures don't abort the entire deliberation [CLAIM-145].
+*   **Panel Dispatch**: The gateway dispatches the query to 2–8 panel models in parallel via `Promise.allSettled()` through the configured model backend (OpenRouter, LiteLLM, Ollama, etc.). `allSettled` ensures partial panel failures don't abort the entire deliberation [CLAIM-145].
 *   **Panel Isolation**: Panel models operate in **strict isolation** — they never see each other's outputs during the initial response phase, preventing anchoring bias [CLAIM-145].
 *   **Judge Schema**: The judge produces **structured JSON** (not freeform merge) identifying: consensus (high-confidence agreements), contradictions, partial coverage, unique insights, and blind spots [CLAIM-145].
 *   **Anonymity**: Model identifiers are stripped from panel responses before presentation to the judge to prevent lab-bias (e.g., GPT judges favoring GPT outputs) [CLAIM-150].

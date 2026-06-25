@@ -42,7 +42,7 @@ This book treats them as **pattern donors** for different layers, connected thro
 | What the spec *means* | What it does **not** mean |
 |:---|:---|
 | Tier 2 behaves *like* Hermes/Codex/Pi | Copy their entire codebases |
-| Tier 5 routes through LiteLLM | Vendor their full repos |
+| Tier 5 talks to **your** model backend (Ollama, OpenRouter, etc.) | Require LiteLLM or vendor a proxy repo |
 | Tier 4 draws from OpenClaw patterns | Fork OpenClaw as your base |
 
 **Core principle:** *Narrow waist, rich edges.*
@@ -67,7 +67,7 @@ This book treats them as **pattern donors** for different layers, connected thro
 
 ```mermaid
 flowchart TB
-  T5["Tier 5 · Gateway<br/>LiteLLM / Open Responses"]
+  T5["Tier 5 · Model Gateway<br/>Ollama · OpenRouter · LiteLLM · direct APIs"]
   T4["Tier 4 · Canvas GUI<br/>OpenClaw"]
   T3["Tier 3 · IDE Extension<br/>Cursor / VS Code"]
   T2["Tier 2 · Cognitive Engine<br/>Hermes / Codex / Pi"]

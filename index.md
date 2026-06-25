@@ -22,7 +22,7 @@ This ebook describes **one new harness** built from **best patterns per layer** 
 | State & handoffs | LangGraph patterns | Your orchestration layer |
 | Chat UI | assistant-ui | Your React + Vite app |
 | Gateway & channels | OpenClaw patterns | Your Node gateway |
-| Model routing | LiteLLM, Open Responses | Proxy integration, not a fork |
+| Model routing | OpenAI-compat APIs | Point at **Ollama** (local), **OpenRouter** (hosted multi-model), **LiteLLM** (self-hosted proxy), or direct provider APIs — pick one, not all |
 
 → [Architecture Recommendations](18_architecture_recommendations/README.md)
 
@@ -45,7 +45,7 @@ Each tier names **reference projects for inspiration**. The goal is a clean sepa
 
 ```mermaid
 flowchart TB
-  T5["Tier 5 · Gateway<br/>LiteLLM / Open Responses"]
+  T5["Tier 5 · Model Gateway<br/>Ollama · OpenRouter · LiteLLM · direct APIs"]
   T4["Tier 4 · Canvas GUI<br/>OpenClaw"]
   T3["Tier 3 · IDE Extension<br/>Cursor / VS Code"]
   T2["Tier 2 · Cognitive Engine<br/>Hermes / Codex / Pi"]
@@ -78,7 +78,9 @@ These repos are **upstream references for research** — linked, not vendored. T
 | [LangGraph](https://github.com/langchain-ai/langgraph) | Graph orchestration |
 | [LangChain](https://github.com/langchain-ai/langchain) | Model abstraction |
 | [OpenClaw](https://github.com/openclaw/openclaw) | Multi-platform assistant |
-| [LiteLLM](https://github.com/BerriAI/litellm) | 100+ model proxy |
+| [OpenRouter SDK](https://github.com/OpenRouterTeam/typescript-sdk) | Hosted multi-model routing (one API key) |
+| [LiteLLM](https://github.com/BerriAI/litellm) | Self-hosted 100+ model proxy (optional) |
+| [Ollama](https://ollama.com) | Local models via OpenAI-compat `/v1` |
 | [Open Responses](https://github.com/open-responses/open-responses) | Responses API server |
 | [assistant-ui](https://github.com/assistant-ui/assistant-ui) | React chat components |
 | [LibreChat](https://github.com/danny-avila/LibreChat) | Personal assistant UI |
