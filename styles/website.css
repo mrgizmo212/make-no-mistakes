@@ -319,3 +319,38 @@ body,
   background: #222;
   border-radius: 3px;
 }
+
+/* ── Custom persistent footer on every page ───────────────── */
+
+.custom-footer {
+  margin-top: 3rem;
+  padding: 1.25rem 1rem 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-sidebar);
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.custom-footer strong {
+  color: var(--heading);
+  display: block;
+  margin-bottom: 0.4em;
+}
+
+.custom-footer a {
+  color: var(--link);
+}
+
+.footer-links {
+  margin-top: 0.6em;
+}
+
+.footer-links a {
+  margin-right: 1em;
+}
+
+.footer-credit {
+  margin-top: 0.8em;
+  font-size: 0.75em;
+  opacity: 0.6;
+}

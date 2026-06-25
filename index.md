@@ -93,3 +93,17 @@ Upstream repos — linked, not vendored. Learn from each; don't merge them.
 | [Open Responses](https://github.com/open-responses/open-responses) | Responses API server |
 | [assistant-ui](https://github.com/assistant-ui/assistant-ui) | React chat components |
 | [LibreChat](https://github.com/danny-avila/LibreChat) | Personal assistant UI |
+
+---
+
+## About the guy who used AI to put all this together
+
+Adam Heimann is the co-founder and CEO of [True Trading Group](https://truetradinggroup.com/), where he also leads AI strategy and product. He started out on the promotional side of penny stocks — he literally wrote [*The Penny Stock Gospel*](https://www.amazon.com/Penny-Stock-Gospel-Adam-Heimann-ebook/dp/B01J4CTWJE/), though not proud of it. Now he builds the tools he wishes those traders had had: multi-agent research workflows and practical AI that help traders and investors analyze markets faster, document plans, and manage risk.
+
+Check out the current [90-day TTG trial for $90](https://truetradinggroup.com/9090/).
+
+He's blunt, allergic to hype, and doesn't think the customer is always right — he'll tell you when you're the problem, because he'd rather you actually get better than feel good and stay broke. It's a posture his members reward: under Adam's direction TTG launched M.A.R.I., an Agent-as-a-Model ecosystem — AI agents exposed as a single model — that powers the TTG AI trading platform, recognized at the 2024 Benzinga Fintech Awards. TTG has since scaled a global community of more than 10,000 members across 115 countries.
+
+A bootstrapped founder since 2006, Adam has taken multiple companies from idea to product with no outside funding, generating more than $100 million in cumulative revenue. He was also an original co-founder of LibreChat LLC, acquired by ClickHouse in November 2025. His work focuses on making institutional-grade capabilities accessible to individuals while emphasizing process, compliance awareness, and human-in-the-loop decision making.
+
+[LinkedIn](https://www.linkedin.com/in/adam-heimann-68789610/) · [X](https://x.com/adamheimann)
